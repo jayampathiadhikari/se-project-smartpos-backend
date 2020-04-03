@@ -1,0 +1,26 @@
+{
+  "name": "se-smartpos-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node --presets es2015 app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayampathiadhikari/se-project-smartpos-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jayampathiadhikari/se-project-smartpos-backend/issues"
+  },
+  "homepage": "https://github.com/jayampathiadhikari/se-project-smartpos-backend#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
+}
