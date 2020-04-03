@@ -2,9 +2,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import todoRouter from './src/routes/toDoRoutes.js';
 
+/**
+ *when importing use filename.js otherwise wont work
+ */
+
 // Set up the express app
-const app = express()
-// const port = process.env.PORT || 3000;
+const app = express();
 
 // Parse incoming requests data
 app.use(bodyParser.json());
@@ -16,18 +19,6 @@ app.get('/', function(req, res) {
 });
 app.use(todoRouter);
 
-
-// app.listen(port, () => {
-//     console.log(`Listening on port..3000`)
-// });
-
-// import express from 'express';
-// //const express = require('express');
-// const app = express();
-// const path = require('path');
 const port = process.env.PORT || 3000;
-
-
-
 
 app.listen(port, () => console.log(`url-shortener listening on port ${port}!`));
