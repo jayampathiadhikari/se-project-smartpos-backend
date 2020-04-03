@@ -1,9 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import todoRouter from './src/routes/toDoRoutes';
+import todoRouter from './src/routes/toDoRoutes.js';
 
 // Set up the express app
-const app = express();
+const app = express()
 // const port = process.env.PORT || 3000;
 
 // Parse incoming requests data

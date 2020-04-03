@@ -1,4 +1,4 @@
-import db from '../db/db';
+import db from '../db/db.js';
 
 class ToDoController {
   getAllTodos(req, res) {
