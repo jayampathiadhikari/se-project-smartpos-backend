@@ -1,6 +1,23 @@
 import db from '../db/db.js';
+import {database} from '../db/postgres';
 
 class ToDoController {
+  async databaseTest(req, res) {
+    const result = await database.query('SELECT * from district');
+    if (result.success) {
+      return res.status(200).send({
+        success: result.success,
+        data: result.data,
+      });
+    } else {
+      return res.status(200).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
+  }
+
   getAllTodos(req, res) {
     return res.status(200).send({
       success: 'true',
@@ -8,6 +25,7 @@ class ToDoController {
       todos: db,
     });
   }
+
   getTodo(req, res) {
     const id = parseInt(req.params.id, 10);
     db.map((todo) => {
