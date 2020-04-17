@@ -47,6 +47,31 @@ class Database {
       };
     }
   }
+  async queryParameterized(text,values) {
+    try {
+      const client = await this.pool.connect();
+      try {
+        const result = await client.query(text,values);
+        client.release();
+        return {
+          success: true,
+          data: result.rows
+        };
+      } catch (err) {
+        return {
+          success: false,
+          errorType: 'query error',
+          error: err.stack
+        }
+      }
+    } catch (err) {
+      return {
+        success: false,
+        errorType: 'connection error',
+        error: err.stack
+      };
+    }
+  }
 }
 
 export const database = new Database(pool);

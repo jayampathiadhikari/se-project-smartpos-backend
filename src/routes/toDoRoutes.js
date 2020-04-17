@@ -11,6 +11,7 @@ const router = new Router();
 
 
 router.get('/db', toDoController.databaseTest);
+router.get('/dbpara', toDoController.databaseTestParameterized);
 
 router.get('/api/v1/todos', toDoController.getAllTodos);
 router.get('/api/v1/todos/:id', toDoController.getTodo);
