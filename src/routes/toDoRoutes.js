@@ -4,14 +4,20 @@
 
 const Router = require('express-promise-router');
 
-import toDoController from '../controllers/toDoController.js';
 
-//const router = express.Router();
+const toDoController = require('../controllers/toDoController.js');
+const employeeController = require('../controllers/employeeController.js');
+
 const router = new Router();
 
 
 router.get('/db', toDoController.databaseTest);
-router.get('/dbpara', toDoController.databaseTestParameterized);
+
+router.get('/employee/profile', employeeController.getUserData);
+router.get('/employee/insert', employeeController.insertData);
+
+//router.get('/ownerProfile', ownerController.getUserData);
+
 
 router.get('/api/v1/todos', toDoController.getAllTodos);
 router.get('/api/v1/todos/:id', toDoController.getTodo);
@@ -19,4 +25,4 @@ router.post('/api/v1/todos', toDoController.createTodo);
 router.put('/api/v1/todos/:id', toDoController.updateTodo);
 router.delete('/api/v1/todos/:id', toDoController.deleteTodo);
 
-export default router;
+module.exports= router;
