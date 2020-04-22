@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "start": "babel-node --presets es2015 app.js ",
+    "dev": "nodemon --exec babel-node app.js ",
     "startes": "node app.js",
     "app": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
