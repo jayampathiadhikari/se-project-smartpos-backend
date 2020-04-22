@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "presets": [
+    "@babel/preset-es2015"
+  ],
   "scripts": {
-    "start": "babel-node --presets es2015 app.js",
+    "start": "babel-node --presets es2015 app.js ",
     "startes": "node app.js",
+    "app": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -16,8 +20,9 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "express-promise-router": "^3.0.3",
-    "pg": "^8.0.0",
-    "pg-hstore": "^2.3.3",
-    "sequelize": "^5.21.6"
+    "pg": "^8.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
   }
 }

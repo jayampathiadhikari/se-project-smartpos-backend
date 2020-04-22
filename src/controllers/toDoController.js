@@ -1,11 +1,17 @@
-import db from '../db/db.js';
-import {database} from '../db/postgres';
-// import {sequelize} from "../db/sequelize";
+// import db from '../db/db.js';
+// import {database} from '../db/postgres';
+
+const db = require('../db/db.js');
+const database = require('../db/postgres');
+
+//console.log(database);
 
 class ToDoController {
   async databaseTest(req, res) {
-    const tableName = 'district';
-    const result = await database.query(`SELECT * from ${tableName}`);
+    const result = await database.query('SELECT * from district where district_id=1');
+
+    
+
     if (result.success) {
       return res.status(200).send({
         success: result.success,
@@ -19,34 +25,7 @@ class ToDoController {
       });
     }
   }
-  /** important: only certain places can be used as parameters in postgres. ex: table name cannot be used as a parameter*/
-  async databaseTestParameterized(req, res) {
-    const text = 'SELECT * from district where district_id = $1';
-    const values = ['1'];
-    const result = await database.queryParameterized(text,values);
-    if (result.success) {
-      return res.status(200).send({
-        success: result.success,
-        data: result.data,
-      });
-    } else {
-      return res.status(200).send({
-        success: result.success,
-        errorType: result.errorType,
-        error: result.error
-      });
-    }
-  }
-  sqTest(req, res){
-    sequelize
-      .authenticate()
-      .then(() => {
-        console.log('Connection has been established successfully.');
-      })
-      .catch(err => {
-        console.error('Unable to connect to the database:', err);
-      });
-  }
+
   getAllTodos(req, res) {
     return res.status(200).send({
       success: 'true',
@@ -169,4 +148,4 @@ class ToDoController {
 };
 
 const toDoController = new ToDoController();
-export default toDoController;
+module.exports=toDoController;
