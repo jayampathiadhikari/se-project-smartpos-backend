@@ -14,7 +14,9 @@ const router = new Router();
 router.get('/db', toDoController.databaseTest);
 
 router.get('/employee/profile', employeeController.getUserData);
+router.get('/employee/auth', employeeController.getAuthData);
 router.get('/employee/insert', employeeController.insertData);
+router.get('/employee/count', employeeController.getCount);
 
 //router.get('/ownerProfile', ownerController.getUserData);
 
