@@ -3,6 +3,7 @@ const {database} = require('../db/postgres');
 const employeeModel = require('../models/employeeModel.js');
 
 class Employee {
+
   async getUserData(req, res) {
     console.log('req')
     const result = await employeeModel.getUserData(req);
@@ -61,6 +62,13 @@ class Employee {
     return res.send(count.data);
     console.log(count.data);
   }
+
+  async getCountTest(req, res) {
+      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      const count=67;
+      return res.send(count.data);
+      console.log(count.data);
+    }
 
 
 };
