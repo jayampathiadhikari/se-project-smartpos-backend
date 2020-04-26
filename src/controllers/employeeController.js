@@ -63,19 +63,41 @@ class Employee {
     console.log(count.data);
   }
 
-  async getCountTesting(req, res) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-      const count=67;
-      return res.send(count.data);
-      console.log(count.data);
+  async updateUserData(req, res) {
+      console.log('req')
+      const result = await employeeModel.updateData(req);
+      if (result.success) {
+        return res.status(200).send({
+          success: result.success,
+          data: result.data,
+        });
+      } else {
+        return res.status(200).send({
+          success: result.success,
+          errorType: result.errorType,
+          error: result.error
+        });
+      }
     }
 
-    async getCountTest(req, res) {
+    async editUserData(req, res) {
+        //console.log('req')
+
+        const result = await employeeModel.editUserData(req);
+        if (result.success) {
           res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-          const count=67;
-          return res.send(count.data);
-          console.log(count.data);
+          return res.status(200).send({
+            success: result.success,
+            data: result.data,
+          });
+        } else {
+          return res.status(200).send({
+            success: result.success,
+            errorType: result.errorType,
+            error: result.error
+          });
         }
+      }
 
 
 };
@@ -86,4 +108,3 @@ class Employee {
 
 const employee = new Employee();
 module.exports = employee;
-
