@@ -7,6 +7,7 @@ const Router = require('express-promise-router');
 
 const toDoController = require('../controllers/toDoController.js');
 const employeeController = require('../controllers/employeeController.js');
+const agentController = require('../controllers/agentController.js');
 
 const router = new Router();
 
@@ -19,6 +20,9 @@ router.post('/employee/insert', employeeController.insertData);
 router.get('/employee/count', employeeController.getCount);
 router.post('/employee/update', employeeController.updateUserData);
 router.post('/employee/edit', employeeController.editUserData);
+router.post('/agent/suggest', agentController.suggestShops);
+
+
 
 //router.get('/ownerProfile', ownerController.getUserData);
 
