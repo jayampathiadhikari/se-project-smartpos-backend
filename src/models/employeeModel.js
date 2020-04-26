@@ -17,7 +17,7 @@ exports.getAuthData = async (req) => {
 
 exports.insertData = async (req) => {
   console.log('de')
-    const result =await insertData('employee_role_type', ['role_id','role_name'], [13,'ergrgruurg']);
+    const result =await insertData('employee_role_type', ['role_id','role_name'], [26,'efffggfruurg']);
     return result;
 }
 
