@@ -3,8 +3,8 @@ const { getData } = require('../db/index');
 
 
 
-exports.getUserData = async (req) => {
+exports.getSuggestionData = async (req) => {
   console.log('de')
-    const result = await getData('district', ['district_id'], 1);
+    const result = await getData('shop_suggestions', ['shop_suggestion_id'], req.body.shop_suggestion_id);
     return result;
 }
