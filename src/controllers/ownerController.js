@@ -7,6 +7,14 @@ const {database} = require('../db/postgres');
 const ownerModel = require('../models/ownerModel.js');
 
 class Owner {
+  async showShopSuggestions(req,res){
+    if(result.success){
+      //result= await ownerModel.
+      return res.send(result)
+    }
+
+
+  }
 
 };
 
