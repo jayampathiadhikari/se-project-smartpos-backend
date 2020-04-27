@@ -1,10 +1,35 @@
 const { getData } = require('../db/index');
-
-
-
+const { insertData } = require('../db/index');
+const { deleteData } = require('../db/index');
 
 exports.getSuggestionData = async (req) => {
   console.log('de')
     const result = await getData('shop_suggestions', ['shop_suggestion_id'], req.body.shop_suggestion_id);
+    return result;
+}
+
+
+//const shopdata = await module.exports.getSuggestionData(req);
+
+exports.insertIntoShopOwner = async (name_with_initial,contact_num_cell,contact_num_land,residence_lattitude,residence_longitude,email) => {
+  const values=[name_with_initial,contact_num_cell,contact_num_land,residence_lattitude,residence_longitude,email]
+  const result = await insertData('shop_owner', ['name_with_initial','contact_num_cell','contact_num_land','residence_lattitude','residence_longitude','email'],values);
+  return result;
+}
+
+
+exports.insertIntoShop = async (route_id,name,latitude,longitude,shop_contact_num,owner_id) => {
+    const values=[owner_id,route_id,name,latitude,longitude,shop_contact_num]
+    const result = await insertData('shop', ['owner_id','route_id','name','latitude','longitude','shop_contact_num'],values);
+    return result;
+}
+
+// exports.deleteData = async (req) => {
+//     const result = await deleteData('employee_role_type', ['role_id'],26);
+//     return result;
+// }
+
+exports.deleteSuggestion = async (shop_suggestion_id) => {
+    const result = await deleteData('shop_suggestions', ['shop_suggestion_id'],shop_suggestion_id);
     return result;
 }

@@ -20,6 +20,9 @@ router.post('/employee/update', employeeController.updateUserData);
 router.post('/employee/edit', employeeController.editUserData);
 router.post('/agent/suggest', agentController.suggestShops);
 router.get('/owner/viewsuggestion', ownerController.viewShopSuggestion);
+router.post('/owner/acceptsuggestion', ownerController.acceptShopSuggestion);
+router.post('/owner/declinesuggestion', ownerController.declineShopSuggestion);
+// router.post('/owner/delete', ownerController.deleteData);
 
 
 // router.get('/api/v1/todos', toDoController.getAllTodos);

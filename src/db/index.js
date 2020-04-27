@@ -24,8 +24,7 @@ async function insertData(table_name, column_names, values) {
   });
 
   pr=pr.slice(0,-1);
-  console.log(pr)
-  //pr='$1,$2'
+  //console.log(pr)
   const text = `INSERT INTO ${table_name}(${column_names}) VALUES(${pr}) RETURNING *`
 
   const result=await connection.queryParameterized(text,values);
@@ -53,6 +52,13 @@ console.log(valuesfinal);
 
 }
 
+async function deleteData(table_name, constraint, value) {
+
+const result=await connection.queryParameterized(`Delete from ${table_name} where ${constraint}=$1`,[`${value}`]);
+return result;
+
+}
 
 
-module.exports = { getData,insertData,updateData};
+
+module.exports = { getData,insertData,updateData,deleteData};
