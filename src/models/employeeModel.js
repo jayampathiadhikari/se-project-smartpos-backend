@@ -11,7 +11,7 @@ exports.getUserData = async (req) => {
 
 exports.getAuthData = async (req) => {
   console.log('aesrr')
-    const result = await getData('user_authorization', ['username'], req.body.bank_account);
+    const result = await getData('user_authorization', ['username'], req.body.username);
     return result;
 }
 
@@ -23,7 +23,7 @@ exports.insertData = async (req) => {
 
 exports.updateData = async (req) => {
   console.log('aesrr')
-    const result = await updateData('employee', ['first_name','street'],['Sam','Muwagama'],'employee_id',req.body.bank_account);
+    const result = await updateData('employee', ['first_name','street'],['Sam','Muwagama'],'employee_id',req.body.employee_id);
     return result;
 }
 
