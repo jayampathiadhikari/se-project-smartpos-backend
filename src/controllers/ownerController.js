@@ -1,9 +1,6 @@
-// import db from '../db/db.js';
-// import {database} from '../db/postgres';
+
 // import ownerModel from '../models/ownerModel.js';
 
-//const db = require('../db/db.js');
-const {database} = require('../db/postgres');
 const ownerModel = require('../models/ownerModel.js');
 
 class Owner {
@@ -58,7 +55,7 @@ class Owner {
           console.log('insert success');
           console.log(req)
           const deleteresult = await ownerModel.deleteSuggestion(shop_suggestion_id);
-          
+
           if(deleteresult.success){
             return res.send(deleteresult.data)
           }
@@ -120,21 +117,40 @@ class Owner {
     }
   }
 
-  // async deleteData(req, res) {
-  //   console.log('req')
-  //   const result = await ownerModel.deleteData(req);
-  //   if (result.success) {
-  //     res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-  //     return res.send(result.data)
-  //     //console.log(result.data);
-  //   } else {
-  //     return res.status(200).send({
-  //       success: result.success,
-  //       errorType: result.errorType,
-  //       error: result.error
-  //     });
-  //   }
-  // }
+  async viewAgents(req, res) {
+
+    const result = await ownerModel.getAllAgents(req);
+    if (result.success) {
+      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      return res.send(result.data)
+      //console.log(result.data);
+    } else {
+      return res.status(200).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
+  }
+
+  async sendTarget(req, res) {
+
+    const result = await ownerModel.insertTarget(req);
+
+    if (result.success) {
+      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      return res.send(result.data)
+      //console.log(result.data);
+    } else {
+      return res.status(200).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
+  }
+
+
 
 };
 

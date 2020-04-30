@@ -1,17 +1,10 @@
-// import db from '../db/db.js';
-// import {database} from '../db/postgres';
-// import ownerModel from '../models/ownerModel.js';
+const stockModel = require('../models/stockModel.js');
 
-const db = require('../db/db.js');
-const {database} = require('../db/postgres');
-const agentModel = require('../models/agentModel.js');
+class Stock{
 
+  async viewAgentStock(req, res) {
 
-class Agent {
-
-  async suggestShops(req, res) {
-    console.log('req')
-    const result = await agentModel.insertSuggestions(req);
+    const result = await stockModel.getAgentStock(req);
     if (result.success) {
       res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.send(result.data)
@@ -25,10 +18,9 @@ class Agent {
     }
   }
 
-  async viewSalesDates(req, res) {
+  async viewWarehouseStock(req, res) {
 
-    const result = await agentModel.getSalesDates(req);
-
+    const result = await stockModel.getWarehouse(req);
     if (result.success) {
       res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.send(result.data)
@@ -41,13 +33,7 @@ class Agent {
       });
     }
   }
+}
 
-
-};
-
-
-
-
-
-const agent = new Agent();
-module.exports = agent;
+const stock= new Stock()
+module.exports=stock
