@@ -2,11 +2,16 @@ const db = require('../db/db.js');
 const connection = require('./postgres');
 
 
-
-
 async function getData(table_name, constraints, values) {
 
     const result=await connection.queryParameterized(`SELECT * from ${table_name} where ${constraints}=$1`,[`${values}`]);
+    return result;
+
+}
+
+async function getAllData(table_name, constraints, values) {
+
+    const result=await connection.queryParameterized(`SELECT * from ${table_name} `,[]);
     return result;
 
 }
@@ -66,7 +71,7 @@ async function updateData(table_name, column_names,values, constraint, constrain
 valuesfinal = valuesfinal.slice(0, -1);
 console.log(valuesfinal);
   const text = `update ${table_name} set (${column_names}) =(${valuesfinal}) where ${constraint}=$1 `
-  //const text = `update ${table_name} set (first_name) =('Sam') where ${constraint}=$1`
+  //const text = `update ${table_name} set (first_name,last_name) =('Sam','Perera') where ${constraint}=$1`
 
   const result=await connection.queryParameterized(text,[`${constraintvalue}`]);
   return result;
@@ -82,6 +87,26 @@ async function updateSingleData(table_name, column_name,value, constraint, const
 
 }
 
+async function decrementIntegers(table_name, column_name,value, constraint, constraintvalue) {
+
+  const text = `update ${table_name} set ${column_name} =${column_name}-${value} where ${constraint}=$1 `
+
+  const result=await connection.queryParameterized(text,[`${constraintvalue}`]);
+  return result;
+
+}
+
+async function incrementIntegers(table_name, column_name,value, constraint, constraintvalue) {
+
+  const text = `update ${table_name} set ${column_name} =${column_name}+${value} where ${constraint}=$1 `
+
+
+  const result=await connection.queryParameterized(text,[`${constraintvalue}`]);
+  return result;
+
+}
+
+
 async function deleteData(table_name, constraint, value) {
 
 const result=await connection.queryParameterized(`Delete from ${table_name} where ${constraint}=$1`,[`${value}`]);
@@ -91,4 +116,4 @@ return result;
 
 
 
-module.exports = { getData,insertData,updateData,deleteData,getData_twoConditions,updateSingleData};
+module.exports = { getData,insertData,updateData,deleteData,getData_twoConditions,updateSingleData,decrementIntegers,incrementIntegers,getAllData};

@@ -33,3 +33,13 @@ exports.deleteSuggestion = async (shop_suggestion_id) => {
     const result = await deleteData('shop_suggestions', ['shop_suggestion_id'],shop_suggestion_id);
     return result;
 }
+
+exports.getAllAgents = async (req) => {
+    const result = await getData('employee natural join employee_role_type', ['role_name'],'agent');
+    return result;
+}
+
+exports.insertTarget = async (req) => {
+    const result = await insertData('monthly_target', ['target_value'],[req.body.target_value]);
+    return result;
+}
