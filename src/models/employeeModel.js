@@ -22,6 +22,8 @@ exports.insertData = async (req) => {
 }
 
 exports.addNewEmployee = async (req) => {
+  console.log(req.body.employee_id);
+  console.log(req.body.role_id);
   var role_id;
   if (req.body.type === 'agent'){
     role_id = 1

@@ -43,15 +43,15 @@ async function insertData(table_name, column_names, values) {
   //column_names
   //values=[`${values}`];
   //console.log(values);
-  var pr = ''
+  let pr = '';
   values.forEach((item, i) => {
-    num = i + 1
+    let num = i + 1;
     pr += "$" + num + ","
   });
 
   pr = pr.slice(0, -1);
   //console.log(pr)
-  const text = `INSERT INTO ${table_name}(${column_names}) VALUES(${pr}) RETURNING *`
+  const text = `INSERT INTO ${table_name}(${column_names}) VALUES(${pr}) RETURNING *`;
 
   const result = await connection.queryParameterized(text, values);
   return result;
