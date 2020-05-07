@@ -20,8 +20,22 @@ class Employee {
     }
   }
 
+  async addEmployee(req,res){
+    //role ids : owner - 3, salesperson - 2 , agent - 1
+    const result = await employeeModel.addNewEmployee(req);
+    if (result.success) {
+      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000');
+      return res.send(result.data)
+    } else {
+      return res.status(200).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
+  }
+
   async getAuthData(req, res) {
-    console.log('dsfdsf')
     const result = await employeeModel.getAuthData(req);
     if (result.success) {
       res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')

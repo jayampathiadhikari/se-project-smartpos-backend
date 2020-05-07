@@ -7,7 +7,7 @@ exports.getUserData = async (req) => {
   console.log('de')
     const result = await getData('employee', ['employee_id'], req.body.employee_id);
     return result;
-}
+};
 
 exports.getAuthData = async (req) => {
   console.log('aesrr')
@@ -20,6 +20,19 @@ exports.insertData = async (req) => {
     const result =await insertData('employee_role_type', ['role_id','role_name'], [26,'efffggfruurg']);
     return result;
 }
+
+exports.addNewEmployee = async (req) => {
+  var role_id;
+  if (req.body.type === 'agent'){
+    role_id = 1
+  }else if(req.body.type === 'salesperson'){
+    role_id = 2
+  }else{
+    role_id = 3
+  }
+  const result =await insertData('employee_fb', ['employee_id','role_id'], [req.body.employee_id,role_id]);
+  return result;
+};
 
 exports.updateData = async (req) => {
   console.log('aesrr')

@@ -19,11 +19,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //router is middleware. to use it follows
 app.get('/', function(req, res) {
-  // const customers=[
-  //   {id:1, firstName:'John', lastName:'Doe'},
-  //   {id:2, firstName:'Jo', lastName:'Do'}
-  // ];
-  // res.json(customers);
     res.send({'name':'jayamoathi'});
 });
 app.use(todoRouter);
