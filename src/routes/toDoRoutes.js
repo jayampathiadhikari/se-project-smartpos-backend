@@ -16,8 +16,8 @@ const router = new Router();
 
 
 //employee routes
-//router.get('/employee/profile', employeeController.getUserData);
-// router.get('/employee/auth', employeeController.getAuthData);
+router.get('/employee/profile', employeeController.getUserData);
+router.get('/employee/auth', employeeController.getAuthData);
 router.post('/employee/register', employeeController.addEmployee);
 router.post('/employee/insert', employeeController.insertData);
 router.post('/employee/edit', employeeController.editUserData);
