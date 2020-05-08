@@ -1,3 +1,5 @@
+
+
 const stockModel = require('../models/stockModel.js');
 
 class Stock{
@@ -17,6 +19,31 @@ class Stock{
       });
     }
   }
+
+  async viewSalespersonStock(req, res) {
+
+      const result = await stockModel.getSalespersonStock(req);
+      if (result.success) {
+        let stock=[]
+        result.data.forEach((product)=>{
+        let productDetail={'product_id': product.product_id,
+                           'name' : product.name,
+                           'quantity' : product.remaining_quantity,
+                           'unit_price' : product.selling_price
+        }
+        stock.push(productDetail);
+        });
+        return res.status(200).send({
+            success: result.success,
+            data:stock});
+      } else {
+        return res.status(200).send({
+          success: result.success,
+          errorType: result.errorType,
+          error: result.error
+        });
+      }
+    }
 
   async viewWarehouseStock(req, res) {
 
