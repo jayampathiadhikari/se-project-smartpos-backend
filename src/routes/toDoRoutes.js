@@ -22,6 +22,7 @@ const router = new Router();
 //employee routes
 router.get('/employee/profile', employeeController.getUserData);
 router.get('/employee/auth', employeeController.getAuthData);
+router.post('/employee/register', employeeController.addEmployee);
 router.post('/employee/insert', employeeController.insertData);
 router.post('/employee/edit', employeeController.editUserData);
 
@@ -75,7 +76,7 @@ router.get('/stock/viewsalespersonstock',stockController.viewSalespersonStock);
 
 //test routes
 // router.post('/owner/delete', ownerController.deleteData);
-//router.post('/employee/update', employeeController.updateUserData);
+// router.post('/employee/update', employeeController.updateUserData);
 //router.get('/employee/count', employeeController.getCount);
 
 
