@@ -24,9 +24,6 @@ class Salesperson {
         });
     }
   }
-
-
-
 };
 
 const salesperson = new Salesperson();

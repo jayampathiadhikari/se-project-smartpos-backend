@@ -53,6 +53,8 @@ router.get('/invoice/viewallinvoices', invoiceController.getAllInvoices);
 router.get('/invoice/viewinvoicedetails', invoiceController.getInvoiceDetails);
 router.put('/invoice/updateinvoicepaidamount',invoiceController.updateInvoicePaidAmount);
 
+router.post('/invoice/generateInvoice', invoiceController.generateInvoice);
+
 
 //requesting invoice routes
 router.get('/reqinvoice/viewSuggestedList', reqInvoiceController.viewSuggestedList);

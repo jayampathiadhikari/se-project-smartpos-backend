@@ -73,6 +73,38 @@ class Database {
       };
     }
   }
+
+  async queryTransactions(textArray,valuesArray) {
+    try{
+        const client = await this.pool.connect();
+        try {
+             await client.query('BEGIN');
+             for (let i = 0; i < textArray.length; i++) {
+                await client.query(textArray[i], valuesArray[i]);
+             }
+             await client.query('COMMIT');
+             client.release();
+             return  {
+                 success : true
+             }
+
+        }catch (err) {
+             await client.query('ROLLBACK')
+             client.release();
+             return {
+             success: false,
+             errorType: 'query error',
+             error: err.stack
+             };
+        }
+    }catch (err) {
+        return {
+             success: false,
+             errorType: 'connection error',
+             error: err.stack
+         };
+    }
+  }
 }
 
 const database = new Database(pool);
