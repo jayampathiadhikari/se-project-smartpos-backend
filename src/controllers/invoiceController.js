@@ -2,26 +2,15 @@ const invoiceModel = require('../models/invoiceModel.js');
 
 
 class Invoice {
-//
-//  async calInvoiceValue(invoice_id){
-//          const result = await invoiceModel.getInvoiceDetails(invoice_id);
-//                      let invoice_value= 0;
-//                      if(result.success){
-//                          result.data.forEach((product)=>{
-//                              invoice_value=invoice_value+(product.quantity * product.selling_price);
-//                          });
-//                       }
-//          return invoice_value;
-//   }
 
 
   async getAllInvoices(req, res) {
-    const result = await invoiceModel.getAllInvoices(req.body.shop_id);
+    const result = await invoiceModel.getAllInvoices(req);
     if(result.success){
         const  invoices= [];
           result.data.forEach(async (invoice)=>{
 
-          const result2 = await invoiceModel.getInvoiceDetails(invoice.invoice_id);
+          const result2 = await invoiceModel.getInvoiceDetails({"body":{"invoice_id":invoice.invoice_id}});
           let invoice_value= 0;
 
            if(result2.success){
@@ -57,7 +46,7 @@ class Invoice {
 
 
   async getInvoiceDetails(req, res) {
-      const result = await invoiceModel.getInvoiceDetails(req.body.invoice_id);
+      const result = await invoiceModel.getInvoiceDetails(req);
       if(result.success){
           let slicedData= [];
           result.data.forEach((product)=>{
@@ -84,7 +73,7 @@ class Invoice {
 
 
     async updateInvoicePaidAmount(req,res) {
-        const result = await invoiceModel.updateInvoicePaidAmount(req.body.invoice_id,req.body.amount_received);
+        const result = await invoiceModel.updateInvoicePaidAmount(req);
         if (result.success) {
           return res.status(200).send({success:result.success});
         } else {
@@ -96,12 +85,11 @@ class Invoice {
         }
     }
 
-    ///on going..........................
     async generateInvoice(req, res) {
 
-        const result = await invoiceModel.insertIntoInvoice(req.body.salesperson_id,req.body.shop_id,req.body.products);
+        const result = await invoiceModel.generateInvoice(req);
         if (result.success) {
-          return res.send(result.data)
+          return res.send({success:result.success});
         } else {
           return res.status(200).send({
             success: result.success,
@@ -110,6 +98,7 @@ class Invoice {
           });
         }
       }
+
 
 };
 
