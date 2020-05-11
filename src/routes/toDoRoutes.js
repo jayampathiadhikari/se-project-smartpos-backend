@@ -73,7 +73,7 @@ router.get('/agent/viewreport', reportController.viewReport);
 //stock routes
 router.get('/stock/viewagentstock',stockController.viewAgentStock);
 router.get('/stock/viewwarehouse',stockController.viewWarehouseStock);
-router.get('/stock/viewsalespersonstock',stockController.viewSalespersonStock);
+router.post('/stock/viewsalespersonstock',stockController.viewSalespersonStock);
 
 
 //test routes
