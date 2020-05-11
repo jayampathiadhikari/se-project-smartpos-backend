@@ -8,7 +8,7 @@ exports.getAllShops = async (req) => {
 }
 
 exports.getShopDetails = async (req) => {
-    const result = await getData('shop natural join shop_owner', 'shop_id',10);
+    const result = await getData('shop natural join shop_owner', 'shop_id',req.body.shop_id);
     return result;
 }
 
