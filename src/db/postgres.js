@@ -105,6 +105,57 @@ class Database {
          };
     }
   }
+
+
+async queryTransaction(query1,value1,query2,value2,query3,value3){
+
+  (async () => {
+
+    const client = await this.pool.connect();
+    try {
+      await client.query('BEGIN')
+      const res = await client.query(`${query1}` ,value1)
+
+      const owner_id=res.rows[0].owner_id;
+      //console.log(owner_id);
+      value2.splice(-1, 1,owner_id);
+
+      await client.query(`${query2}`,value2)
+      await client.query(`${query3}`,value3)
+      await client.query('COMMIT')
+    } catch (e) {
+      await client.query('ROLLBACK')
+      throw e
+    } finally {
+      client.release()
+    }
+  })().catch(e => console.error(e.stack))
+
+}
+
+async queryTransactionsTwo(query1,values,query2,value){
+
+  (async () => {
+
+    const client = await this.pool.connect();
+    try {
+      await client.query('BEGIN')
+      const res = await client.query(`${query1}` ,values)
+
+      await client.query(`${query2}`,value)
+
+      await client.query('COMMIT')
+    } catch (e) {
+      await client.query('ROLLBACK')
+      throw e
+    } finally {
+      client.release()
+    }
+  })().catch(e => console.error(e.stack))
+
+}
+
+
 }
 
 const database = new Database(pool);

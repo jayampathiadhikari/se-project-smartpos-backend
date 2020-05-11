@@ -114,6 +114,55 @@ return result;
 
 }
 
+async function callTransactionInsertInsert(table_name1,column_names1,values1,table_name2,column_names2,values2,table_name3,column_names3,values3) {
+
+  var pr1=''
+  values1.forEach((item, i) => {
+      num=i+1
+        pr1+="$"+num+","
+  });
+
+  pr1=pr1.slice(0,-1);
+
+  var pr2=''
+  values2.forEach((item, i) => {
+      num=i+1
+        pr2+="$"+num+","
+  });
+
+  pr2=pr2.slice(0,-1);
+
+  query1=`INSERT INTO ${table_name1}(${column_names1}) VALUES (${pr1}) RETURNING *`
+  query2=`INSERT INTO ${table_name2}(${column_names2}) VALUES (${pr2})`
+  query3=`Delete from ${table_name3} where ${column_names3}=$1`
 
 
-module.exports = { getData,insertData,updateData,deleteData,getData_twoConditions,updateSingleData,decrementIntegers,incrementIntegers,getAllData};
+const result=await connection.queryTransaction(query1,values1,query2,values2,query3,values3);
+return result;
+
+}
+
+async function callTransactionInsertDecrement(table1,columns,values,table2,col1,col1update,col2,value) {
+
+  var pr1=''
+  values.forEach((item, i) => {
+      num=i+1
+        pr1+="$"+num+","
+  });
+
+  pr1=pr1.slice(0,-1);
+
+
+  query1=`INSERT INTO ${table1}(${columns}) VALUES (${pr1}) RETURNING *`
+  query2=`update ${table2} set ${col1} =${col1}-${col1update} where ${col2}=$1 `
+
+  const result=await connection.queryTransactionsTwo(query1,values,query2,[value]);
+  return result;
+
+
+}
+
+
+
+
+module.exports = { getData,insertData,updateData,deleteData,getData_twoConditions,updateSingleData,decrementIntegers,incrementIntegers,getAllData,callTransactionInsertInsert,callTransactionInsertDecrement};

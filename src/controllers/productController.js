@@ -4,19 +4,15 @@ const productModel = require('../models/productModel.js');
 class Product{
 
   async sendtoAgent(req, res) {
-    var sendresult={}
-    var removeresult={}
-
-        try {
-          sendresult = await productModel.sendToCarriage(req);
-          removeresult =await productModel.removeFromWarehouse(req);
-
-        } catch (e) {
-            throw e
-        }finally{
-          res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-          res.send(removeresult)
-        }
+    const result = productModel.sendAndRemove(req);
+    //here result becomes undefined so always goes to else part, this is bcs the transaction doesnt return anything
+    if (result.success) {
+      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      return res.send('sending was successfull')
+      //console.log(result.data);
+    } else {
+      return res.status(200).send('sending failed');
+    }
 
 
   }
