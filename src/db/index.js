@@ -4,8 +4,8 @@ const connection = require('./postgres');
 
 async function getData(table_name, constraints, values) {
 
-    const result=await connection.queryParameterized(`SELECT * from ${table_name} where ${constraints}=$1`,[`${values}`]);
-    return result;
+  const result = await connection.queryParameterized(`SELECT * from ${table_name} where ${constraints}=$1`, [`${values}`]);
+  return result;
 
 }
 
