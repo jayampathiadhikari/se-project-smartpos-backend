@@ -41,16 +41,16 @@ router.get('/owner/viewagents', ownerController.viewAgents);
 router.post('/owner/sendtarget', ownerController.sendTarget);
 
 //salespersonRoutes routes
-router.get('/route/getAllRoutes', routeController.getAllRoutes);
+router.post('/route/getAllRoutes', routeController.getAllRoutes);
 
 
 //shop routes
-router.get('/shop/viewshops', shopController.getAllShops);
-router.get('/shop/viewshopdetails', shopController.getShopDetails);
+router.post('/shop/viewshops', shopController.getAllShops);
+router.post('/shop/viewshopdetails', shopController.getShopDetails);
 
 //invoice routes
-router.get('/invoice/viewallinvoices', invoiceController.getAllInvoices);
-router.get('/invoice/viewinvoicedetails', invoiceController.getInvoiceDetails);
+router.post('/invoice/viewallinvoices', invoiceController.getAllInvoices);
+router.post('/invoice/viewinvoicedetails', invoiceController.getInvoiceDetails);
 router.put('/invoice/updateinvoicepaidamount',invoiceController.updateInvoicePaidAmount);
 
 router.post('/invoice/generateInvoice', invoiceController.generateInvoice);
