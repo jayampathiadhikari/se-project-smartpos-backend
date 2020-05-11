@@ -21,7 +21,7 @@ class Employee {
   }
 
   async addEmployee(req,res){
-    
+
     //role ids : owner - 3, salesperson - 2 , agent - 1
     const result = await employeeModel.addNewEmployee(req);
     if (result.success) {
