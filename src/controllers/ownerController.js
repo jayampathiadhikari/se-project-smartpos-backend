@@ -20,6 +20,8 @@ class Owner {
     }
   }
 
+
+
   async acceptShopSuggestion(req, res) {
     const shop_suggestion_id=req.body.shop_suggestion_id;
     const shopdata = await ownerModel.getSuggestionData(req);
@@ -42,54 +44,26 @@ class Owner {
       const email=shopdata.data[0].email
 
 
-      const insertshopowner= await ownerModel.insertIntoShopOwner(name_with_initial,contact_num_cell,contact_num_land,residence_lattitude,residence_longitude,email);
+      const insertshopowner= await ownerModel.alterShopShopOWner(shop_suggestion_id,name_with_initial,contact_num_cell,contact_num_land,residence_lattitude,residence_longitude,email,route_id,name,latitude,longitude,shop_contact_num);
       //console.log(insertshopowner);
 
       if (insertshopowner.success){
-        const owner_id=insertshopowner.data[0].owner_id;
-
-        const insertshop=await ownerModel.insertIntoShop(route_id,name,latitude,longitude,shop_contact_num,owner_id);
-        //console.log(insertshop);
-        if (insertshop.success){
 
           console.log('insert success');
           console.log(req)
-          const deleteresult = await ownerModel.deleteSuggestion(shop_suggestion_id);
-
-          if(deleteresult.success){
-            return res.send(deleteresult.data)
-          }
-          else {
-            return res.status(200).send({
-              success: deleteresult.success,
-              errorType: deleteresult.errorType,
-              error:deleteresult.error
-            });
-          }
-
-        }
-
-        else {
-          return res.status(200).send({
-            success: insertshop.success,
-            errorType: insertshop.errorType,
-            error: insertshop.error
-          });
-        }
-
-      }
-
-      else {
-        return res.status(200).send({
-          success: insertshopowner.success,
-          errorType: insertshopowner.errorType,
-          error: insertshopowner.error
-        });
-      }
-
+          res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+          return res.send('successfully sent')
 
 
     }
+    else{
+      return res.status(200).send({
+        success: insertshopowner.success,
+        errorType: insertshopowner.errorType,
+        error: insertshopowner.error
+      });
+    }
+  }
 
     else {
       return res.status(200).send({
@@ -99,6 +73,7 @@ class Owner {
       });
     }
   }
+
 
   async declineShopSuggestion(req, res) {
     const shop_suggestion_id=req.body.shop_suggestion_id;
