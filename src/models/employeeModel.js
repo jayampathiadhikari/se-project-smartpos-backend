@@ -32,7 +32,7 @@ exports.addNewEmployee = async (req) => {
   }else{
     role_id = 3
   }
-  const result =await insertData('employee_fb', ['employee_id','role_id'], [req.body.employee_id,role_id]);
+  const result =await insertData('employee', ['employee_id','role_id'], [req.body.employee_id,role_id]);
   return result;
 };
 

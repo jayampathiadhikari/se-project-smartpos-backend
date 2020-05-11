@@ -42,19 +42,19 @@ router.post('/owner/sendtarget', ownerController.sendTarget);
 router.get('/owner/viewmonthlytarget', ownerController.viewMonthlyTarget);
 
 //salespersonRoutes routes
-router.get('/route/getAllRoutes', routeController.getAllRoutes);
+router.post('/route/getAllRoutes', routeController.getAllRoutes);
 
 
 //shop routes
-router.get('/shop/viewshops', shopController.getAllShops);
-router.get('/shop/viewshopdetails', shopController.getShopDetails);
+router.post('/shop/viewshops', shopController.getAllShops);
+router.post('/shop/viewshopdetails', shopController.getShopDetails);
+router.post('/shop/viewshopsbydistrict',shopController.getShopsByDistrict)
 router.get('/shop/viewagentshops', shopController.viewShops);
 
 //invoice routes
-router.get('/invoice/viewallinvoices', invoiceController.getAllInvoices);
-router.get('/invoice/viewinvoicedetails', invoiceController.getInvoiceDetails);
+router.post('/invoice/viewallinvoices', invoiceController.getAllInvoices);
+router.post('/invoice/viewinvoicedetails', invoiceController.getInvoiceDetails);
 router.put('/invoice/updateinvoicepaidamount',invoiceController.updateInvoicePaidAmount);
-
 router.post('/invoice/generateInvoice', invoiceController.generateInvoice);
 
 
@@ -75,7 +75,8 @@ router.get('/agent/viewreport', reportController.viewReport);
 //stock routes
 router.get('/stock/viewagentstock',stockController.viewAgentStock);
 router.get('/stock/viewwarehouse',stockController.viewWarehouseStock);
-router.get('/stock/viewsalespersonstock',stockController.viewSalespersonStock);
+router.post('/stock/viewsalespersonstock',stockController.viewSalespersonStock);
+
 router.post('/stock/addtoagentstock',stockController.addToAgentStock);
 router.post('/stock/addtosalespersonstock',stockController.addToSalespersonStock);
 
