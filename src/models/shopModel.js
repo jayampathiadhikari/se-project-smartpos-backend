@@ -12,3 +12,8 @@ exports.getShopDetails = async (req) => {
     return result;
 }
 
+exports.getAgentShops = async (req) => {
+
+    const result = await getData('(agent_salesperson natural join route_salesperson) natural join (shop natural join shop_owner)', 'agent_id',req.body.agent_id );
+    return result;
+}

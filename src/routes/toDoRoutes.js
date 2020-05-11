@@ -39,6 +39,7 @@ router.post('/owner/acceptsuggestion', ownerController.acceptShopSuggestion);
 router.post('/owner/declinesuggestion', ownerController.declineShopSuggestion);
 router.get('/owner/viewagents', ownerController.viewAgents);
 router.post('/owner/sendtarget', ownerController.sendTarget);
+router.get('/owner/viewmonthlytarget', ownerController.viewMonthlyTarget);
 
 //salespersonRoutes routes
 router.get('/route/getAllRoutes', routeController.getAllRoutes);
@@ -47,6 +48,7 @@ router.get('/route/getAllRoutes', routeController.getAllRoutes);
 //shop routes
 router.get('/shop/viewshops', shopController.getAllShops);
 router.get('/shop/viewshopdetails', shopController.getShopDetails);
+router.get('/shop/viewagentshops', shopController.viewShops);
 
 //invoice routes
 router.get('/invoice/viewallinvoices', invoiceController.getAllInvoices);
@@ -74,6 +76,8 @@ router.get('/agent/viewreport', reportController.viewReport);
 router.get('/stock/viewagentstock',stockController.viewAgentStock);
 router.get('/stock/viewwarehouse',stockController.viewWarehouseStock);
 router.get('/stock/viewsalespersonstock',stockController.viewSalespersonStock);
+router.post('/stock/addtoagentstock',stockController.addToAgentStock);
+router.post('/stock/addtosalespersonstock',stockController.addToSalespersonStock);
 
 
 //test routes
