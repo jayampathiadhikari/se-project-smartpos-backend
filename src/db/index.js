@@ -232,4 +232,4 @@ async function callTransactionInsertDecrementTwo(table1,columns,values,table2,co
 
 
 
-module.exports = { getData,insertData,updateData,deleteData,getData_twoConditions,updateSingleData,decrementIntegers,upsert,incrementIntegers,getAllData,callTransactionInsertInsert,callTransactionInsertDecrement,callTransactionInsertDecrementTwo};
+module.exports = { getData,getDataNull,getDataNotNull,insertData,updateData,deleteData,getData_twoConditions,updateSingleData,decrementIntegers,upsert,incrementIntegers,getAllData,callTransactionInsertInsert,callTransactionInsertDecrement,callTransactionInsertDecrementTwo};

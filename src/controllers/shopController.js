@@ -113,7 +113,33 @@ class Shop {
       });
     }
   };
+  async getShopsInRouteByDistrict(req, res) {
+    const result = await shopModel.getShopsInRouteByDistrict(req);
+    if (result.success) {
+      let shops = [];
+      result.data.forEach((shop) => {
+        let shopDetail = {
+          'shop_id': shop.shop_id,
+          'name': shop.name,
+          'latitude': shop.latitude,
+          'longitude': shop.longitude,
+          'route_id':shop.route_id
+        };
+        shops.push(shopDetail);
+      });
+      return res.status(200).send({
+        success: result.success,
+        data: shops
+      });
 
+    } else {
+      return res.status(200).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
+  };
 
     async viewShops(req, res) {
         const result = await shopModel.getAgentShops(req);
