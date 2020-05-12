@@ -109,7 +109,7 @@ class Database {
 
 async queryTransaction(query1,value1,query2,value2,query3,value3){
 
-  (async () => {
+  try {
 
     const client = await this.pool.connect();
     try {
@@ -123,19 +123,35 @@ async queryTransaction(query1,value1,query2,value2,query3,value3){
       await client.query(`${query2}`,value2)
       await client.query(`${query3}`,value3)
       await client.query('COMMIT')
+
+      return  {
+          success : true
+      }
+
     } catch (e) {
       await client.query('ROLLBACK')
       throw e
+      return {
+      success: false,
+      errorType: 'query error',
+      error: err.stack
+      };
     } finally {
       client.release()
     }
-  })().catch(e => console.error(e.stack))
+  }catch (err) {
+      return {
+           success: false,
+           errorType: 'connection error',
+           error: err.stack
+       };
+     }
 
 }
 
 async queryTransactionsTwo(query1,values,query2,value){
 
-  (async () => {
+  try {
 
     const client = await this.pool.connect();
     try {
@@ -145,13 +161,29 @@ async queryTransactionsTwo(query1,values,query2,value){
       await client.query(`${query2}`,value)
 
       await client.query('COMMIT')
+
+      return  {
+          success : true
+
+      }
     } catch (e) {
       await client.query('ROLLBACK')
       throw e
+      return {
+      success: false,
+      errorType: 'query error',
+      error: err.stack
+      };
     } finally {
       client.release()
     }
-  })().catch(e => console.error(e.stack))
+  }catch (err) {
+      return {
+           success: false,
+           errorType: 'connection error',
+           error: err.stack
+       };
+     }
 
 }
 

@@ -114,6 +114,35 @@ return result;
 
 }
 
+async function upsert(table_name,column_names,values,target,action){
+
+  var pr=''
+  values.forEach((item, i) => {
+      num=i+1
+        pr+="$"+num+","
+  });
+
+  pr=pr.slice(0,-1);
+
+  const text = `INSERT INTO ${table_name}(${column_names}) VALUES(${pr}) ON CONFLICT ${target} ${action}`
+
+    const result=await connection.queryParameterized(text,values);
+    return result;
+
+
+  // ON CONFLICT on constraint agent_stock_pkey
+  // DO UPDATE SET quantity = quantity+${added_quantity} where agent_id=${agent_id} and product_id=${product_id}`
+
+  // INSERT INTO agent_stock (agent_id, product_id, quantity)
+  // VALUES (${agent_id}, ${product_id}, ${added_quantity})
+  // ON CONFLICT on constraint agent_stock_pkey
+  // DO UPDATE SET quantity = quantity+${added_quantity} where agent_id=${agent_id} and product_id=${product_id}`
+
+
+}
+
+
+
 async function callTransactionInsertInsert(table_name1,column_names1,values1,table_name2,column_names2,values2,table_name3,column_names3,values3) {
 
   var pr1=''
@@ -163,6 +192,28 @@ async function callTransactionInsertDecrement(table1,columns,values,table2,col1,
 }
 
 
+async function callTransactionInsertDecrementTwo(table1,columns,values,table2,col,colupdate,col1,val1,col2,val2) {
+
+  var pr1=''
+  values.forEach((item, i) => {
+      num=i+1
+        pr1+="$"+num+","
+  });
+
+  pr1=pr1.slice(0,-1);
 
 
-module.exports = { getData,insertData,updateData,deleteData,getData_twoConditions,updateSingleData,decrementIntegers,incrementIntegers,getAllData,callTransactionInsertInsert,callTransactionInsertDecrement};
+  query1=`INSERT INTO ${table1}(${columns}) VALUES (${pr1}) RETURNING *`
+  query2=`update ${table2} set ${col} =${col}-${colupdate} where ${col1}=$1 and ${col2}=$2`
+
+  const result=await connection.queryTransactionsTwo(query1,values,query2,[val1,val2]);
+  return result;
+
+
+}
+
+
+
+
+
+module.exports = { getData,insertData,updateData,deleteData,getData_twoConditions,updateSingleData,decrementIntegers,upsert,incrementIntegers,getAllData,callTransactionInsertInsert,callTransactionInsertDecrement,callTransactionInsertDecrementTwo};

@@ -20,6 +20,22 @@ class Stock{
     }
   }
 
+  async addToAgentStock(req,res) {
+
+    const result = await stockModel.insertAgentStock(req);
+    if (result.success) {
+      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      return res.send(result.data)
+      //console.log(result.data);
+    } else {
+      return res.status(200).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
+  }
+
   async viewSalespersonStock(req, res) {
 
       const result = await stockModel.getSalespersonStock(req);
@@ -44,6 +60,23 @@ class Stock{
         });
       }
     }
+
+    async addToSalespersonStock(req, res) {
+
+      const result = await stockModel.insertSalespersonStock(req);
+      if (result.success) {
+        res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+        return res.send(result)
+        //console.log(result.data);
+      } else {
+        return res.status(200).send({
+          success: result.success,
+          errorType: result.errorType,
+          error: result.error
+        });
+      }
+    }
+
 
   async viewWarehouseStock(req, res) {
 
