@@ -1,6 +1,7 @@
 const shopModel = require('../models/shopModel.js');
 
 
+
 class Shop {
 
   async getAllShops(req, res) {
@@ -67,7 +68,35 @@ class Shop {
           'shop_id': shop.shop_id,
           'name': shop.name,
           'latitude': shop.latitude,
-          'longitude': shop.longitude
+          'longitude': shop.longitude,
+          'route_id':shop.route_id
+        };
+        shops.push(shopDetail);
+      });
+      return res.status(200).send({
+        success: result.success,
+        data: shops
+      });
+
+    } else {
+      return res.status(200).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
+  };
+  async getShopsNotInRouteByDistrict(req, res) {
+    const result = await shopModel.getShopsNotInRouteByDistrict(req);
+    if (result.success) {
+      let shops = [];
+      result.data.forEach((shop) => {
+        let shopDetail = {
+          'shop_id': shop.shop_id,
+          'name': shop.name,
+          'latitude': shop.latitude,
+          'longitude': shop.longitude,
+          'route_id':shop.route_id
         };
         shops.push(shopDetail);
       });
@@ -85,7 +114,9 @@ class Shop {
     }
   };
 
+
 };
+
 
 
 const shop = new Shop();

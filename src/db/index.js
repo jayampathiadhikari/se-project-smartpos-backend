@@ -9,6 +9,22 @@ async function getData(table_name, constraints, values) {
 
 }
 
+async function getDataNotNull(table_name, constraints,notnullcolumn, values) {
+
+  const result = await connection.queryParameterized(`SELECT * from ${table_name} where ${constraints}=$1 and ${notnullcolumn} is not null` , [`${values}`]);
+  return result;
+
+}
+
+async function getDataNull(table_name, constraints,nullcolumn, values) {
+
+  const result = await connection.queryParameterized(`SELECT * from ${table_name} where ${constraints}=$1 and ${nullcolumn} is null` , [`${values}`]);
+  return result;
+
+}
+
+
+
 async function getAllData(table_name, constraints, values) {
 
     const result=await connection.queryParameterized(`SELECT * from ${table_name} `,[]);
@@ -165,4 +181,4 @@ async function callTransactionInsertDecrement(table1,columns,values,table2,col1,
 
 
 
-module.exports = { getData,insertData,updateData,deleteData,getData_twoConditions,updateSingleData,decrementIntegers,incrementIntegers,getAllData,callTransactionInsertInsert,callTransactionInsertDecrement};
+module.exports = { getData,getDataNotNull,getDataNull,insertData,updateData,deleteData,getData_twoConditions,updateSingleData,decrementIntegers,incrementIntegers,getAllData,callTransactionInsertInsert,callTransactionInsertDecrement};

@@ -50,6 +50,7 @@ router.post('/shop/viewshopdetails', shopController.getShopDetails);
 router.post('/shop/viewshopsbydistrict',shopController.getShopsByDistrict)
 
 
+
 //invoice routes
 router.post('/invoice/viewallinvoices', invoiceController.getAllInvoices);
 router.post('/invoice/viewinvoicedetails', invoiceController.getInvoiceDetails);
