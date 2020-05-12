@@ -48,8 +48,11 @@ router.post('/route/getAllRoutes', routeController.getAllRoutes);
 //shop routes
 router.post('/shop/viewshops', shopController.getAllShops);
 router.post('/shop/viewshopdetails', shopController.getShopDetails);
-router.post('/shop/viewshopsbydistrict',shopController.getShopsByDistrict)
+router.post('/shop/viewshopsbydistrict',shopController.getShopsByDistrict);
+router.post('/shop/viewshops-withroutebydistrict',shopController.getShopsInRouteByDistrict);
+router.post('/shop/viewshops-withnoroutebydistrict',shopController.getShopsNotInRouteByDistrict);
 router.get('/shop/viewagentshops', shopController.viewShops);
+
 
 //invoice routes
 router.post('/invoice/viewallinvoices', invoiceController.getAllInvoices);
