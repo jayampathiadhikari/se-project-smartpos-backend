@@ -2,6 +2,7 @@ const { getData } = require('../db/index');
 const { insertData } = require('../db/index');
 const { deleteData } = require('../db/index');
 const { callTransactionInsertInsert} = require('../db/index');
+const { getData_twoConditions} = require('../db/index');
 
 
 exports.getSuggestionData = async (req) => {
@@ -61,5 +62,11 @@ exports.getAllAgents = async (req) => {
 
 exports.insertTarget = async (req) => {
     const result = await insertData('monthly_target', ['target_value'],[req.body.target_value]);
+    return result;
+}
+
+
+exports.getTarget = async (req) => {
+    const result = await getData_twoConditions('monthly_target', ['year','month'], [new Date().getFullYear(),new Date().getMonth()+1]);
     return result;
 }
