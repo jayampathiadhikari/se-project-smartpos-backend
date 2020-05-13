@@ -107,30 +107,29 @@ class Database {
     }
   }
 
-  async queryTransactionForRoutes(textArray, valuesArray) {
+  async queryTransactionForRoutes(createNewRoute,createNewRouteValues,shop_ids) {
     try {
       const client = await this.pool.connect();
       try {
+        const texts = [];
+        const values = [];
+        const updateShop =(route_id) => (`UPDATE shop SET route_id = ${route_id} WHERE shop_id = $1`);
         await client.query('BEGIN');
-        client.query(textArray[0], valuesArray[0]).then(async () => {
-            for (let i = 1; i < textArray.length; i++) {
-              await client.query(textArray[i], valuesArray[i]);
-            }
-          }
-        ).catch(async(err) => {
-          await client.query('ROLLBACK');
-          client.release();
-          return {
-            success: false,
-            errorType: 'query error',
-            error: err.stack
-          };
+        const res = await client.query(createNewRoute, createNewRouteValues);
+        
+        shop_ids.forEach((val)=> {
+          texts.push(updateShop(res.rows[0].route_id));
+          values.push([val]);
         });
+        for (let i = 0; i < texts.length; i++) {
+          await client.query(texts[i], values[i]);
+        }
         await client.query('COMMIT');
         client.release();
         return {
-          success: true
-        }
+          success: true,
+        };
+
       } catch (err) {
         await client.query('ROLLBACK');
         client.release();
