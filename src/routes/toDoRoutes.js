@@ -44,6 +44,11 @@ router.get('/owner/viewmonthlytarget', ownerController.viewMonthlyTarget);
 //salespersonRoutes routes
 router.post('/route/getAllRoutes', routeController.getAllRoutes);
 
+//Routes routes
+router.get('/route/getlatest-routeid', routeController.getLatestRouteId);
+router.post('/route/create-route', routeController.createNewRoute);
+
+
 
 //shop routes
 router.post('/shop/viewshops', shopController.getAllShops);
