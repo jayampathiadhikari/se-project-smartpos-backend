@@ -13,16 +13,12 @@ exports.getLatestRouteId = async (req) => {
 exports.createNewRoute = async (req) => {
     //texts sould be array of text strings
     //values should be array of array of values
-    console.log(typeof (req.body.shop_ids),req.body.shop_ids)
-
     const route_id = req.body.next_route_id;
-    const shop_ids = req.body.shop_ids;
+    const shop_ids = JSON.parse(req.body.shop_ids);
     const route_details = JSON.parse(req.body.route_details);
-    console.log(typeof (route_details))
     const createNewRoute = 'INSERT INTO route(route_name, district_id, salesperson_id, day_id) VALUES ($1, $2, $3, $4)';
     const createNewRouteValues = [route_details.route_name, route_details.district_id,route_details.salesperson_id,route_details.day_id];
     const updateShop = `UPDATE shop SET route_id = ${route_id} WHERE shop_id = $1`;
-    const updateShopValues = ['shop_id'];
 
     const texts = [];
     const values = [];

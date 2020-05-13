@@ -117,7 +117,15 @@ class Database {
               await client.query(textArray[i], valuesArray[i]);
             }
           }
-        );
+        ).catch(async(err) => {
+          await client.query('ROLLBACK');
+          client.release();
+          return {
+            success: false,
+            errorType: 'query error',
+            error: err.stack
+          };
+        });
         await client.query('COMMIT');
         client.release();
         return {
