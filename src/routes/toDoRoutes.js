@@ -28,6 +28,8 @@ router.post('/employee/edit', employeeController.editUserData);
 
 //salesperson routes
 router.get('/salesperson/getdailytarget', salespersonController.getDailyTarget);
+router.post('/salesperson/getunassigneddates', salespersonController.getUnassignedDays);
+
 
 //agent routes
 router.post('/agent/suggest', agentController.suggestShops);
@@ -43,6 +45,7 @@ router.get('/owner/viewmonthlytarget', ownerController.viewMonthlyTarget);
 
 //salespersonRoutes routes
 router.post('/route/getAllRoutes', routeController.getAllRoutes);
+
 
 //Routes routes
 router.get('/route/getlatest-routeid', routeController.getLatestRouteId);
