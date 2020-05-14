@@ -28,12 +28,11 @@ class Salesperson {
     return salespersonModel.getAssignedDates(req).then( result1 => {
       return salespersonModel.getDatesInfo().then(result2 => {
         if (result1.success && result2.success){
-          console.log('succ');
           const freeDates = [];
           const assignedDates = result1.data.map((row)=>(row.day_id));
           const datesInfo = result2.data;
           datesInfo.forEach((info)=> {
-            if(!assignedDates.includes(info.date_id)){
+            if(!assignedDates.includes(info.day_id)){
               freeDates.push(info)
             }
           });
