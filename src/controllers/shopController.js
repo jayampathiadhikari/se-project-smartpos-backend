@@ -161,7 +161,9 @@ class Shop {
     const result = await shopModel.getShopsInSelectedRoute(req);
     if (result.success) {
       res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-      return res.send(result.data)
+      return res.send({
+        success:true,
+        data:result.data})
       //console.log(result.data);
     } else {
       return res.status(200).send({
