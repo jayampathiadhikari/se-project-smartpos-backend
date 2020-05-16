@@ -1,5 +1,5 @@
 const {getData} = require('../db/index');
-const {updateSingleData} = require('../db/index');
+const {incrementIntegers} = require('../db/index');
 const {insertData} = require('../db/index');
 const {deleteData} = require('../db/index');
 const connection = require('../db/postgres');
@@ -17,7 +17,7 @@ exports.getInvoiceDetails = async (req)=>{
 
 
 exports.updateInvoicePaidAmount = async (req)=>{
-    const result = await updateSingleData('invoice', 'paid_amount',req.body.amount_received, 'invoice_id', req.body.invoice_id);
+    const result = await incrementIntegers('invoice', 'paid_amount',req.body.amount_received, 'invoice_id', req.body.invoice_id);
     return result;
 }
 
@@ -26,8 +26,7 @@ exports.generateInvoice = async (req) => {
         const invoiceGenerateResult = await insertData('invoice',['shop_id','salesperson_id'],[req.body.shop_id,req.body.salesperson_id]);
 
         if (invoiceGenerateResult.success){
-            console.log(invoiceGenerateResult);
-            const products=req.body.products
+            const products=JSON.parse(req.body.products)
             const invoice_id=invoiceGenerateResult.data[0].invoice_id
 
             let text1 = `INSERT INTO invoice_items (invoice_id,product_id,quantity) VALUES `;
