@@ -1,7 +1,6 @@
 const shopModel = require('../models/shopModel.js');
 
 
-
 class Shop {
 
   async getAllShops(req, res) {
@@ -69,7 +68,7 @@ class Shop {
           'name': shop.name,
           'latitude': shop.latitude,
           'longitude': shop.longitude,
-          'route_id':shop.route_id
+          'route_id': shop.route_id
         };
         shops.push(shopDetail);
       });
@@ -86,6 +85,7 @@ class Shop {
       });
     }
   };
+
   async getShopsNotInRouteByDistrict(req, res) {
     const result = await shopModel.getShopsNotInRouteByDistrict(req);
     if (result.success) {
@@ -96,7 +96,7 @@ class Shop {
           'name': shop.name,
           'latitude': shop.latitude,
           'longitude': shop.longitude,
-          'route_id':shop.route_id
+          'route_id': shop.route_id
         };
         shops.push(shopDetail);
       });
@@ -113,6 +113,7 @@ class Shop {
       });
     }
   };
+
   async getShopsInRouteByDistrict(req, res) {
     const result = await shopModel.getShopsInRouteByDistrict(req);
     if (result.success) {
@@ -123,7 +124,7 @@ class Shop {
           'name': shop.name,
           'latitude': shop.latitude,
           'longitude': shop.longitude,
-          'route_id':shop.route_id
+          'route_id': shop.route_id
         };
         shops.push(shopDetail);
       });
@@ -141,27 +142,23 @@ class Shop {
     }
   };
 
-    async viewShops(req, res) {
-        const result = await shopModel.getAgentShops(req);
-        if (result.success) {
-          res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-          return res.send(result.data)
-          //console.log(result.data);
-        }
-        else{
-            return res.status(200).send({
-                success : result.success,
-                errorType: result.errorType,
-                error: result.error
-            });
-        }
-      }
-
-
+  async viewShops(req, res) {
+    const result = await shopModel.getAgentShops(req);
+    if (result.success) {
+      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+      return res.send(result.data)
+      //console.log(result.data);
+    } else {
+      return res.status(200).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
+  }
 
 
 };
-
 
 
 const shop = new Shop();
