@@ -32,3 +32,8 @@ exports.getShopsInRouteByDistrict = async (req) => {
   const result = await getDataNotNull('shop','district_id','route_id',req.body.district_id);
   return result;
 };
+
+exports.getShopsInSelectedRoute = async (req) => {
+    const result = await getData('shop', 'route_id', req.body.route_id);
+    return result;
+};
