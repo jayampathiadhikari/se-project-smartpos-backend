@@ -60,6 +60,7 @@ router.post('/shop/viewshopsbydistrict',shopController.getShopsByDistrict);
 router.post('/shop/viewshops-withroutebydistrict',shopController.getShopsInRouteByDistrict);
 router.post('/shop/viewshops-withnoroutebydistrict',shopController.getShopsNotInRouteByDistrict);
 router.get('/shop/viewagentshops', shopController.viewShops);
+router.post('/shop/get-shops-selected-route',shopController.getShopsInSelectedRoute);
 
 
 //invoice routes
