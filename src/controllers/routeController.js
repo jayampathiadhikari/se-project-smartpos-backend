@@ -9,7 +9,7 @@ class Route {
       let routes = [];
       result.data.forEach((route) => {
         let routeDetail = {
-          'route_id': route.shop_id,
+          'route_id': route.route_id,
           'route_name': route.route_name,
           'week': route.week,
           'day': route.day

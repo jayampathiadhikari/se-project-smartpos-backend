@@ -44,7 +44,7 @@ router.post('/owner/sendtarget', ownerController.sendTarget);
 router.get('/owner/viewmonthlytarget', ownerController.viewMonthlyTarget);
 
 //salespersonRoutes routes
-router.post('/route/getAllRoutes', routeController.getAllRoutes);
+router.post('/route/get-all-routes', routeController.getAllRoutes);
 
 
 //Routes routes
