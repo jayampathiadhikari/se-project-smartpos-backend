@@ -8,30 +8,32 @@ class Invoice {
     const result = await invoiceModel.getAllInvoices(req);
     if(result.success){
         const  invoices= [];
-          result.data.forEach(async (invoice)=>{
+            for (const invoice of result.data) {
+                const result2 = await invoiceModel.getInvoiceDetails({"body":{"invoice_id":invoice.invoice_id}});
+                let invoice_value= 0;
 
-          const result2 = await invoiceModel.getInvoiceDetails({"body":{"invoice_id":invoice.invoice_id}});
-          let invoice_value= 0;
+                if(result2.success){
+                    result2.data.forEach((product)=>{
+                        invoice_value=invoice_value+(product.quantity * product.selling_price);
+                    });
+                }
+                let invoiceDetail={'invoice_id': invoice.invoice_id,
+                                 'issued_date' : invoice.issued_date.toISOString().slice(0,10),
+                                 'paid_amount' : invoice.paid_amount,
+                                 'invoice_value' : invoice_value,
 
-           if(result2.success){
-                result2.data.forEach((product)=>{
-                    invoice_value=invoice_value+(product.quantity * product.selling_price);
-                });
-           }
-          let invoiceDetail={'invoice_id': invoice.invoice_id,
-                             'issued_date' : invoice.issued_date.toISOString().slice(0,10),
-                             'paid_amount' : invoice.paid_amount,
-                             'invoice_value' : invoice_value,
+                }
+                invoices.push(invoiceDetail);
 
+                if (result.data.length===invoices.length){
+                    break;
+                }
             }
-            invoices.push(invoiceDetail);
 
-            if (result.data.length==invoices.length){
-                return res.status(200).send({
-                  success: result.success,
-                  data:invoices});
-            }
-          });
+            return res.status(200).send({
+            success: result.success,
+            data: invoices
+            });
 
 
     }else{
@@ -100,7 +102,7 @@ class Invoice {
       }
 
 
-};
+}
 
 
 
