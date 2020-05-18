@@ -74,38 +74,38 @@ class Database {
       };
     }
   }
-
-  async queryTransactions(textArray, valuesArray) {
-    try {
-      const client = await this.pool.connect();
-      try {
-        await client.query('BEGIN');
-        for (let i = 0; i < textArray.length; i++) {
-          await client.query(textArray[i], valuesArray[i]);
-        }
-        await client.query('COMMIT');
-        client.release();
-        return {
-          success: true
-        }
-
-      } catch (err) {
-        await client.query('ROLLBACK')
-        client.release();
-        return {
-          success: false,
-          errorType: 'query error',
-          error: err.stack
-        };
-      }
-    } catch (err) {
-      return {
-        success: false,
-        errorType: 'connection error',
-        error: err.stack
-      };
-    }
-  }
+  //
+  // async queryTransactions(textArray, valuesArray) {
+  //   try {
+  //     const client = await this.pool.connect();
+  //     try {
+  //       await client.query('BEGIN');
+  //       for (let i = 0; i < textArray.length; i++) {
+  //         await client.query(textArray[i], valuesArray[i]);
+  //       }
+  //       await client.query('COMMIT');
+  //       client.release();
+  //       return {
+  //         success: true
+  //       }
+  //
+  //     } catch (err) {
+  //       await client.query('ROLLBACK')
+  //       client.release();
+  //       return {
+  //         success: false,
+  //         errorType: 'query error',
+  //         error: err.stack
+  //       };
+  //     }
+  //   } catch (err) {
+  //     return {
+  //       success: false,
+  //       errorType: 'connection error',
+  //       error: err.stack
+  //     };
+  //   }
+  // }
 
   async queryTransactionForRoutes(createNewRoute,createNewRouteValues,shop_ids) {
     try {
@@ -147,6 +147,59 @@ class Database {
       };
     }
   }
+
+
+  async queryTransactionsInvoice(createNewInvoice,createNewInvoiceValues,products,salesperson_id) {
+    try {
+      const client = await this.pool.connect();
+      try {
+        const queryStrings = [];
+        const queryValues = [];
+
+        const addInvoiceItems = (invoice_id)=>(`INSERT INTO invoice_items (invoice_id,product_id,quantity) VALUES (${invoice_id},$1, $2)`);
+
+        await client.query('BEGIN');
+        const res = await client.query(createNewInvoice, createNewInvoiceValues);
+
+        products.forEach((product)=> {
+          queryStrings.push(addInvoiceItems(res.rows[0].invoice_id));
+          queryValues.push([product.product_id,product.quantity]);
+        });
+
+        products.forEach((product)=> {
+          queryStrings.push(`update salesperson_stock set remaining_quantity =remaining_quantity-${product.quantity} where salesperson_id=$1 and stock_received_date =$2 and product_id=$3`);
+          queryValues.push([salesperson_id,new Date().toISOString().slice(0,10),product.product_id]);
+        });
+
+        for (let i = 0; i < queryStrings.length; i++) {
+          await client.query(queryStrings[i], queryValues[i]);
+        }
+        await client.query('COMMIT');
+        client.release();
+        return {
+          success: true,
+        };
+
+      } catch (err) {
+        await client.query('ROLLBACK');
+        client.release();
+        return {
+          success: false,
+          errorType: 'query error',
+          error: err.stack
+        };
+      }
+    } catch (err) {
+      return {
+        success: false,
+        errorType: 'connection error',
+        error: err.stack
+      };
+    }
+  }
+
+
+
 
 
   async queryTransaction(query1, value1, query2, value2, query3, value3) {
