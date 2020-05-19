@@ -20,7 +20,6 @@ const invoiceController = require('../controllers/invoiceController.js');
 
 const router = new Router();
 
-//router.use(require('body-parser').json());
 
 //employee routes
 router.get('/api/v1/employee/profile', employeeController.getUserData);
@@ -31,6 +30,8 @@ router.post('/api/v1/employee/edit', employeeController.editUserData);
 
 //salesperson routes
 router.get('/salesperson/getdailytarget', salespersonController.getDailyTarget);
+router.post('/salesperson/getunassigneddates', salespersonController.getUnassignedDays);
+
 
 //agent routes
 router.post('/api/v1/agent/suggest', agentController.suggestShops);
@@ -45,13 +46,23 @@ router.post('/api/v1/owner/sendtarget', ownerController.sendTarget);
 router.get('/api/v1/owner/viewmonthlytarget', ownerController.viewMonthlyTarget);
 
 //salespersonRoutes routes
-router.post('/route/getAllRoutes', routeController.getAllRoutes);
+router.post('/route/get-all-routes', routeController.getAllRoutes);
+
+
+//Routes routes
+router.get('/route/getlatest-routeid', routeController.getLatestRouteId);
+router.post('/route/create-route', routeController.createNewRoute);
+
 
 
 //shop routes
 router.post('/shop/viewshops', shopController.getAllShops);
 router.post('/shop/viewshopdetails', shopController.getShopDetails);
-router.post('/shop/viewshopsbydistrict',shopController.getShopsByDistrict)
+router.post('/shop/viewshopsbydistrict',shopController.getShopsByDistrict);
+router.post('/shop/viewshops-withroutebydistrict',shopController.getShopsInRouteByDistrict);
+router.post('/shop/viewshops-withnoroutebydistrict',shopController.getShopsNotInRouteByDistrict);
+router.get('/shop/viewagentshops', shopController.viewShops);
+router.post('/shop/get-shops-selected-route',shopController.getShopsInSelectedRoute);
 router.get('/api/v1/shop/viewagentshops', shopController.viewShops);
 
 //invoice routes
