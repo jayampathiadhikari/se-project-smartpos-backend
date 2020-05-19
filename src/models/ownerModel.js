@@ -1,3 +1,4 @@
+const { getAllData } = require('../db/index');
 const { getData } = require('../db/index');
 const { insertData } = require('../db/index');
 const { deleteData } = require('../db/index');
@@ -6,8 +7,8 @@ const { getData_twoConditions} = require('../db/index');
 
 
 exports.getSuggestionData = async (req) => {
-  console.log('de')
-    const result = await getData('shop_suggestions', ['shop_suggestion_id'], req.body.shop_suggestion_id);
+
+    const result = await getAllData('shop_suggestions');
     return result;
 }
 
@@ -50,10 +51,10 @@ exports.alterShopShopOWner = async (shop_suggestion_id,name_with_initial,contact
 //     return result;
 // }
 
-// exports.deleteSuggestion = async (shop_suggestion_id) => {
-//     const result = await deleteData('shop_suggestions', ['shop_suggestion_id'],shop_suggestion_id);
-//     return result;
-// }
+exports.deleteSuggestion = async (shop_suggestion_id) => {
+    const result = await deleteData('shop_suggestions', ['shop_suggestion_id'],shop_suggestion_id);
+    return result;
+}
 
 exports.getAllAgents = async (req) => {
     const result = await getData('employee natural join employee_role_type', ['role_name'],'agent');

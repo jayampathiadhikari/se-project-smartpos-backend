@@ -8,10 +8,10 @@ class Product{
     //here result becomes undefined so always goes to else part, this is bcs the transaction doesnt return anything
     if (result.success) {
       res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-      return res.send('sending was successfull')
+      return res.status(200).send('sending was successfull')
       //console.log(result.data);
     } else {
-      return res.status(200).send('sending failed');
+      return res.status(404).send('sending failed');
     }
 
 
@@ -23,10 +23,10 @@ class Product{
     const resultt = await productModel.insertIntoWarehouse(req);
     if (result.success) {
       res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-      return res.send(result.data)
+      return res.status(200).send(result)
       //console.log(result.data);
     } else {
-      return res.status(200).send({
+      return res.status(404).send({
         success: result.success,
         errorType: result.errorType,
         error: result.error
@@ -39,10 +39,10 @@ class Product{
     const result = await productModel.incrementQuantity(req);
     if (result.success) {
       res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-      return res.send(result.data)
+      return res.status(200).send(result)
       //console.log(result.data);
     } else {
-      return res.status(200).send({
+      return res.status(404).send({
         success: result.success,
         errorType: result.errorType,
         error: result.error

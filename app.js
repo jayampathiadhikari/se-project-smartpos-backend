@@ -1,8 +1,5 @@
-//import express from 'express';
 const express = require('express');
-//import bodyParser from 'body-parser';
 const bodyParser = require('body-parser');
-//import todoRouter from './src/routes/toDoRoutes.js';
 const todoRouter = require('./src/routes/toDoRoutes.js');
 //Access-Control-Allow-Origin: http://localhost:3000;
 
@@ -33,4 +30,5 @@ app.use(todoRouter);
 
 const port = process.env.PORT || 4000;
 
-app.listen(port, () => console.log(`url-shortener listening on port ${port}!`));
+//app.listen(port, () => console.log(`url-shortener listening on port ${port}!`));
+module.exports = app.listen(port, () => console.log(`url-shortener listening on port ${port}!`));
