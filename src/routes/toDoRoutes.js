@@ -2,7 +2,9 @@
  * import Router from express-promise-router
  */
 
-const Router = require('express-promise-router');
+//const Router = require('express-promise-router');
+const Router = require('express');
+
 
 const employeeController = require('../controllers/employeeController.js');
 const agentController = require('../controllers/agentController.js');
@@ -18,28 +20,29 @@ const invoiceController = require('../controllers/invoiceController.js');
 
 const router = new Router();
 
+//router.use(require('body-parser').json());
 
 //employee routes
-router.get('/employee/profile', employeeController.getUserData);
-router.get('/employee/auth', employeeController.getAuthData);
-router.post('/employee/register', employeeController.addEmployee);
-router.post('/employee/insert', employeeController.insertData);
-router.post('/employee/edit', employeeController.editUserData);
+router.get('/api/v1/employee/profile', employeeController.getUserData);
+router.get('/api/v1/employee/auth', employeeController.getAuthData);
+router.post('/api/v1/employee/register', employeeController.addEmployee);
+router.post('/api/v1/employee/insert', employeeController.insertData);
+router.post('/api/v1/employee/edit', employeeController.editUserData);
 
 //salesperson routes
 router.get('/salesperson/getdailytarget', salespersonController.getDailyTarget);
 
 //agent routes
-router.post('/agent/suggest', agentController.suggestShops);
-router.get('/agent/viewsalesdates', agentController.viewSalesDates);
+router.post('/api/v1/agent/suggest', agentController.suggestShops);
+router.get('/api/v1/agent/viewsalesdates', agentController.viewSalesDates);
 
 //owner routes
-router.get('/owner/viewsuggestion', ownerController.viewShopSuggestion);
-router.post('/owner/acceptsuggestion', ownerController.acceptShopSuggestion);
-router.post('/owner/declinesuggestion', ownerController.declineShopSuggestion);
-router.get('/owner/viewagents', ownerController.viewAgents);
-router.post('/owner/sendtarget', ownerController.sendTarget);
-router.get('/owner/viewmonthlytarget', ownerController.viewMonthlyTarget);
+router.get('/api/v1/owner/viewsuggestion', ownerController.viewShopSuggestion);
+router.post('/api/v1/owner/acceptsuggestion', ownerController.acceptShopSuggestion);
+router.post('/api/v1/owner/declinesuggestion', ownerController.declineShopSuggestion);
+router.get('/api/v1/owner/viewagents', ownerController.viewAgents);
+router.post('/api/v1/owner/sendtarget', ownerController.sendTarget);
+router.get('/api/v1/owner/viewmonthlytarget', ownerController.viewMonthlyTarget);
 
 //salespersonRoutes routes
 router.post('/route/getAllRoutes', routeController.getAllRoutes);
@@ -49,7 +52,7 @@ router.post('/route/getAllRoutes', routeController.getAllRoutes);
 router.post('/shop/viewshops', shopController.getAllShops);
 router.post('/shop/viewshopdetails', shopController.getShopDetails);
 router.post('/shop/viewshopsbydistrict',shopController.getShopsByDistrict)
-router.get('/shop/viewagentshops', shopController.viewShops);
+router.get('/api/v1/shop/viewagentshops', shopController.viewShops);
 
 //invoice routes
 router.post('/invoice/viewallinvoices', invoiceController.getAllInvoices);
@@ -59,32 +62,32 @@ router.post('/invoice/generateInvoice', invoiceController.generateInvoice);
 
 
 //requesting invoice routes
-router.get('/reqinvoice/viewSuggestedList', reqInvoiceController.viewSuggestedList);
-router.post('/reqinvoice/declareSuggestion', reqInvoiceController.declareSuggestion);
-router.get('/reqinvoice/viewAcceptedList', reqInvoiceController.viewAcceptedList);
-router.post('/reqinvoice/sendRequest', reqInvoiceController.sendRequest);
+router.get('/api/v1/reqinvoice/viewsuggestedlist', reqInvoiceController.viewSuggestedList);
+router.post('/api/v1/reqinvoice/declaresuggestion', reqInvoiceController.declareSuggestion);
+router.get('/api/v1/reqinvoice/viewacceptedlist', reqInvoiceController.viewAcceptedList);
+router.post('/api/v1/reqinvoice/sendrequest', reqInvoiceController.sendRequest);
 
 //product routes
-router.post('/product/sendtoAgent', productController.sendtoAgent);
-router.post('/product/addnewproduct', productController.addNewProduct);
-router.post('/product/additems', productController.addProductItems);
+router.post('/api/v1/product/sendtoagent', productController.sendtoAgent);
+router.post('/api/v1/product/addnewproduct', productController.addNewProduct);
+router.post('/api/v1/product/additems', productController.addProductItems);
 
 //report routes
-router.get('/agent/viewreport', reportController.viewReport);
+router.get('/api/v1/report/viewreport', reportController.viewReport);
 
 //stock routes
-router.get('/stock/viewagentstock',stockController.viewAgentStock);
-router.get('/stock/viewwarehouse',stockController.viewWarehouseStock);
-router.post('/stock/viewsalespersonstock',stockController.viewSalespersonStock);
-
-router.post('/stock/addtoagentstock',stockController.addToAgentStock);
-router.post('/stock/addtosalespersonstock',stockController.addToSalespersonStock);
+router.get('/api/v1/stock/viewagentstock',stockController.viewAgentStock);
+router.get('/api/v1/stock/viewwarehouse',stockController.viewWarehouseStock);
+router.post('/api/v1/stock/viewsalespersonstock',stockController.viewSalespersonStock);
+router.post('/api/v1/stock/addtoagentstock',stockController.addToAgentStock);
+router.post('/api/v1/stock/addtosalespersonstock',stockController.addToSalespersonStock);
 
 
 //test routes
+const sample = require('../test/sample.js');
 // router.post('/owner/delete', ownerController.deleteData);
 // router.post('/employee/update', employeeController.updateUserData);
-//router.get('/employee/count', employeeController.getCount);
+router.get('/sample', sample.sampleData);
 
 
 // router.get('/api/v1/todos', toDoController.getAllTodos);

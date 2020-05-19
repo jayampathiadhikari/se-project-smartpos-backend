@@ -5,14 +5,15 @@ const ownerModel = require('../models/ownerModel.js');
 
 class Owner {
   async viewShopSuggestion(req, res) {
-    console.log('req')
+    
     const result = await ownerModel.getSuggestionData(req);
+
     if (result.success) {
       res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-      return res.send(result.data)
+      return res.status(200).send(result)
       //console.log(result.data);
     } else {
-      return res.status(200).send({
+      return res.status(404).send({
         success: result.success,
         errorType: result.errorType,
         error: result.error
@@ -49,8 +50,8 @@ class Owner {
 
       if (insertshopowner.success){
 
-          console.log('insert success');
-          console.log(req)
+          // console.log('insert success');
+          // console.log(req)
           res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
           return res.send('successfully sent')
 
@@ -114,7 +115,7 @@ class Owner {
 
     if (result.success) {
       res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-      return res.send(result.data)
+      return res.send(result)
       //console.log(result.data);
     } else {
       return res.status(200).send({
@@ -130,7 +131,7 @@ class Owner {
 
       if (result.success) {
         res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-        return res.send(result.data)
+        return res.send(result)
         //console.log(result.data);
       } else {
         return res.status(200).send({

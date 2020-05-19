@@ -11,7 +11,9 @@
     "dev": "nodemon --exec babel-node app.js ",
     "startes": "node app.js",
     "app": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mtest": "mocha ./src/test/*.test.js",
+    "test-watch": "nodemon --exec \"npm run mtest\""
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +26,14 @@
     "pg": "^8.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.3"
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "expect": "^26.0.1",
+    "mocha": "^7.1.2",
+    "nodemon": "^2.0.3",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
+    "supertest": "^4.0.2",
+    "typescript": "^3.9.2"
   }
 }

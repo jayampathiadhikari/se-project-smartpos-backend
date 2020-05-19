@@ -9,7 +9,7 @@ async function getData(table_name, constraints, values) {
 
 }
 
-async function getAllData(table_name, constraints, values) {
+async function getAllData(table_name) {
 
     const result=await connection.queryParameterized(`SELECT * from ${table_name} `,[]);
     return result;

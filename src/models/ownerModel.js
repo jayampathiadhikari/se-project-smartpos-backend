@@ -1,4 +1,4 @@
-const { getData } = require('../db/index');
+const { getAllData } = require('../db/index');
 const { insertData } = require('../db/index');
 const { deleteData } = require('../db/index');
 const { callTransactionInsertInsert} = require('../db/index');
@@ -7,7 +7,7 @@ const { getData_twoConditions} = require('../db/index');
 
 exports.getSuggestionData = async (req) => {
   console.log('de')
-    const result = await getData('shop_suggestions', ['shop_suggestion_id'], req.body.shop_suggestion_id);
+    const result = await getAllData('shop_suggestions');
     return result;
 }
 

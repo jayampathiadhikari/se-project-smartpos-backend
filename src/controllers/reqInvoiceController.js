@@ -53,7 +53,7 @@ class ReqInvoice{
   async sendRequest(req, res) {
 
     const result = await reqInvoiceModel.acceptRequest(req);
-    
+
     if (result.success) {
       res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.send(result.data)
