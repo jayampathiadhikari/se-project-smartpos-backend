@@ -17,7 +17,7 @@ class Agent {
       return res.status(200).send(result)
 
     } else {
-      return res.status(409).send({
+      return res.status(404).send({
         success: result.success,
         errorType: result.errorType,
         error: result.error

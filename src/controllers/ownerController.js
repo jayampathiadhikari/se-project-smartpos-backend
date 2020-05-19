@@ -5,7 +5,7 @@ const ownerModel = require('../models/ownerModel.js');
 
 class Owner {
   async viewShopSuggestion(req, res) {
-    
+
     const result = await ownerModel.getSuggestionData(req);
 
     if (result.success) {
@@ -58,7 +58,7 @@ class Owner {
 
     }
     else{
-      return res.status(200).send({
+      return res.status(404).send({
         success: insertshopowner.success,
         errorType: insertshopowner.errorType,
         error: insertshopowner.error
@@ -67,7 +67,7 @@ class Owner {
   }
 
     else {
-      return res.status(200).send({
+      return res.status(404).send({
         success: shopdata.success,
         errorType: shopdata.errorType,
         error: shopdata.error
@@ -78,14 +78,14 @@ class Owner {
 
   async declineShopSuggestion(req, res) {
     const shop_suggestion_id=req.body.shop_suggestion_id;
-    console.log('req')
+
     const result = await ownerModel.deleteSuggestion(shop_suggestion_id);
     if (result.success) {
       res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-      return res.send(result.data)
-      //console.log(result.data);
+      return res.status(200).send(result)
+
     } else {
-      return res.status(200).send({
+      return res.status(404).send({
         success: result.success,
         errorType: result.errorType,
         error: result.error
@@ -96,12 +96,13 @@ class Owner {
   async viewAgents(req, res) {
 
     const result = await ownerModel.getAllAgents(req);
+    
     if (result.success) {
       res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-      return res.send(result.data)
-      //console.log(result.data);
+      return res.status(200).send(result)
+
     } else {
-      return res.status(200).send({
+      return res.status(404).send({
         success: result.success,
         errorType: result.errorType,
         error: result.error
@@ -115,10 +116,10 @@ class Owner {
 
     if (result.success) {
       res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-      return res.send(result)
+      return res.status(200).send(result)
       //console.log(result.data);
     } else {
-      return res.status(200).send({
+      return res.status(404).send({
         success: result.success,
         errorType: result.errorType,
         error: result.error
@@ -128,13 +129,14 @@ class Owner {
 
   async viewMonthlyTarget(req,res){
       const result = await ownerModel.getTarget(req);
+      //console.log(result);
 
       if (result.success) {
         res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-        return res.send(result)
-        //console.log(result.data);
+        return res.status(200).send(result)
+
       } else {
-        return res.status(200).send({
+        return res.status(404).send({
           success: result.success,
           errorType: result.errorType,
           error: result.error
