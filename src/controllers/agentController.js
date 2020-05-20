@@ -13,7 +13,7 @@ class Agent {
 
     const result = await agentModel.insertSuggestions(req);
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      
       return res.status(200).send(result)
 
     } else {
@@ -30,7 +30,7 @@ class Agent {
     const result = await agentModel.getSalesDates(req);
 
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      
       return res.status(200).send(result)
 
     } else {

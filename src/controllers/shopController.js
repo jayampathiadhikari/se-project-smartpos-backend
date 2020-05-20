@@ -145,7 +145,7 @@ class Shop {
   async viewShops(req, res) {
     const result = await shopModel.getAgentShops(req);
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+      
       return res.status(200).send(result)
       //console.log(result.data);
     } else {
@@ -160,7 +160,6 @@ class Shop {
   async getShopsInSelectedRoute(req, res) {
     const result = await shopModel.getShopsInSelectedRoute(req);
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
       return res.send({
         success:true,
         data:result.data})

@@ -6,7 +6,7 @@ class ReqInvoice{
     
     const result = await reqInvoiceModel.getSuggestedList(req);
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      
       return res.status(200).send(result)
       //console.log(result.data);
     } else {
@@ -22,7 +22,7 @@ class ReqInvoice{
     console.log('req')
     const result = await reqInvoiceModel.removeSuggestion(req);
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      
       return res.status(200).send(result)
       //console.log(result.data);
     } else {
@@ -38,7 +38,7 @@ class ReqInvoice{
 
     const result = await reqInvoiceModel.getAcceptedList(req);
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      
       return res.status(200).send(result)
       //console.log(result.data);
     } else {
@@ -55,7 +55,7 @@ class ReqInvoice{
     const result = await reqInvoiceModel.acceptRequest(req);
 
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      
       return res.status(200).send(result)
       //console.log(result.data);
     } else {

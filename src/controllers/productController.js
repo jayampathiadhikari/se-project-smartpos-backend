@@ -7,7 +7,6 @@ class Product{
     const result = productModel.sendAndRemove(req);
     //here result becomes undefined so always goes to else part, this is bcs the transaction doesnt return anything
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send('sending was successfull')
       //console.log(result.data);
     } else {
@@ -18,11 +17,9 @@ class Product{
   }
 
   async addNewProduct(req, res) {
-
     const result = await productModel.insertIntoProduct(req);
     const resultt = await productModel.insertIntoWarehouse(req);
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send(result)
       //console.log(result.data);
     } else {
@@ -35,10 +32,8 @@ class Product{
   }
 
   async addProductItems(req, res) {
-
     const result = await productModel.incrementQuantity(req);
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send(result)
       //console.log(result.data);
     } else {
