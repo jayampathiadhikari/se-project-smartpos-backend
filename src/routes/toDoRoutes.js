@@ -17,6 +17,7 @@ const salespersonController = require('../controllers/salespersonController.js')
 const shopController = require('../controllers/shopController.js');
 const routeController = require('../controllers/routeController.js');
 const invoiceController = require('../controllers/invoiceController.js');
+const graphController = require('../controllers/graphController.js');
 
 const router = new Router();
 
@@ -75,6 +76,7 @@ router.post('/invoice/generateInvoice', invoiceController.generateInvoice);
 router.get('/api/v1/reqinvoice/viewsuggestedlist', reqInvoiceController.viewSuggestedList);
 router.post('/api/v1/reqinvoice/declaresuggestion', reqInvoiceController.declareSuggestion);
 router.get('/api/v1/reqinvoice/viewacceptedlist', reqInvoiceController.viewAcceptedList);
+router.get('/api/v1/reqinvoice/viewreqinvoices', reqInvoiceController.viewAllInvoices);
 router.post('/api/v1/reqinvoice/sendrequest', reqInvoiceController.sendRequest);
 
 //product routes
@@ -91,6 +93,9 @@ router.get('/api/v1/stock/viewwarehouse',stockController.viewWarehouseStock);
 router.post('/api/v1/stock/viewsalespersonstock',stockController.viewSalespersonStock);
 router.post('/api/v1/stock/addtoagentstock',stockController.addToAgentStock);
 router.post('/api/v1/stock/addtosalespersonstock',stockController.addToSalespersonStock);
+
+//graph Routes
+router.get('/api/v1/graph/agentlinegraph',graphController.agentLineGraph);
 
 
 //test routes

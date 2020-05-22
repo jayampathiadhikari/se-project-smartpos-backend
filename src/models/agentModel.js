@@ -1,10 +1,10 @@
-const { getData } = require('../db/index');
+const { getUniqueData} = require('../db/index');
 const { insertData } = require('../db/index');
 
 
 exports.getSalesDates = async (req) => {
 
-    const result = await getData('sales natural join agent_salesperson', 'agent_id',req.body.agent_id );
+    const result = await getUniqueData('sales natural join agent_salesperson','sold_date', 'agent_id',req.query.agent_id );
     return result;
 }
 

@@ -5,9 +5,12 @@ const employeeModel = require('../models/employeeModel.js');
 class Employee {
 
   async getUserData(req, res) {
+    console.log('req')
     const result = await employeeModel.getUserData(req);
     if (result.success) {
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send(result)
+      //console.log(result.data);
     } else {
       return res.status(200).send({
         success: result.success,
@@ -67,7 +70,7 @@ class Employee {
   }
 
   async getCount(req, res) {
-    
+    //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
     const count=67;
     return res.send(count.data);
     console.log(count.data);
@@ -95,7 +98,7 @@ class Employee {
 
         const result = await employeeModel.editUserData(req);
         if (result.success) {
-          
+          //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
           return res.status(200).send({
             success: result.success,
             data: result.data,

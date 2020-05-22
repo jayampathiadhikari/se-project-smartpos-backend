@@ -1,9 +1,5 @@
-// import db from '../db/db.js';
-// import {database} from '../db/postgres';
 // import ownerModel from '../models/ownerModel.js';
 
-const db = require('../db/db.js');
-const {database} = require('../db/postgres');
 const agentModel = require('../models/agentModel.js');
 
 
@@ -13,7 +9,7 @@ class Agent {
 
     const result = await agentModel.insertSuggestions(req);
     if (result.success) {
-      
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send(result)
 
     } else {
@@ -30,7 +26,7 @@ class Agent {
     const result = await agentModel.getSalesDates(req);
 
     if (result.success) {
-      
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send(result)
 
     } else {
