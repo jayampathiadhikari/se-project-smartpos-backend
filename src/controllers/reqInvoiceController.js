@@ -55,7 +55,31 @@ class ReqInvoice{
     const result = await reqInvoiceModel.getInvoices(req);
     if (result.success) {
       //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+
       return res.status(200).send(result)
+    } else {
+      return res.status(404).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
+  }
+
+  async getAgentIds(req, res) {
+    const result = await reqInvoiceModel.getInvoices(req);
+    if (result.success) {
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      const agentIds = [];
+      result.data.forEach(data => {
+        if(!agentIds.includes(data.employee_id)){
+          agentIds.push(data.employee_id)
+        }
+      });
+      return res.status(200).send({
+        success:true,
+        data: agentIds
+      })
     } else {
       return res.status(404).send({
         success: result.success,

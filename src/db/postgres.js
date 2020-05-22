@@ -7,8 +7,7 @@
 
 const {Pool} = require('pg');
 
-const DATABASE_URL = `postgres://labofgazlworvs:1cd93ae40f72ad53f6d909c2244d0f02a2c5276cb37ef9d0b5b83a22deba0b01@ec2-54-75-225-52.eu-west-1.compute.amazonaws.com:5432/d7bek3cbh2uq5d`;
-
+const DATABASE_URL = `postgres://labofgazlworvs:1cd93ae40f72ad53f6d909c2244d0f02a2c5276cb37ef9d0b5b83a22deba0b01@ec2-54-75-225-52.eu-west-1.compute.amazonaws.com:5432/d7bek3cbh2uq5d`
 const config = {
   connectionString: DATABASE_URL,
   ssl: {
