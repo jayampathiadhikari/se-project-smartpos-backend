@@ -9,7 +9,7 @@ class Owner {
     const result = await ownerModel.getSuggestionData(req);
 
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send(result)
       //console.log(result.data);
     } else {
@@ -50,10 +50,8 @@ class Owner {
 
       if (insertshopowner.success){
 
-          // console.log('insert success');
-          // console.log(req)
-          res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-          return res.send('successfully sent')
+          ///res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+          return res.status(200).send(insertshopowner)
 
 
     }
@@ -81,8 +79,10 @@ class Owner {
 
     const result = await ownerModel.deleteSuggestion(shop_suggestion_id);
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send(result)
+
 
     } else {
       return res.status(404).send({
@@ -96,9 +96,9 @@ class Owner {
   async viewAgents(req, res) {
 
     const result = await ownerModel.getAllAgents(req);
-    
+
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send(result)
 
     } else {
@@ -115,7 +115,7 @@ class Owner {
     const result = await ownerModel.insertTarget(req);
 
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send(result)
       //console.log(result.data);
     } else {
@@ -132,7 +132,7 @@ class Owner {
       //console.log(result);
 
       if (result.success) {
-        res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+        //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
         return res.status(200).send(result)
 
       } else {

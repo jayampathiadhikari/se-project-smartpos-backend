@@ -3,10 +3,10 @@ const reqInvoiceModel = require('../models/reqInvoiceModel.js');
 class ReqInvoice{
 
   async viewSuggestedList(req, res) {
-    
+
     const result = await reqInvoiceModel.getSuggestedList(req);
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send(result)
       //console.log(result.data);
     } else {
@@ -19,10 +19,10 @@ class ReqInvoice{
   }
 
   async declareSuggestion(req, res) {
-    console.log('req')
+
     const result = await reqInvoiceModel.removeSuggestion(req);
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send(result)
       //console.log(result.data);
     } else {
@@ -38,9 +38,24 @@ class ReqInvoice{
 
     const result = await reqInvoiceModel.getAcceptedList(req);
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send(result)
       //console.log(result.data);
+    } else {
+      return res.status(404).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
+  }
+
+  async viewAllInvoices(req, res) {
+
+    const result = await reqInvoiceModel.getInvoices(req);
+    if (result.success) {
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      return res.status(200).send(result)
     } else {
       return res.status(404).send({
         success: result.success,
@@ -55,7 +70,7 @@ class ReqInvoice{
     const result = await reqInvoiceModel.acceptRequest(req);
 
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send(result)
       //console.log(result.data);
     } else {
