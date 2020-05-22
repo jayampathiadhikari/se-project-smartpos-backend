@@ -9,6 +9,13 @@ async function getData(table_name, constraints, values) {
 
 }
 
+async function getUniqueData(table_name,coloumn,constraints, values) {
+
+  const result = await connection.queryParameterized(`SELECT ${coloumn} from ${table_name} where ${constraints}=$1`, [`${values}`]);
+  return result;
+
+}
+
 async function getDataNotNull(table_name, constraints, notnullcolumn, values) {
 
   const result = await connection.queryParameterized(`SELECT * from ${table_name} where ${constraints}=$1 and ${notnullcolumn} is not null`, [`${values}`]);
@@ -185,6 +192,33 @@ async function callTransactionInsertInsert(table_name1, column_names1, values1, 
 
 }
 
+async function callTransactionInsertTwo(table_name1, column_names1, values1, table_name2, column_names2, values2) {
+
+  var pr1 = ''
+  values1.forEach((item, i) => {
+    num = i + 1
+    pr1 += "$" + num + ","
+  });
+
+  pr1 = pr1.slice(0, -1);
+
+  var pr2 = ''
+  values2.forEach((item, i) => {
+    num = i + 1
+    pr2 += "$" + num + ","
+  });
+
+  pr2 = pr2.slice(0, -1);
+
+  query1 = `INSERT INTO ${table_name1}(${column_names1}) VALUES (${pr1}) RETURNING *`
+  query2 = `INSERT INTO ${table_name2}(${column_names2}) VALUES (${pr2})`
+
+
+  const result = await connection.queryTransactionsTwo(query1, values1, query2, values2);
+  return result;
+
+}
+
 async function callTransactionInsertDecrement(table1, columns, values, table2, col1, col1update, col2, value) {
 
   var pr1 = ''
@@ -229,6 +263,7 @@ async function callTransactionInsertDecrementTwo(table1, columns, values, table2
 
 module.exports = {
   getData,
+  getUniqueData,
   getDataNull,
   getDataNotNull,
   insertData,
@@ -242,5 +277,6 @@ module.exports = {
   getAllData,
   callTransactionInsertInsert,
   callTransactionInsertDecrement,
-  callTransactionInsertDecrementTwo
+  callTransactionInsertDecrementTwo,
+  callTransactionInsertTwo
 };

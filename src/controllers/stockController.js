@@ -8,7 +8,7 @@ class Stock{
 
     const result = await stockModel.getAgentStock(req);
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.send(result.data)
       //console.log(result.data);
     } else {
@@ -24,7 +24,7 @@ class Stock{
 
     const result = await stockModel.insertAgentStock(req);
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.send(result.data)
       //console.log(result.data);
     } else {
@@ -65,7 +65,7 @@ class Stock{
 
       const result = await stockModel.insertSalespersonStock(req);
       if (result.success) {
-        res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+        //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
         return res.send(result)
         //console.log(result.data);
       } else {
@@ -82,7 +82,7 @@ class Stock{
 
     const result = await stockModel.getWarehouse(req);
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.send(result.data)
       //console.log(result.data);
     } else {

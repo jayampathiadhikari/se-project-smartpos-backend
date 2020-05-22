@@ -6,7 +6,7 @@ class Report{
     const result = await reportModel.getReportDetails(req);
 
     if (result.success) {
-      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.send(result.data)
       //console.log(result.data);
     } else {

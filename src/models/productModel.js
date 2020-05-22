@@ -2,6 +2,7 @@ const {insertData} = require('../db/index');
 const {incrementIntegers} = require('../db/index');
 const {decrementIntegers} = require('../db/index');
 const {callTransactionInsertDecrement} = require('../db/index');
+const {callTransactionInsertTwo} = require('../db/index');
 
 
 
@@ -37,16 +38,15 @@ exports.sendAndRemove = async (req) => {
 
 
 
-exports.insertIntoProduct = async (req,) => {
+exports.insertWarehouseProduct = async(req)=>{
 
-    const result = await insertData('product', ['product_id','name','production_cost','selling_price'], [req.body.product_id,req.body.name,req.body.production_cost,req.body.selling_price]);
-    return result;
-}
+  const col1= ['product_id','name','production_cost','selling_price']
+  const val1= [req.body.product_id,req.body.name,req.body.production_cost,req.body.selling_price]
+  const col2= ['product_id','quantity']
+  const val2= [req.body.product_id,req.body.quantity]
 
-exports.insertIntoWarehouse = async (req,) => {
-
-    const result = await insertData('warehouse_stock', ['product_id','quantity'], [req.body.product_id,req.body.quantity]);
-    return result;
+  const result = await callTransactionInsertTwo('product', col1, val1, 'warehouse_stock', col2, val2);
+  return result;
 }
 
 exports.incrementQuantity = async (req,) => {
