@@ -1,8 +1,8 @@
-const { insertData } = require('../db/index');
+const {getData} = require('../db/index');
 
 
-exports.getSalesDates = async (req) => {
+exports.getAgentLineGraph = async (req) => {
 
-    const result = await getUniqueData('sales natural join agent_salesperson','sold_date', 'agent_id',req.query.agent_id );
+    const result = await getData('agent_overall_sales','agent_id', req.query.agent_id );
     return result;
 }

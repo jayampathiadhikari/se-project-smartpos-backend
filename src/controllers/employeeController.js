@@ -35,6 +35,34 @@ class Employee {
     }
   }
 
+  async addAgent(req,res){
+
+    const result = await employeeModel.addNewAgent(req);
+    if (result.success) {
+      return res.status(200).send(result)
+    } else {
+      return res.status(404).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
+  }
+
+  async addSalesperson(req,res){
+
+    const result = await employeeModel.addNewSalesperson(req);
+    if (result.success) {
+      return res.status(200).send(result)
+    } else {
+      return res.status(200).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
+  }
+
   async getAuthData(req, res) {
     const result = await employeeModel.getAuthData(req);
     if (result.success) {

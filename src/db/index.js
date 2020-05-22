@@ -219,6 +219,34 @@ async function callTransactionInsertTwo(table_name1, column_names1, values1, tab
 
 }
 
+
+async function callTransactionInsertTwoForiegn(table_name1, column_names1, values1, table_name2, column_names2, values2) {
+
+  var pr1 = ''
+  values1.forEach((item, i) => {
+    num = i + 1
+    pr1 += "$" + num + ","
+  });
+
+  pr1 = pr1.slice(0, -1);
+
+  var pr2 = ''
+  values2.forEach((item, i) => {
+    num = i + 1
+    pr2 += "$" + num + ","
+  });
+
+  pr2 = pr2.slice(0, -1);
+
+  query1 = `INSERT INTO ${table_name1}(${column_names1}) VALUES (${pr1}) RETURNING *`
+  query2 = `INSERT INTO ${table_name2}(${column_names2}) VALUES (${pr2})`
+
+
+  const result = await connection.queryTransactionsTwoForiegnKey(query1, values1, query2, values2);
+  return result;
+
+}
+
 async function callTransactionInsertDecrement(table1, columns, values, table2, col1, col1update, col2, value) {
 
   var pr1 = ''
@@ -278,5 +306,6 @@ module.exports = {
   callTransactionInsertInsert,
   callTransactionInsertDecrement,
   callTransactionInsertDecrementTwo,
-  callTransactionInsertTwo
+  callTransactionInsertTwo,
+  callTransactionInsertTwoForiegn
 };

@@ -5,18 +5,23 @@ class Graph{
 
   async agentLineGraph(req, res) {
 
-    const result = await graphModel.insertSuggestions(req);
-    if (result.success) {
-      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-      return res.status(200).send(result)
-
-    } else {
-      return res.status(404).send({
-        success: result.success,
-        errorType: result.errorType,
-        error: result.error
-      });
-    }
+    // const result = await graphModel.getAgentLineGraph(req);
+    // if (result.success) {
+    //   const current_year =;
+    //   const current_month =;
+    //   let months=[]
+    //   for i in range(1,current_month){
+    //
+    //   }
+    //   return res.status(200).send(result)
+    //
+    // } else {
+    //   return res.status(404).send({
+    //     success: result.success,
+    //     errorType: result.errorType,
+    //     error: result.error
+    //   });
+    // }
   }
 
 }

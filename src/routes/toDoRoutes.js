@@ -28,6 +28,8 @@ router.get('/api/v1/employee/auth', employeeController.getAuthData);
 router.post('/api/v1/employee/register', employeeController.addEmployee);
 router.post('/api/v1/employee/insert', employeeController.insertData);
 router.post('/api/v1/employee/edit', employeeController.editUserData);
+router.post('/api/v1/employee/registeragent', employeeController.addAgent);
+router.post('/api/v1/employee/registersalesperson', employeeController.addSalesperson);
 
 //salesperson routes
 router.get('/salesperson/getdailytarget', salespersonController.getDailyTarget);

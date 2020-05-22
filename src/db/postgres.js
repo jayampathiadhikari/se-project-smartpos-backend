@@ -7,7 +7,7 @@
 
 const {Pool} = require('pg');
 
-const DATABASE_URL = `postgres://ikskhujcyrzjtq:49d69e32604b80afd0cf428570eb693797f4aec94918797116798e27dbbdb872@ec2-54-217-204-34.eu-west-1.compute.amazonaws.com:5432/d86cgt146guri2`;
+const DATABASE_URL = `postgres://labofgazlworvs:1cd93ae40f72ad53f6d909c2244d0f02a2c5276cb37ef9d0b5b83a22deba0b01@ec2-54-75-225-52.eu-west-1.compute.amazonaws.com:5432/d7bek3cbh2uq5d`;
 
 const config = {
   connectionString: DATABASE_URL,
@@ -116,7 +116,7 @@ class Database {
         const updateShop =(route_id) => (`UPDATE shop SET route_id = ${route_id} WHERE shop_id = $1`);
         await client.query('BEGIN');
         const res = await client.query(createNewRoute, createNewRouteValues);
-        
+
         shop_ids.forEach((val)=> {
           texts.push(updateShop(res.rows[0].route_id));
           values.push([val]);
@@ -281,6 +281,14 @@ class Database {
     }
 
   }
+
+   async queryTransactionsTwoForiegnKey(query1, values1, query2, values2) {
+
+
+
+}
+
+
 
 
 }
