@@ -8,7 +8,7 @@ const {callTransactionInsertDecrementTwo} = require('../db/index');
 
 exports.getAgentStock = async (req) => {
 
-    const result = await getData('agent_stock natural join product', 'agent_id',req.body.agent_id );
+    const result = await getData('agent_stock natural join product', 'agent_id',req.query.agent_id );
     return result;
 }
 

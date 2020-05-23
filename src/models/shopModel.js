@@ -19,7 +19,7 @@ exports.getShopsByDistrict = async (req) => {
 
 exports.getAgentShops = async (req) => {
 
-    const result = await getData('shop natural join shop_owner', 'district_id',req.body.district_id );
+    const result = await getData('shop natural join shop_owner', 'district_id',req.query.district_id );
     return result;
 };
 
