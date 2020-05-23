@@ -79,7 +79,7 @@ router.get('/api/v1/reqinvoice/viewsuggestedlist', reqInvoiceController.viewSugg
 router.post('/api/v1/reqinvoice/declaresuggestion', reqInvoiceController.declareSuggestion);
 router.get('/api/v1/reqinvoice/viewacceptedlist', reqInvoiceController.viewAcceptedList);
 router.get('/api/v1/reqinvoice/viewreqinvoices', reqInvoiceController.viewAllInvoices);
-router.get('/reqinvoice/getagentids', reqInvoiceController.getAgentIds);
+router.get('/api/v1/reqinvoice/getagentids', reqInvoiceController.getAgentIds);
 router.post('/api/v1/reqinvoice/sendrequest', reqInvoiceController.sendRequest);
 
 //product routes
