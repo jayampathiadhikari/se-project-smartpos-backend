@@ -23,6 +23,14 @@ exports.getWarehouse = async (req) => {
     return result;
 }
 
+exports.getWarehouseQuantity = async (req) => {
+  console.log(req);
+
+    const result = await getData('warehouse_stock','product_id',req.product_id);
+    return result;
+}
+
+
 exports.insertAgentStock = async (req) => {
   const col='quantity'
   const target= 'on constraint agent_stock_pkey'
