@@ -216,19 +216,19 @@ class Database {
         await client.query(`${query3}`, value3)
         await client.query('COMMIT')
 
-        client.release()
         return {
           success: true
         }
 
       } catch (e) {
         await client.query('ROLLBACK')
-        client.release();
         return {
           success: false,
           errorType: 'query error',
           error: e.stack
         };
+      }finally {
+        client.release()
       }
     } catch (err) {
       return {
@@ -252,18 +252,20 @@ class Database {
         await client.query(`${query2}`, value)
 
         await client.query('COMMIT')
-        client.release()
+
         return {
           success: true
         }
       } catch (e) {
         await client.query('ROLLBACK')
-        client.release()
+
         return {
           success: false,
           errorType: 'query error',
           error: e.stack
         };
+      }finally {
+        client.release()
       }
     } catch (err) {
       return {
@@ -305,18 +307,18 @@ class Database {
         values2.push(employee_id);
         await client.query(text2,values2);
         await client.query('COMMIT')
-        client.release();
         return {
           success: true,
         };
       } catch (err) {
         await client.query('ROLLBACK');
-        client.release();
         return {
           success: false,
           errorType: 'query error',
           error: err.stack
         };
+      }finally {
+        client.release();
       }
     } catch (err) {
       return {
