@@ -277,6 +277,37 @@ class Database {
 
   }
 
+  async queryTransactionTwo(query1, values, query2, value) {
+    try {
+      const client = await this.pool.connect();
+      try {
+        await client.query('BEGIN');
+        const res = await client.query(query1, values);
+        await client.query(query2, value);
+        await client.query('COMMIT');
+        client.release();
+        return {
+          success: true,
+        };
+
+      } catch (err) {
+        await client.query('ROLLBACK');
+        client.release();
+        return {
+          success: false,
+          errorType: 'query error',
+          error: err.stack
+        };
+      }
+    } catch (err) {
+      return {
+        success: false,
+        errorType: 'connection error',
+        error: err.stack
+      };
+    }
+  }
+
   async queryTransactionsTwoForiegnKey(query1, values1, query2, values2) {
     try {
       const client = await this.pool.connect();
