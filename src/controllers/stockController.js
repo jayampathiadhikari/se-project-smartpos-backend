@@ -9,10 +9,10 @@ class Stock{
     const result = await stockModel.getAgentStock(req);
     if (result.success) {
       //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-      return res.send(result.data)
-      //console.log(result.data);
+      return res.status(200).send(result)
+
     } else {
-      return res.status(200).send({
+      return res.status(404).send({
         success: result.success,
         errorType: result.errorType,
         error: result.error
@@ -25,10 +25,10 @@ class Stock{
     const result = await stockModel.insertAgentStock(req);
     if (result.success) {
       //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-      return res.send(result.data)
-      //console.log(result.data);
+      return res.status(200).send(result)
+
     } else {
-      return res.status(200).send({
+      return res.status(404).send({
         success: result.success,
         errorType: result.errorType,
         error: result.error
@@ -66,10 +66,10 @@ class Stock{
       const result = await stockModel.insertSalespersonStock(req);
       if (result.success) {
         //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-        return res.send(result)
-        //console.log(result.data);
+        return res.status(200).send(result)
+
       } else {
-        return res.status(200).send({
+        return res.status(404).send({
           success: result.success,
           errorType: result.errorType,
           error: result.error
@@ -81,7 +81,18 @@ class Stock{
   async viewWarehouseStock(req, res) {
 
     const result = await stockModel.getWarehouse(req);
-    return res.send(result)
+
+    if (result.success) {
+      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+      return res.status(200).send(result)
+
+    } else {
+      return res.status(404).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
   }
 }
 

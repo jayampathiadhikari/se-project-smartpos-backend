@@ -28,6 +28,8 @@ router.get('/api/v1/employee/auth', employeeController.getAuthData);
 router.post('/api/v1/employee/register', employeeController.addEmployee);
 router.post('/api/v1/employee/insert', employeeController.insertData);
 router.post('/api/v1/employee/edit', employeeController.editUserData);
+router.post('/api/v1/employee/registeragent', employeeController.addAgent);
+router.post('/api/v1/employee/registersalesperson', employeeController.addSalesperson);
 
 //salesperson routes
 router.get('/salesperson/getdailytarget', salespersonController.getDailyTarget);
@@ -77,7 +79,7 @@ router.get('/api/v1/reqinvoice/viewsuggestedlist', reqInvoiceController.viewSugg
 router.post('/api/v1/reqinvoice/declaresuggestion', reqInvoiceController.declareSuggestion);
 router.get('/api/v1/reqinvoice/viewacceptedlist', reqInvoiceController.viewAcceptedList);
 router.get('/api/v1/reqinvoice/viewreqinvoices', reqInvoiceController.viewAllInvoices);
-router.get('/api/v1/reqinvoice/getagentids', reqInvoiceController.getAgentIds);
+router.get('/reqinvoice/getagentids', reqInvoiceController.getAgentIds);
 router.post('/api/v1/reqinvoice/sendrequest', reqInvoiceController.sendRequest);
 
 //product routes
@@ -91,12 +93,15 @@ router.get('/api/v1/report/viewreport', reportController.viewReport);
 //stock routes
 router.get('/api/v1/stock/viewagentstock',stockController.viewAgentStock);
 router.get('/api/v1/stock/viewwarehouse',stockController.viewWarehouseStock);
-router.post('/api/v1/stock/viewsalespersonstock',stockController.viewSalespersonStock);
+router.post('/stock/viewsalespersonstock',stockController.viewSalespersonStock);
 router.post('/api/v1/stock/addtoagentstock',stockController.addToAgentStock);
 router.post('/api/v1/stock/addtosalespersonstock',stockController.addToSalespersonStock);
 
 //graph Routes
 router.get('/api/v1/graph/agentlinegraph',graphController.agentLineGraph);
+router.get('/api/v1/graph/ownerlinegraph',graphController.ownerLineGraph);
+router.get('/api/v1/graph/agentbargraph',graphController.agentBarGraph);
+router.get('/api/v1/graph/ownerbargraph',graphController.ownerBarGraph);
 
 
 //test routes

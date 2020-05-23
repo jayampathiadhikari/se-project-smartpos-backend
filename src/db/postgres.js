@@ -115,7 +115,7 @@ class Database {
         const updateShop =(route_id) => (`UPDATE shop SET route_id = ${route_id} WHERE shop_id = $1`);
         await client.query('BEGIN');
         const res = await client.query(createNewRoute, createNewRouteValues);
-        
+
         shop_ids.forEach((val)=> {
           texts.push(updateShop(res.rows[0].route_id));
           values.push([val]);
@@ -280,6 +280,14 @@ class Database {
     }
 
   }
+
+   async queryTransactionsTwoForiegnKey(query1, values1, query2, values2) {
+
+
+
+}
+
+
 
 
 }

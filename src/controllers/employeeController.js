@@ -5,7 +5,7 @@ const employeeModel = require('../models/employeeModel.js');
 class Employee {
 
   async getUserData(req, res) {
-    console.log('req')
+
     const result = await employeeModel.getUserData(req);
     if (result.success) {
       //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
@@ -25,7 +25,35 @@ class Employee {
     //role ids : owner - 3, salesperson - 2 , agent - 1
     const result = await employeeModel.addNewEmployee(req);
     if (result.success) {
-      return res.send(result.data)
+      return res.status(200).send(result.data)
+    } else {
+      return res.status(200).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
+  }
+
+  async addAgent(req,res){
+
+    const result = await employeeModel.addNewAgent(req);
+    if (result.success) {
+      return res.status(200).send(result)
+    } else {
+      return res.status(404).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
+  }
+
+  async addSalesperson(req,res){
+
+    const result = await employeeModel.addNewSalesperson(req);
+    if (result.success) {
+      return res.status(200).send(result)
     } else {
       return res.status(200).send({
         success: result.success,
@@ -38,7 +66,7 @@ class Employee {
   async getAuthData(req, res) {
     const result = await employeeModel.getAuthData(req);
     if (result.success) {
-      return res.send(result.data)
+      return res.status(200).send(result.data)
       // return res.status(200).send({
       //   success: result.success,
       //   data: result.data,
@@ -72,7 +100,7 @@ class Employee {
   async getCount(req, res) {
     //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
     const count=67;
-    return res.send(count.data);
+    return res.status(200).send(count.data);
     console.log(count.data);
   }
 

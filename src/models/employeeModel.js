@@ -2,6 +2,7 @@ const { getData } = require('../db/index');
 const { insertData } = require('../db/index');
 const { updateData } = require('../db/index');
 const { editData } = require('../db/index');
+const { callTransactionInsertTwoForiegn } = require('../db/index');
 
 exports.getUserData = async (req) => {
   console.log('de')
@@ -36,8 +37,24 @@ exports.addNewEmployee = async (req) => {
   return result;
 };
 
+
+exports.addNewAgent = async (req) => {
+
+    const result = await callTransactionInsertTwoForiegn('employee', ['employee_id','role_id'], [req.body.agent_id,1], 'owner_agent',['owner_id','agent_id'], [req.body.owner_id,req.body.agent_id]);
+    return result;
+}
+
+
+exports.addNewSalesperson = async (req) => {
+
+    const result = await callTransactionInsertTwoForiegn('employee', ['employee_id','role_id'], [req.body.salesperson_id,2], 'agent_salesperson', ['agent_id','salesperson_id'], [req.body.agent_id,req.body.salesperson_id]);
+    return result;
+}
+
+
+
 exports.updateData = async (req) => {
-  console.log('aesrr')
+
     const result = await updateData('employee', ['first_name','street'],['Sam','Muwagama'],'employee_id',req.body.employee_id);
     return result;
 }
@@ -45,7 +62,7 @@ exports.updateData = async (req) => {
 
 
 exports.editUserData = async (req) => {
-  console.log('aesrr')
+
     const result = await updateData('employee', ['first_name','last_name','gender','street','city','state'],[req.body.first_name,req.body.last_name,req.body.gender,req.body.street,req.body.city,req.body.state],'employee_id',req.body.employee_id);
     return result;
 }

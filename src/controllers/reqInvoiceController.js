@@ -24,7 +24,7 @@ class ReqInvoice{
     if (result.success) {
       //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send(result)
-      //console.log(result.data);
+
     } else {
       return res.status(404).send({
         success: result.success,
@@ -40,7 +40,7 @@ class ReqInvoice{
     if (result.success) {
       //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send(result)
-      //console.log(result.data);
+
     } else {
       return res.status(404).send({
         success: result.success,
@@ -96,7 +96,7 @@ class ReqInvoice{
     if (result.success) {
       //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send(result)
-      //console.log(result.data);
+    
     } else {
       return res.status(404).send({
         success: result.success,
