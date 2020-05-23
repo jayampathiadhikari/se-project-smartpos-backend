@@ -3,7 +3,7 @@ const {incrementIntegers} = require('../db/index');
 const {decrementIntegers} = require('../db/index');
 const {callTransactionInsertDecrement} = require('../db/index');
 const {callTransactionInsertTwo} = require('../db/index');
-
+const connection = require('../db/postgres');
 
 
 // exports.sendToCarriage = async (req) => {
