@@ -33,7 +33,6 @@ exports.sendAndRemove = async (req) => {
   const result = await callTransactionInsertDecrement(table1,columns,values,table2,col1,col1update,col2,value)
   return result;
 
-
 }
 
 

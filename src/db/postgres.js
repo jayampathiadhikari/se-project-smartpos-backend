@@ -216,20 +216,19 @@ class Database {
         await client.query(`${query3}`, value3)
         await client.query('COMMIT')
 
+        client.release()
         return {
           success: true
         }
 
       } catch (e) {
         await client.query('ROLLBACK')
-        throw e
+        client.release();
         return {
           success: false,
           errorType: 'query error',
-          error: err.stack
+          error: e.stack
         };
-      } finally {
-        client.release()
       }
     } catch (err) {
       return {
@@ -253,21 +252,18 @@ class Database {
         await client.query(`${query2}`, value)
 
         await client.query('COMMIT')
-
+        client.release()
         return {
           success: true
-
         }
       } catch (e) {
         await client.query('ROLLBACK')
-        throw e
+        client.release()
         return {
           success: false,
           errorType: 'query error',
-          error: err.stack
+          error: e.stack
         };
-      } finally {
-        client.release()
       }
     } catch (err) {
       return {
