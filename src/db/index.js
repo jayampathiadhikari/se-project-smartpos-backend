@@ -262,10 +262,15 @@ async function callTransactionInsertDecrement(table1, columns, values, table2, c
   query1 = `INSERT INTO ${table1}(${columns}) VALUES (${pr1}) RETURNING *`
   query2 = `update ${table2} set ${col1} =${col1}-${col1update} where ${col2}=$1 `
 
-  const result = await connection.queryTransactionsTwo(query1, values, query2, [value]);
-  return result;
-
-
+  return connection.transactionTwo(query1, values, query2, [value]).then(res=>{
+    return res
+  }).catch(err => {
+    return {
+      success: false,
+      errorType: 'connection error',
+      error: err.stack
+    };
+  });
 }
 
 
