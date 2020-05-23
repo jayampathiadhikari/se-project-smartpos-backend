@@ -7,10 +7,9 @@ class Report{
 
     if (result.success) {
       //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-      return res.send(result.data)
-      //console.log(result.data);
+      return res.status(200).send(result)
     } else {
-      return res.status(200).send({
+      return res.status(404).send({
         success: result.success,
         errorType: result.errorType,
         error: result.error

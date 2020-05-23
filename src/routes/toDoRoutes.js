@@ -79,7 +79,7 @@ router.get('/api/v1/reqinvoice/viewsuggestedlist', reqInvoiceController.viewSugg
 router.post('/api/v1/reqinvoice/declaresuggestion', reqInvoiceController.declareSuggestion);
 router.get('/api/v1/reqinvoice/viewacceptedlist', reqInvoiceController.viewAcceptedList);
 router.get('/api/v1/reqinvoice/viewreqinvoices', reqInvoiceController.viewAllInvoices);
-router.get('/api/v1/reqinvoice/getagentids', reqInvoiceController.getAgentIds);
+router.get('/reqinvoice/getagentids', reqInvoiceController.getAgentIds);
 router.post('/api/v1/reqinvoice/sendrequest', reqInvoiceController.sendRequest);
 
 //product routes
@@ -93,7 +93,7 @@ router.get('/api/v1/report/viewreport', reportController.viewReport);
 //stock routes
 router.get('/api/v1/stock/viewagentstock',stockController.viewAgentStock);
 router.get('/api/v1/stock/viewwarehouse',stockController.viewWarehouseStock);
-router.post('/api/v1/stock/viewsalespersonstock',stockController.viewSalespersonStock);
+router.post('/stock/viewsalespersonstock',stockController.viewSalespersonStock);
 router.post('/api/v1/stock/addtoagentstock',stockController.addToAgentStock);
 router.post('/api/v1/stock/addtosalespersonstock',stockController.addToSalespersonStock);
 
