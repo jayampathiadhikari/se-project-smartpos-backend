@@ -6,7 +6,7 @@ const {updateSingleData} = require('../db/index');
 
 exports.getSuggestedList = async (req) => {
 
-    const result = await getData_twoConditions('requesting_invoice_items', ['employee_id','state_accepted'], [req.query.employee_id,'false']);
+    const result = await getData_twoConditions('requesting_invoice_items join product using (product_id)', ['employee_id','state_accepted'], [req.query.employee_id,'false']);
     return result;
 }
 
