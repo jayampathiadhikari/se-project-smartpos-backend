@@ -3,9 +3,19 @@ const productModel = require('../models/productModel.js');
 
 class Product{
 
-  async sendtoAgent(req, res) {
-    const result = await productModel.sendAndRemove(req);
-    return res.status(200).send(result);
+  async sendAgentReq(req, res) {
+    const result = await productModel.sendAgentReq(req);
+    if (result.success) {
+      return res.status(200).send({
+        success: result.success,
+      });
+    } else {
+      return res.status(200).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
   }
 
   async addNewProduct(req, res) {
