@@ -1,4 +1,5 @@
 const reqInvoiceModel = require('../models/reqInvoiceModel.js');
+const stockModel = require('../models/stockModel.js');
 
 class ReqInvoice{
 
@@ -37,8 +38,19 @@ class ReqInvoice{
   async viewAcceptedList(req, res) {
 
     const result = await reqInvoiceModel.getAcceptedList(req);
+
     if (result.success) {
-      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+
+      var i;
+      var obj;
+      var id;
+
+      for (obj of result.data) {
+        id = obj.product_id;
+        const result2 = await stockModel.getWarehouseQuantity({product_id:id});
+        obj.available_qantity=result2.data[0].quantity;
+      }
+
       return res.status(200).send(result)
 
     } else {
