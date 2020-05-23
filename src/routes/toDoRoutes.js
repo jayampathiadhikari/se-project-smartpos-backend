@@ -83,7 +83,7 @@ router.get('/api/v1/reqinvoice/getagentids', reqInvoiceController.getAgentIds);
 router.post('/api/v1/reqinvoice/sendrequest', reqInvoiceController.sendRequest);
 
 //product routes
-router.post('/api/v1/product/sendtoagent', productController.sendtoAgent);
+router.post('/api/v1/product/sendtoagent', routeController.sendAgentReq);
 router.post('/api/v1/product/addnewproduct', productController.addNewProduct);
 router.post('/api/v1/product/additems', productController.addProductItems);
 

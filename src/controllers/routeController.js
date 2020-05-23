@@ -66,6 +66,21 @@ class Route {
       });
     }
   }
+  async sendAgentReq(req, res) {
+    const result = await routeModel.sendAgentReq(req);
+    if (result.success) {
+      return res.status(200).send({
+        success: result.success,
+      });
+    } else {
+      return res.status(200).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
+  }
+
 
 
 };
