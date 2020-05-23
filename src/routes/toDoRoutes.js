@@ -99,6 +99,9 @@ router.post('/api/v1/stock/addtosalespersonstock',stockController.addToSalespers
 
 //graph Routes
 router.get('/api/v1/graph/agentlinegraph',graphController.agentLineGraph);
+router.get('/api/v1/graph/ownerlinegraph',graphController.ownerLineGraph);
+router.get('/api/v1/graph/agentbargraph',graphController.agentBarGraph);
+router.get('/api/v1/graph/ownerbargraph',graphController.ownerBarGraph);
 
 
 //test routes
