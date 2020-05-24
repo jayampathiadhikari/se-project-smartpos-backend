@@ -22,3 +22,8 @@ exports.getDistrictName = async (id) => {
     const result = await getData('district','district_id',id);
     return result;
 }
+
+exports.getProductName = async (id) => {
+    const result = await getData('product','product_id',id);
+    return result;
+}

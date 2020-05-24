@@ -49,7 +49,11 @@ class Report{
               total_revenue+=obj.revenue;
             }
         }
-        array.push({id:id,total_revenue:total_revenue});
+        console.log(array);
+        var result3 = await reportModel.getProductName(id);
+        var name = result3.data[0].name;
+        array.push({id:id,product_name:name,total_revenue:total_revenue});
+
 
       }
 
@@ -112,7 +116,10 @@ class Report{
               total_revenue+=obj.revenue;
             }
         }
-        array.push({id:id,total_revenue:total_revenue});
+        var result3 = await reportModel.getProductName(id);
+        var name = result3.data[0].name;
+        array.push({id:id,product_name:name,total_revenue:total_revenue});
+
 
       }
 
@@ -175,7 +182,11 @@ class Report{
               total_revenue+=obj.revenue;
             }
         }
-        array.push({id:id,total_revenue:total_revenue});
+
+        var result3 = await reportModel.getProductName(id);
+        var name = result3.data[0].name;
+        array.push({id:id,product_name:name,total_revenue:total_revenue});
+
 
       }
 
@@ -238,7 +249,10 @@ class Report{
               total_revenue+=obj.revenue;
             }
         }
-        array.push({id:id,total_revenue:total_revenue});
+
+        var result3 = await reportModel.getProductName(id);
+        var name = result3.data[0].name;
+        array.push({id:id,product_name:name,total_revenue:total_revenue});
 
       }
 
