@@ -52,12 +52,13 @@ class Owner {
 
       if (insertshopowner.success){
 
-          res.setHeader('Access-Control-Allow-Origin','*')
+          res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
           return res.status(200).send(insertshopowner)
 
 
     }
     else{
+        res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send({
         success: insertshopowner.success,
         errorType: insertshopowner.errorType,
@@ -67,6 +68,7 @@ class Owner {
   }
 
     else {
+      res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
       return res.status(200).send({
         success: shopdata.success,
         errorType: shopdata.errorType,
