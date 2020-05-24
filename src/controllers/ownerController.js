@@ -52,7 +52,7 @@ class Owner {
 
       if (insertshopowner.success){
 
-          ///res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
+          res.setHeader('Access-Control-Allow-Origin','*')
           return res.status(200).send(insertshopowner)
 
 
