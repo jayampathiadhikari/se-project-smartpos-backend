@@ -2,8 +2,7 @@ const { getData } = require('../db/index');
 const { insertData } = require('../db/index');
 const { updateData } = require('../db/index');
 const { editData } = require('../db/index');
-const { callTransactionInsertTwoForiegn , addUser} = require('../db/index');
-
+const { callTransactionInsertTwoForiegn } = require('../db/index');
 
 exports.getUserData = async (req) => {
   console.log('de')
@@ -67,17 +66,3 @@ exports.editUserData = async (req) => {
     const result = await updateData('employee', ['first_name','last_name','gender','street','city','state'],[req.body.first_name,req.body.last_name,req.body.gender,req.body.street,req.body.city,req.body.state],'employee_id',req.body.employee_id);
     return result;
 }
-
-exports.addUserAgent = async (req) => {
-
-  const res = await addUser([req.body.employee_id,1],'owner_agent',['owner_id','agent_id'],[req.body.owner_id])
-  return res
-}
-
-exports.addUserSalesperson = async (req) => {
-
-  const res = await addUser([req.body.employee_id,2],'agent_salesperson',['agent_id','salesperson_id'],[req.body.agent_id])
-  return res
-}
-
-

@@ -1,4 +1,5 @@
 const { getData_twoConditions } = require('../db/index');
+const {getAllData } = require('../db/index');
 
 
 exports.getReportDetails = async (req) => {
@@ -6,7 +7,7 @@ exports.getReportDetails = async (req) => {
     return result;
 }
 
-exports.getTopProductsOwnerMonth = async (req) => {
-    const result = await getData_twoConditions('owner_overall_sales',['owner','sold_date'],[req.query.agent_id,req.query.sold_date]);
+exports.getAllAgentSales = async (req) => {
+    const result = await getAllData('agent_ovarall_sales');
     return result;
 }

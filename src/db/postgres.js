@@ -73,7 +73,6 @@ class Database {
       };
     }
   }
-
   //
   // async queryTransactions(textArray, valuesArray) {
   //   try {
@@ -107,17 +106,17 @@ class Database {
   //   }
   // }
 
-  async queryTransactionForRoutes(createNewRoute, createNewRouteValues, shop_ids) {
+  async queryTransactionForRoutes(createNewRoute,createNewRouteValues,shop_ids) {
     try {
       const client = await this.pool.connect();
       try {
         const texts = [];
         const values = [];
-        const updateShop = (route_id) => (`UPDATE shop SET route_id = ${route_id} WHERE shop_id = $1`);
+        const updateShop =(route_id) => (`UPDATE shop SET route_id = ${route_id} WHERE shop_id = $1`);
         await client.query('BEGIN');
         const res = await client.query(createNewRoute, createNewRouteValues);
 
-        shop_ids.forEach((val) => {
+        shop_ids.forEach((val)=> {
           texts.push(updateShop(res.rows[0].route_id));
           values.push([val]);
         });
@@ -149,26 +148,26 @@ class Database {
   }
 
 
-  async queryTransactionsInvoice(createNewInvoice, createNewInvoiceValues, products, salesperson_id) {
+  async queryTransactionsInvoice(createNewInvoice,createNewInvoiceValues,products,salesperson_id) {
     try {
       const client = await this.pool.connect();
       try {
         const queryStrings = [];
         const queryValues = [];
 
-        const addInvoiceItems = (invoice_id) => (`INSERT INTO invoice_items (invoice_id,product_id,quantity) VALUES (${invoice_id},$1, $2)`);
+        const addInvoiceItems = (invoice_id)=>(`INSERT INTO invoice_items (invoice_id,product_id,quantity) VALUES (${invoice_id},$1, $2)`);
 
         await client.query('BEGIN');
         const res = await client.query(createNewInvoice, createNewInvoiceValues);
 
-        products.forEach((product) => {
+        products.forEach((product)=> {
           queryStrings.push(addInvoiceItems(res.rows[0].invoice_id));
-          queryValues.push([product.product_id, product.quantity]);
+          queryValues.push([product.product_id,product.quantity]);
         });
 
-        products.forEach((product) => {
+        products.forEach((product)=> {
           queryStrings.push(`update salesperson_stock set remaining_quantity =remaining_quantity-${product.quantity} where salesperson_id=$1 and stock_received_date =$2 and product_id=$3`);
-          queryValues.push([salesperson_id, new Date().toISOString().slice(0, 10), product.product_id]);
+          queryValues.push([salesperson_id,new Date().toISOString().slice(0,10),product.product_id]);
         });
 
         for (let i = 0; i < queryStrings.length; i++) {
@@ -199,6 +198,9 @@ class Database {
   }
 
 
+
+
+
   async queryTransaction(query1, value1, query2, value2, query3, value3) {
 
     try {
@@ -217,135 +219,19 @@ class Database {
         await client.query('COMMIT')
 
         return {
-          success: true
-        }
-
-      } catch (e) {
-        await client.query('ROLLBACK')
-        return {
-          success: false,
-          errorType: 'query error',
-          error: e.stack
-        };
-      } finally {
-        client.release()
-      }
-    } catch (err) {
-      return {
-        success: false,
-        errorType: 'connection error',
-        error: err.stack
-      };
-    }
-
-  }
-
-  async queryTransactionsTwo(query1, values, query2, value) {
-
-    try {
-
-      const client = await this.pool.connect();
-      try {
-        await client.query('BEGIN')
-        const res = await client.query(`${query1}`, values)
-
-        await client.query(`${query2}`, value)
-
-        await client.query('COMMIT')
-
-        return {
-          success: true
-        }
-      } catch (e) {
-        await client.query('ROLLBACK')
-
-        return {
-          success: false,
-          errorType: 'query error',
-          error: e.stack
-        };
-      } finally {
-        client.release()
-      }
-    } catch (err) {
-      return {
-        success: false,
-        errorType: 'connection error',
-        error: err.stack
-      };
-    }
-
-  }
-
-  async transactionTwo(query1, values, query2, value) {
-    // note: we don't try/catch this because if connecting throws an exception
-    // we don't need to dispose of the client (it will be undefined)
-    const client = await pool.connect();
-    try {
-      await client.query('BEGIN');
-      await client.query(query1, values);
-      await client.query(query2, value);
-
-      await client.query('COMMIT')
-      return {
-        success: true
-      }
-    } catch (e) {
-      await client.query('ROLLBACK');
-      return  {
-        success: false,
-        errorType: 'query error',
-        error: e.stack
-      }
-    } finally {
-      client.release()
-    }
-  }
-
-
-  async queryTransactionsTwoForiegnKey(query1, values1, query2, values2) {
-    try {
-      const client = await this.pool.connect();
-      await client.query('BEGIN');
-      client.query(query1, values1).then((res) => {
-        const new_employee_id = res.rows[0].employee_id;
-        values2.push(new_employee_id);
-        client.query(query2, values2).then(async () => {
-          client.query('COMMIT');
-        })
-      }).catch(async (e) => {
-        await client.query('ROLLBACK')
-      })
-    } catch (e) {
-      await client.query('ROLLBACK')
-    }
-
-  }
-
-  async queryTransactionAddUser(text1, values1, text2, values2) {
-    try {
-      const client = await this.pool.connect();
-      try {
-        //values 1 contains employee_id and user type
-        await client.query('BEGIN');
-        const res = await client.query(text1, values1);
-        const employee_id = res.rows[0].employee_id;
-        //values 2 contains supervisor_id
-        values2.push(employee_id);
-        await client.query(text2, values2);
-        await client.query('COMMIT')
-        return {
           success: true,
         };
-      } catch (err) {
-        await client.query('ROLLBACK');
+
+      } catch (e) {
+        await client.query('ROLLBACK')
+        throw e
         return {
           success: false,
           errorType: 'query error',
           error: err.stack
         };
       } finally {
-        client.release();
+        client.release()
       }
     } catch (err) {
       return {
@@ -354,7 +240,49 @@ class Database {
         error: err.stack
       };
     }
+
   }
+
+  async queryTransactionsThree(query1, values1, query2, values2,query3, values3) {
+
+    try {
+
+      const client = await this.pool.connect();
+      try {
+        await client.query('BEGIN')
+        await client.query(`${query1}`, values1)
+
+        await client.query(`${query2}`, values2)
+        await client.query(`${query3}`, values3)
+
+        await client.query('COMMIT')
+
+        return {
+          success: true
+
+        }
+      } catch (e) {
+        await client.query('ROLLBACK')
+        throw e
+        return {
+          success: false,
+          errorType: 'query error',
+          error: err.stack
+        };
+      } finally {
+        client.release()
+      }
+    } catch (err) {
+      return {
+        success: false,
+        errorType: 'connection error',
+        error: err.stack
+      };
+    }
+
+  }
+
+
 
 
 }

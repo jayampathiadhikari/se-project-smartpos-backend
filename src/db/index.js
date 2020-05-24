@@ -16,6 +16,13 @@ async function getUniqueData(table_name,coloumn,constraints, values) {
 
 }
 
+async function getUniqueAllData(table_name,coloumn) {
+
+  const result = await connection.queryParameterized(`SELECT ${coloumn} from ${table_name} `, []);
+  return result;
+
+}
+
 async function getDataNotNull(table_name, constraints, notnullcolumn, values) {
 
   const result = await connection.queryParameterized(`SELECT * from ${table_name} where ${constraints}=$1 and ${notnullcolumn} is not null`, [`${values}`]);
@@ -192,7 +199,6 @@ async function callTransactionInsertInsert(table_name1, column_names1, values1, 
 
 }
 
-
 async function callTransactionInsertTwo(table_name1, column_names1, values1, table_name2, column_names2, values2) {
 
   var pr1 = ''
@@ -262,15 +268,11 @@ async function callTransactionInsertDecrement(table1, columns, values, table2, c
   query1 = `INSERT INTO ${table1}(${columns}) VALUES (${pr1}) RETURNING *`
   query2 = `update ${table2} set ${col1} =${col1}-${col1update} where ${col2}=$1 `
 
-  return connection.transactionTwo(query1, values, query2, [value]).then(res=>{
-    return res
-  }).catch(err => {
-    return {
-      success: false,
-      errorType: 'connection error',
-      error: err.stack
-    };
-  });
+  const result = await connection.queryTransactionsTwo(query1, values, query2, [value]);
+  //console.log(result);
+  return result;
+
+
 }
 
 
@@ -294,20 +296,11 @@ async function callTransactionInsertDecrementTwo(table1, columns, values, table2
 
 }
 
-async function addUser(values1,table2,columns2,values2){
-  //values1- employee-id & role_id
-  //values2 - supervisor_id
-  const query1 = `INSERT INTO employee (employee_id,role_id) VALUES ($1,$2) RETURNING *`;
-  const query2 = `INSERT INTO ${table2} (${columns2}) VALUES ($1,$2)`;
-  const result = await connection.queryTransactionAddUser(query1,values1,query2,values2);
-  return result;
-
-}
-
 
 module.exports = {
   getData,
   getUniqueData,
+  getUniqueAllData,
   getDataNull,
   getDataNotNull,
   insertData,
@@ -323,7 +316,5 @@ module.exports = {
   callTransactionInsertDecrement,
   callTransactionInsertDecrementTwo,
   callTransactionInsertTwo,
-  callTransactionInsertTwoForiegn,
-  addUser
-
+  callTransactionInsertTwoForiegn
 };
