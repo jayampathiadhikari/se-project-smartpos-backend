@@ -36,8 +36,8 @@ class Employee {
   }
 
   async addAgent(req,res){
-
-    const result = await employeeModel.addNewAgent(req);
+    //owner_id,employee_id
+    const result = await employeeModel.addUserAgent(req);
     if (result.success) {
       return res.status(200).send(result)
     } else {
@@ -50,8 +50,8 @@ class Employee {
   }
 
   async addSalesperson(req,res){
-
-    const result = await employeeModel.addNewSalesperson(req);
+    //agent_id, employee_id
+    const result = await employeeModel.addUserSalesperson(req);
     if (result.success) {
       return res.status(200).send(result)
     } else {
