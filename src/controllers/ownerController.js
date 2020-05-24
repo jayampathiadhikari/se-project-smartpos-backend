@@ -23,52 +23,45 @@ class Owner {
 
   async acceptShopSuggestion(req, res) {
     const shop_suggestion_id = req.body.shop_suggestion_id;
-    const shopdata = await ownerModel.getSuggestionData(req);
-    console.log(shopdata)
-    if (shopdata.success) {
-      console.log(shopdata);
-      // console.log(shopdata.data[0]);
-      // console.log(shopdata.data[0].route_id);
-      // console.log(shopdata.data.route_id);
-
-      const route_id = shopdata.data[0].route_id
-      const district_id = shopdata.data[0].district_id
-      const name = shopdata.data[0].name
-      const latitude = shopdata.data[0].latitude
-      const longitude = shopdata.data[0].longitude
-      const shop_contact_num = shopdata.data[0].shop_contact_num
-      const name_with_initial = shopdata.data[0].name_with_initial
-      const contact_num_cell = shopdata.data[0].contact_num_cell
-      const contact_num_land = shopdata.data[0].contact_num_land
-      const residence_lattitude = shopdata.data[0].residence_lattitude
-      const residence_longitude = shopdata.data[0].residence_longitude
-      const email = shopdata.data[0].email
-
-
-      const insertshopowner = await ownerModel.alterShopShopOWner(shop_suggestion_id, district_id, name_with_initial, contact_num_cell, contact_num_land, residence_lattitude, residence_longitude, email, route_id, name, latitude, longitude, shop_contact_num);
-      //console.log(insertshopowner);
-      if (insertshopowner.success) {
-        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-        res.setHeader('Access-Control-Allow-Headers', 'Origin, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Response-Time, X-PINGOTHER, X-CSRF-Token,Authorization');
-        res.setHeader('Access-Control-Allow-Credentials', true);
-        return res.status(200).send(insertshopowner)
-      } else {
-        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
-        return res.status(200).send({
-          success: insertshopowner.success,
-          errorType: insertshopowner.errorType,
-          error: insertshopowner.error
-        });
+    return ownerModel.getSuggestionData(req).then(
+      async(shopdata) => {
+        if (shopdata.success) {
+          const route_id = shopdata.data[0].route_id
+          const district_id = shopdata.data[0].district_id
+          const name = shopdata.data[0].name
+          const latitude = shopdata.data[0].latitude
+          const longitude = shopdata.data[0].longitude
+          const shop_contact_num = shopdata.data[0].shop_contact_num
+          const name_with_initial = shopdata.data[0].name_with_initial
+          const contact_num_cell = shopdata.data[0].contact_num_cell
+          const contact_num_land = shopdata.data[0].contact_num_land
+          const residence_lattitude = shopdata.data[0].residence_lattitude
+          const residence_longitude = shopdata.data[0].residence_longitude
+          const email = shopdata.data[0].email
+          const insertshopowner = await ownerModel.alterShopShopOWner(shop_suggestion_id, district_id, name_with_initial, contact_num_cell, contact_num_land, residence_lattitude, residence_longitude, email, route_id, name, latitude, longitude, shop_contact_num);
+          if (insertshopowner.success) {
+            return res.status(200).send(insertshopowner)
+          } else {
+            return res.status(200).send({
+              success: insertshopowner.success,
+              errorType: insertshopowner.errorType,
+              error: insertshopowner.error
+            });
+          }
+        } else {
+          return res.status(200).send({
+            success: shopdata.success,
+            errorType: shopdata.errorType,
+            error: shopdata.error
+          });
+        }
       }
-    } else {
-      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+    ).catch(e => {
       return res.status(200).send({
-        success: shopdata.success,
-        errorType: shopdata.errorType,
-        error: shopdata.error
-      });
-    }
+        success: false,
+      })
+    });
+
   }
 
 
