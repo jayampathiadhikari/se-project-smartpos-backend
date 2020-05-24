@@ -150,15 +150,8 @@ class Report{
 
   async viewTopDistrictsMonth(req, res) {
 
-    const result = await reportModel.getAllAgentSales(req);
-    const result2 = await productController.allProductIds(req);
+    const result = await reportModel.getAllDistrictSales(req);
 
-    var ids=[]
-    if (result2.success){
-      ids=result2.data
-    }
-
-    //console.log(ids);
     var id;
     var obj;
     var array=[];
@@ -168,14 +161,17 @@ class Report{
       const current_month =new Date().getMonth()+1;
       const current_year =new Date().getFullYear();
 
-      for(id of ids){
+      for(id=1; id<=25; id++){
         var total_revenue=0;
+        var name;
         for(obj of result.data){
-            if (obj.month==current_month-1 && obj.year==current_year && obj.product_id==id){
+            if (obj.month==current_month-1 && obj.year==current_year && obj.district_id==id){
               total_revenue+=obj.revenue;
             }
         }
-        array.push({id:id,total_revenue:total_revenue});
+        var result2 = await reportModel.getDistrictName(id);
+        name = result2.data[0].district_name;
+        array.push({district_name:name,total_revenue:total_revenue});
 
       }
 
@@ -211,12 +207,55 @@ class Report{
     }
   }
 
-  async viewTopDistrictsMonth(req, res) {
+  async viewTopDistrictsYear(req, res) {
 
-    const result = await graphModel.getAgentLineGraph(req);
+    const result = await reportModel.getAllDistrictSales(req);
+
+    var id;
+    var obj;
+    var array=[];
 
     if (result.success) {
-      return res.status(200).send(result)
+
+      const current_year =new Date().getFullYear();
+
+      for(id=1; id<=25; id++){
+        var total_revenue=0;
+        var name;
+        for(obj of result.data){
+            if (obj.year==current_year-1 && obj.district_id==id){
+              total_revenue+=obj.revenue;
+            }
+        }
+        var result2 = await reportModel.getDistrictName(id);
+        name = result2.data[0].district_name;
+        array.push({district_name:name,total_revenue:total_revenue});
+
+      }
+
+      array.sort(function compare(a, b) {
+
+          const revA = a.total_revenue;
+          const revB = b.total_revenue;
+
+          let comparison = 0;
+          if (revA > revB) {
+            comparison = 1;
+          } else if (revA < revB) {
+            comparison = -1;
+          }
+          return comparison;
+      });
+
+      array.reverse();
+
+
+
+      return res.status(200).send({
+        success:result.success,
+        data:array
+      })
+
     } else {
       return res.status(404).send({
         success: result.success,
@@ -225,10 +264,6 @@ class Report{
       });
     }
   }
-
-
-
-
 
 
 }

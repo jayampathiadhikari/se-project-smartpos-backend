@@ -95,6 +95,7 @@ router.get('/api/v1/report/viewreport', reportController.viewReport);
 router.get('/api/v1/report/top-pr-owner-month', reportController.viewTopProductsMonthOwner);
 router.get('/api/v1/report/top-pr-owner-year', reportController.viewTopProductsYearOwner);
 router.get('/api/v1/report/top-dis-month', reportController.viewTopDistrictsMonth);
+router.get('/api/v1/report/top-dis-year', reportController.viewTopDistrictsYear);
 
 //stock routes
 router.get('/api/v1/stock/viewagentstock',stockController.viewAgentStock);
@@ -108,6 +109,8 @@ router.get('/api/v1/graph/agentlinegraph',graphController.agentLineGraph);
 router.get('/api/v1/graph/ownerlinegraph',graphController.ownerLineGraph);
 router.get('/api/v1/graph/agentbargraph',graphController.agentBarGraph);
 router.get('/api/v1/graph/ownerbargraph',graphController.ownerBarGraph);
+router.get('/api/v1/graph/dis-month-graph',graphController.districtsMonthGraph);
+router.get('/api/v1/graph/dis-yr-graph',graphController.districtsYearGraph);
 
 
 //test routes
