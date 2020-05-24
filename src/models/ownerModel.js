@@ -47,7 +47,7 @@ exports.alterShopShopOWner = async (shop_suggestion_id,district_id,name_with_ini
   values3=[shop_suggestion_id]
 
 
-  query1 = `INSERT INTO ${table_name1}(${column_names1}) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`
+  query1 = `INSERT INTO shop_owner(${column_names1}) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`
   query2 = `INSERT INTO ${table_name2}(${column_names2}) VALUES ($1,$2,$3,$4,$5,$6,$7)`
   query3 = `Delete from ${table_name3} where ${column_names3}=$1`
 
