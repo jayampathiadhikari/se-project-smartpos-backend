@@ -6,7 +6,7 @@ const ownerModel = require('../models/ownerModel.js');
 class Owner {
   async viewShopSuggestion(req, res) {
 
-    const result = await ownerModel.getSuggestionData(req);
+    const result = await ownerModel.getAllSuggestionData(req);
 
     if (result.success) {
       //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')

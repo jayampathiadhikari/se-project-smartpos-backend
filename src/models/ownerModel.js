@@ -8,7 +8,13 @@ const connection = require('../db/postgres');
 
 exports.getSuggestionData = async (req) => {
 
-    const result = await getData('shop_suggestions','shop_suggestion_id',req.body.shop_suggestion_id);
+    const result = await getData('shop_suggestions','shop_suggestion_id',req.query.shop_suggestion_id);
+    return result;
+}
+
+exports.getAllSuggestionData = async (req) => {
+
+    const result = await getAllData('shop_suggestions');
     return result;
 }
 

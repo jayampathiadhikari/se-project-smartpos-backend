@@ -1,4 +1,5 @@
 const graphModel = require('../models/graphModel.js');
+const reportModel = require('../models/reportModel.js');
 
 
 class Graph{
@@ -261,6 +262,86 @@ async getMonthName(i){
   return month
 }
 
+async districtsMonthGraph(req, res) {
+
+  const result = await reportModel.getAllDistrictSales(req);
+
+  var id;
+  var obj;
+  var array=[];
+
+  if (result.success) {
+
+    const current_month =new Date().getMonth()+1;
+    const current_year =new Date().getFullYear();
+
+    for(id=1; id<=25; id++){
+      var total_revenue=0;
+      var name;
+      for(obj of result.data){
+          if (obj.month==current_month-1 && obj.year==current_year && obj.district_id==id){
+            total_revenue+=obj.revenue;
+          }
+      }
+      var result2 = await reportModel.getDistrictName(id);
+      name = result2.data[0].district_name;
+      array.push({district_name:name,total_revenue:total_revenue});
+
+    }
+
+    return res.status(200).send({
+      success:result.success,
+      data:array
+    })
+
+  } else {
+    return res.status(404).send({
+      success: result.success,
+      errorType: result.errorType,
+      error: result.error
+    });
+  }
+}
+
+async districtsYearGraph(req, res) {
+
+  const result = await reportModel.getAllDistrictSales(req);
+
+  var id;
+  var obj;
+  var array=[];
+
+  if (result.success) {
+
+    const current_year =new Date().getFullYear();
+
+    for(id=1; id<=25; id++){
+      var total_revenue=0;
+      var name;
+      for(obj of result.data){
+          if (obj.year==current_year-1 && obj.district_id==id){
+            total_revenue+=obj.revenue;
+          }
+      }
+      var result2 = await reportModel.getDistrictName(id);
+      name = result2.data[0].district_name;
+      array.push({district_name:name,total_revenue:total_revenue});
+
+    }
+
+    return res.status(200).send({
+      success:result.success,
+      data:array
+    })
+
+  } else {
+    return res.status(404).send({
+      success: result.success,
+      errorType: result.errorType,
+      error: result.error
+    });
+  }
+}
 
 
 }

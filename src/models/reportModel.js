@@ -1,5 +1,6 @@
 const { getData_twoConditions } = require('../db/index');
 const {getAllData } = require('../db/index');
+const {getData } = require('../db/index');
 
 
 exports.getReportDetails = async (req) => {
@@ -8,6 +9,16 @@ exports.getReportDetails = async (req) => {
 }
 
 exports.getAllAgentSales = async (req) => {
-    const result = await getAllData('agent_ovarall_sales');
+    const result = await getAllData('agent_overall_sales');
+    return result;
+}
+
+exports.getAllDistrictSales = async (req) => {
+    const result = await getAllData('overall_district_sales');
+    return result;
+}
+
+exports.getDistrictName = async (id) => {
+    const result = await getData('district','district_id',id);
     return result;
 }
