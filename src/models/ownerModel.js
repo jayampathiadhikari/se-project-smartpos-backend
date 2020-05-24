@@ -36,9 +36,9 @@ exports.getAllSuggestionData = async (req) => {
 
 exports.alterShopShopOWner = async (shop_suggestion_id,district_id,name_with_initial,contact_num_cell,contact_num_land,residence_lattitude,residence_longitude,email,route_id,name,latitude,longitude,shop_contact_num) => {
   var owner_id=''
-  table_name1='shop_owner'
-  table_name2='shop'
-  table_name3='shop_suggestions'
+  // table_name1='shop_owner'
+  // table_name2='shop'
+  // table_name3='shop_suggestions'
   column_names1=['name_with_initial','contact_num_cell','contact_num_land','residence_lattitude','residence_longitude','email']
   column_names2=['district_id','route_id','name','latitude','longitude','shop_contact_num','owner_id']
   column_names3=['shop_suggestion_id']
@@ -48,8 +48,8 @@ exports.alterShopShopOWner = async (shop_suggestion_id,district_id,name_with_ini
 
 
   query1 = `INSERT INTO shop_owner(${column_names1}) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`
-  query2 = `INSERT INTO ${table_name2}(${column_names2}) VALUES ($1,$2,$3,$4,$5,$6,$7)`
-  query3 = `Delete from ${table_name3} where ${column_names3}=$1`
+  query2 = `INSERT INTO shop(${column_names2}) VALUES ($1,$2,$3,$4,$5,$6,$7)`
+  query3 = `Delete from shop_suggestions where ${column_names3}=$1`
 
   const result = await connection.queryTransaction(query1, values1, query2, values2, query3, values3);
   //const result = await callTransactionInsertInsert(table_name1,column_names1,values1,table_name2,column_names2,values2,table_name3,column_names3,values3)
