@@ -26,6 +26,7 @@ class Owner {
   async acceptShopSuggestion(req, res) {
     const shop_suggestion_id=req.body.shop_suggestion_id;
     const shopdata = await ownerModel.getSuggestionData(req);
+    console.log(shopdata)
     if (shopdata.success) {
       console.log(shopdata);
       // console.log(shopdata.data[0]);
@@ -57,7 +58,7 @@ class Owner {
 
     }
     else{
-      return res.status(404).send({
+      return res.status(200).send({
         success: insertshopowner.success,
         errorType: insertshopowner.errorType,
         error: insertshopowner.error
@@ -66,7 +67,7 @@ class Owner {
   }
 
     else {
-      return res.status(404).send({
+      return res.status(200).send({
         success: shopdata.success,
         errorType: shopdata.errorType,
         error: shopdata.error
