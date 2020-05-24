@@ -308,7 +308,7 @@ async function callTransactionInsertDecrementTwo(table1, columns, values, table2
 async function addUser(values1,table2,columns2,values2){
   //values1- employee-id & role_id
   //values2 - supervisor_id
-  const query1 = `INSERT INTO employee (employee_id,role_id) VALUES ($1,$2) RETURNING *`;
+  const query1 = `INSERT INTO employee (employee_id,role_id,district_id) VALUES ($1,$2,$3) RETURNING *`;
   const query2 = `INSERT INTO ${table2} (${columns2}) VALUES ($1,$2)`;
   const result = await connection.queryTransactionAddUser(query1,values1,query2,values2);
   return result;

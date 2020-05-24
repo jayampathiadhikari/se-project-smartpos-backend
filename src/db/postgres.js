@@ -280,27 +280,37 @@ class Database {
   async querytransactionsTwo(query1, values1, query2, values2) {
     // note: we don't try/catch this because if connecting throws an exception
     // we don't need to dispose of the client (it will be undefined)
-    const client = await pool.connect();
-    try {
-      await client.query('BEGIN');
+    try{
+      const client = await pool.connect();
+      try {
+        await client.query('BEGIN');
 
-      await client.query(query1, values1);
-      await client.query(query2, values2);
+        await client.query(query1, values1);
+        await client.query(query2, values2);
 
-      await client.query('COMMIT')
-      return {
-        success: true
+        await client.query('COMMIT')
+        return {
+          success: true
+        }
+      } catch (e) {
+        await client.query('ROLLBACK');
+        return  {
+          success: false,
+          errorType: 'query error',
+          error: e.stack
+        }
+      } finally {
+        client.release()
       }
-    } catch (e) {
-      await client.query('ROLLBACK');
-      return  {
-        success: false,
-        errorType: 'query error',
-        error: e.stack
-      }
-    } finally {
-      client.release()
     }
+    catch (err) {
+      return {
+        success: false,
+        errorType: 'connection error',
+        error: err.stack
+      };
+    }
+
   }
 
 

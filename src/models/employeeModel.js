@@ -70,14 +70,12 @@ exports.editUserData = async (req) => {
 
 exports.addUserAgent = async (req) => {
 
-  const res = await addUser([req.body.employee_id,1],'owner_agent',['owner_id','agent_id'],[req.body.owner_id])
+  const res = await addUser([req.body.employee_id,1,req.body.district_id],'owner_agent',['owner_id','agent_id'],[req.body.owner_id])
   return res
 }
 
 exports.addUserSalesperson = async (req) => {
 
-  const res = await addUser([req.body.employee_id,2],'agent_salesperson',['agent_id','salesperson_id'],[req.body.agent_id])
+  const res = await addUser([req.body.employee_id,2,req.body.district_id],'agent_salesperson',['agent_id','salesperson_id'],[req.body.agent_id])
   return res
 }
-
-

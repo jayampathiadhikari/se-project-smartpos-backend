@@ -81,7 +81,7 @@ class Employee {
   }
 
   async insertData(req, res) {
-    
+
     const result = await employeeModel.insertData(req);
     if (result.success) {
       return res.status(200).send({

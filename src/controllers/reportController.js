@@ -226,19 +226,6 @@ class Report{
     }
   }
 
-async compare(a, b) {
-
-    const revA = a.total_revenue;
-    const revB = b.total_revenue;
-
-    let comparison = 0;
-    if (revA > revB) {
-      comparison = 1;
-    } else if (revA < revB) {
-      comparison = -1;
-    }
-    return comparison;
-}
 
 
 
