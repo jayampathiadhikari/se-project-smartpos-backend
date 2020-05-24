@@ -59,6 +59,7 @@ class Owner {
     ).catch(e => {
       return res.status(200).send({
         success: false,
+        error:e.stack
       })
     });
 
