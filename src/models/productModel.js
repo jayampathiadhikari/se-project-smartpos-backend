@@ -19,35 +19,49 @@ const connection = require('../db/postgres');
 //     return result;
 // }
 
-exports.sendAndRemove = async (req) => {
+exports.sendFromList = async (req) => {
 
-  table1='outward_carriage_stock'
-  columns=['agent_id','product_id','quantity']
-  values1=[req.body.agent_id,req.body.product_id,req.body.quantity]
+  let table1='outward_carriage_stock'
+  let columns=['agent_id','product_id','quantity']
+  let values1=[req.body.agent_id,req.body.product_id,req.body.quantity]
 
-  table2='warehouse_stock'
-  col1='quantity'
-  col1update=req.body.quantity
-  col2='product_id'
-  values2=[req.body.product_id]
+  let table2='warehouse_stock'
+  let col1='quantity'
+  let col1update=req.body.quantity
+  let col2='product_id'
+  let values2=[req.body.product_id]
 
-  table3='requesting_invoice_items'
-  col3='state_accepted'
-  colval3='sent'
-  cons='requesting_invoice_items_id'
-  value3=[req.body.requesting_invoice_items_id]
-  
-  query1 = `INSERT INTO ${table1}(${columns}) VALUES ($1,$2,$3) RETURNING *`
-  query2 = `update ${table2} set ${col1} =${col1}-${col1update} where ${col2}=$1 `
-  query3=  `update ${table3} set ${col3} =${colval3} where ${cons}=$1 `
+  let table3='requesting_invoice_items'
+  let col3='state_accepted'
+  let cons='requesting_invoice_items_id'
+  let values3=['sent', req.body.requesting_invoice_items_id]
+
+  let query1 = `INSERT INTO ${table1}(${columns}) VALUES ($1,$2,$3) RETURNING *`
+  let query2 = `update ${table2} set ${col1} =${col1}-${col1update} where ${col2}=$1 `
+  let query3=  `update ${table3} set ${col3} =$1 where ${cons}=$2 `
 
   const result = await connection.queryTransactionsThree(query1, values1, query2, values2,query3, values3)
   //const result = await callTransactionInsertDecrement(table1,columns,values,table2,col1,col1update,col2,value)
   return result;
 
-
 }
+exports.sendByWish = async (req) => {
+  let table1 = 'outward_carriage_stock';
+  let columns = ['agent_id', 'product_id', 'quantity'];
+  let values1 = [req.body.agent_id, req.body.product_id, req.body.quantity];
 
+  let table2 = 'warehouse_stock';
+  let col1 = 'quantity';
+  let col1update = req.body.quantity;
+  let col2 = 'product_id';
+  let values2 = [req.body.product_id];
+
+  let query1 = `INSERT INTO ${table1}(${columns}) VALUES ($1,$2,$3) RETURNING *`
+  let query2 = `update ${table2} set ${col1} =${col1}-${col1update} where ${col2}=$1 `
+
+  const result = await connection.querytransactionsTwo(query1, values1, query2, values2);
+  return result
+};
 
 
 exports.insertWarehouseProduct = async(req)=>{

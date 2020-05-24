@@ -268,9 +268,18 @@ async function callTransactionInsertDecrement(table1, columns, values, table2, c
   query1 = `INSERT INTO ${table1}(${columns}) VALUES (${pr1}) RETURNING *`
   query2 = `update ${table2} set ${col1} =${col1}-${col1update} where ${col2}=$1 `
 
-  const result = await connection.queryTransactionsTwo(query1, values, query2, [value]);
+  return connection.transactionTwo(query1, values, query2, [value]).then(res=>{
+    return res
+  }).catch(err => {
+    return {
+      success: false,
+      errorType: 'connection error',
+      error: err.stack
+    };
+  });
+  //const result = await connection.queryTransactionsTwo(query1, values, query2, [value]);
   //console.log(result);
-  return result;
+  //return result;
 
 
 }
@@ -296,6 +305,16 @@ async function callTransactionInsertDecrementTwo(table1, columns, values, table2
 
 }
 
+async function addUser(values1,table2,columns2,values2){
+  //values1- employee-id & role_id
+  //values2 - supervisor_id
+  const query1 = `INSERT INTO employee (employee_id,role_id,district_id) VALUES ($1,$2,$3) RETURNING *`;
+  const query2 = `INSERT INTO ${table2} (${columns2}) VALUES ($1,$2)`;
+  const result = await connection.queryTransactionAddUser(query1,values1,query2,values2);
+  return result;
+
+}
+
 
 module.exports = {
   getData,
@@ -316,5 +335,7 @@ module.exports = {
   callTransactionInsertDecrement,
   callTransactionInsertDecrementTwo,
   callTransactionInsertTwo,
-  callTransactionInsertTwoForiegn
+  callTransactionInsertTwoForiegn,
+  addUser
+
 };
