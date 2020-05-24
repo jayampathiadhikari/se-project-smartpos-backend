@@ -84,11 +84,16 @@ router.post('/api/v1/reqinvoice/sendrequest', reqInvoiceController.sendRequest);
 
 //product routes
 router.post('/api/v1/product/sendtoagent', productController.sendtoAgent);
+router.post('/api/v1/product/send-agent-requested', productController.sendAgentRequested);
 router.post('/api/v1/product/addnewproduct', productController.addNewProduct);
 router.post('/api/v1/product/additems', productController.addProductItems);
+router.get('/api/v1/product/allids', productController.allProductIds);
 
 //report routes
 router.get('/api/v1/report/viewreport', reportController.viewReport);
+router.get('/api/v1/report/top-pr-owner-month', reportController.viewTopProductsMonthOwner);
+router.get('/api/v1/report/top-pr-owner-year', reportController.viewTopProductsYearOwner);
+router.get('/api/v1/report/top-dis-month', reportController.viewTopDistrictsMonth);
 
 //stock routes
 router.get('/api/v1/stock/viewagentstock',stockController.viewAgentStock);

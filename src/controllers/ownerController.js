@@ -27,12 +27,13 @@ class Owner {
     const shop_suggestion_id=req.body.shop_suggestion_id;
     const shopdata = await ownerModel.getSuggestionData(req);
     if (shopdata.success) {
-      // console.log(shopdata.data);
+      console.log(shopdata);
       // console.log(shopdata.data[0]);
       // console.log(shopdata.data[0].route_id);
       // console.log(shopdata.data.route_id);
 
       const route_id = shopdata.data[0].route_id
+      const district_id = shopdata.data[0].district_id
       const name= shopdata.data[0].name
       const latitude= shopdata.data[0].latitude
       const longitude= shopdata.data[0].longitude
@@ -45,7 +46,7 @@ class Owner {
       const email=shopdata.data[0].email
 
 
-      const insertshopowner= await ownerModel.alterShopShopOWner(shop_suggestion_id,name_with_initial,contact_num_cell,contact_num_land,residence_lattitude,residence_longitude,email,route_id,name,latitude,longitude,shop_contact_num);
+      const insertshopowner= await ownerModel.alterShopShopOWner(shop_suggestion_id,district_id,name_with_initial,contact_num_cell,contact_num_land,residence_lattitude,residence_longitude,email,route_id,name,latitude,longitude,shop_contact_num);
       //console.log(insertshopowner);
 
       if (insertshopowner.success){

@@ -16,6 +16,13 @@ async function getUniqueData(table_name,coloumn,constraints, values) {
 
 }
 
+async function getUniqueAllData(table_name,coloumn) {
+
+  const result = await connection.queryParameterized(`SELECT ${coloumn} from ${table_name} `, []);
+  return result;
+
+}
+
 async function getDataNotNull(table_name, constraints, notnullcolumn, values) {
 
   const result = await connection.queryParameterized(`SELECT * from ${table_name} where ${constraints}=$1 and ${notnullcolumn} is not null`, [`${values}`]);
@@ -262,6 +269,7 @@ async function callTransactionInsertDecrement(table1, columns, values, table2, c
   query2 = `update ${table2} set ${col1} =${col1}-${col1update} where ${col2}=$1 `
 
   const result = await connection.queryTransactionsTwo(query1, values, query2, [value]);
+  //console.log(result);
   return result;
 
 
@@ -292,6 +300,7 @@ async function callTransactionInsertDecrementTwo(table1, columns, values, table2
 module.exports = {
   getData,
   getUniqueData,
+  getUniqueAllData,
   getDataNull,
   getDataNotNull,
   insertData,

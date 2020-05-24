@@ -219,8 +219,8 @@ class Database {
         await client.query('COMMIT')
 
         return {
-          success: true
-        }
+          success: true,
+        };
 
       } catch (e) {
         await client.query('ROLLBACK')
@@ -243,16 +243,17 @@ class Database {
 
   }
 
-  async queryTransactionsTwo(query1, values, query2, value) {
+  async queryTransactionsThree(query1, values1, query2, values2,query3, values3) {
 
     try {
 
       const client = await this.pool.connect();
       try {
         await client.query('BEGIN')
-        const res = await client.query(`${query1}`, values)
+        await client.query(`${query1}`, values1)
 
-        await client.query(`${query2}`, value)
+        await client.query(`${query2}`, values2)
+        await client.query(`${query3}`, values3)
 
         await client.query('COMMIT')
 
@@ -280,12 +281,6 @@ class Database {
     }
 
   }
-
-   async queryTransactionsTwoForiegnKey(query1, values1, query2, values2) {
-
-
-
-}
 
 
 
