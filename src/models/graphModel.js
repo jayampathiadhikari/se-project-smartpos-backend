@@ -26,3 +26,9 @@ exports.getOwnerBarGraph = async (req) => {
     const result = await getData_twoConditions('owner_overall_sales',['owner_id','product_id'], [req.query.owner_id,req.query.product_id] );
     return result;
 }
+
+exports.getDistrictBarGraph = async (req) => {
+
+    const result = await getData('overall_district_sales','product_id', req.query.product_id );
+    return result;
+}

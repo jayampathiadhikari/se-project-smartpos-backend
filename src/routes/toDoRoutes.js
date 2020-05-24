@@ -94,6 +94,8 @@ router.get('/api/v1/product/allids', productController.allProductIds);
 router.get('/api/v1/report/viewreport', reportController.viewReport);
 router.get('/api/v1/report/top-pr-owner-month', reportController.viewTopProductsMonthOwner);
 router.get('/api/v1/report/top-pr-owner-year', reportController.viewTopProductsYearOwner);
+router.get('/api/v1/report/top-pr-agent-month', reportController.viewTopProductsMonthAgent);
+router.get('/api/v1/report/top-pr-agent-year', reportController.viewTopProductsYearAgent);
 router.get('/api/v1/report/top-dis-month', reportController.viewTopDistrictsMonth);
 router.get('/api/v1/report/top-dis-year', reportController.viewTopDistrictsYear);
 
@@ -111,6 +113,9 @@ router.get('/api/v1/graph/agentbargraph',graphController.agentBarGraph);
 router.get('/api/v1/graph/ownerbargraph',graphController.ownerBarGraph);
 router.get('/api/v1/graph/dis-month-graph',graphController.districtsMonthGraph);
 router.get('/api/v1/graph/dis-yr-graph',graphController.districtsYearGraph);
+router.get('/api/v1/graph/dis-month-bar-graph',graphController.districtsMonthBarGraph);
+router.get('/api/v1/graph/dis-yr-bar-graph',graphController.districtsYearBarGraph);
+
 
 
 //test routes
