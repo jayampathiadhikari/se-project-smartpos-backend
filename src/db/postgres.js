@@ -277,7 +277,7 @@ class Database {
 
   }
 
-  async querytransactionsTwo(query1, values1, query2, values2) {
+  async queryTransactionsTwo(query1, values1, query2, values2) {
     // note: we don't try/catch this because if connecting throws an exception
     // we don't need to dispose of the client (it will be undefined)
     try{
