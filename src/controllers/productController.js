@@ -9,7 +9,7 @@ class Product{
       return res.status(200).send(result);
     }
     else {
-      return res.status(404).send({
+      return res.status(200).send({
         success: result.success,
         errorType: result.errorType,
         error: result.error
@@ -25,7 +25,7 @@ class Product{
       return res.status(200).send(result);
     }
     else {
-      return res.status(404).send({
+      return res.status(200).send({
         success: result.success,
         errorType: result.errorType,
         error: result.error
@@ -47,7 +47,7 @@ class Product{
       return res.status(200).send(result)
       //console.log(result.data);
     } else {
-      return res.status(404).send({
+      return res.status(200).send({
         success: result.success,
         errorType: result.errorType,
         error: result.error
@@ -63,7 +63,7 @@ class Product{
       return res.status(200).send(result)
       //console.log(result.data);
     } else {
-      return res.status(404).send({
+      return res.status(200).send({
         success: result.success,
         errorType: result.errorType,
         error: result.error

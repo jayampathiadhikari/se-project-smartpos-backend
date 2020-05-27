@@ -51,7 +51,7 @@ class Graph{
   }
 
   else {
-      return res.status(404).send({
+      return res.status(200).send({
         success: result.success,
         errorType: result.errorType,
         error: result.error
@@ -105,7 +105,7 @@ class Graph{
   }
 
   else {
-      return res.status(404).send({
+      return res.status(200).send({
         success: result.success,
         errorType: result.errorType,
         error: result.error
@@ -159,7 +159,7 @@ async agentBarGraph(req,res){
 
 
     } else {
-    return res.status(404).send({
+    return res.status(200).send({
       success: result.success,
       errorType: result.errorType,
       error: result.error
@@ -211,7 +211,7 @@ async ownerBarGraph(req,res){
           });
 
   } else {
-    return res.status(404).send({
+    return res.status(200).send({
       success: result.success,
       errorType: result.errorType,
       error: result.error
@@ -295,7 +295,7 @@ async districtsMonthGraph(req, res) {
     })
 
   } else {
-    return res.status(404).send({
+    return res.status(200).send({
       success: result.success,
       errorType: result.errorType,
       error: result.error
@@ -335,7 +335,7 @@ async districtsYearGraph(req, res) {
     })
 
   } else {
-    return res.status(404).send({
+    return res.status(200).send({
       success: result.success,
       errorType: result.errorType,
       error: result.error
@@ -376,7 +376,7 @@ async districtsMonthBarGraph(req, res) {
     })
 
   } else {
-    return res.status(404).send({
+    return res.status(200).send({
       success: result.success,
       errorType: result.errorType,
       error: result.error
@@ -416,7 +416,7 @@ async districtsYearBarGraph(req, res) {
     })
 
   } else {
-    return res.status(404).send({
+    return res.status(200).send({
       success: result.success,
       errorType: result.errorType,
       error: result.error

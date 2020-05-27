@@ -45,7 +45,7 @@ class ToDoController {
         });
       }
     });
-    return res.status(404).send({
+    return res.status(200).send({
       success: 'false',
       message: 'todo does not exist',
     });
@@ -88,7 +88,7 @@ class ToDoController {
     });
 
     if (!todoFound) {
-      return res.status(404).send({
+      return res.status(200).send({
         success: 'false',
         message: 'todo not found',
       });
@@ -133,7 +133,7 @@ class ToDoController {
     });
 
     if (!todoFound) {
-      return res.status(404).send({
+      return res.status(200).send({
         success: 'false',
         message: 'todo not found',
       });

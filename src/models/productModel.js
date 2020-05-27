@@ -59,7 +59,7 @@ exports.sendByWish = async (req) => {
   let query1 = `INSERT INTO ${table1}(${columns}) VALUES ($1,$2,$3) RETURNING *`
   let query2 = `update ${table2} set ${col1} =${col1}-${col1update} where ${col2}=$1 `
 
-  const result = await connection.querytransactionsTwo(query1, values1, query2, values2);
+  const result = await connection.queryTransactionsTwo(query1, values1, query2, values2);
   return result
 };
 
