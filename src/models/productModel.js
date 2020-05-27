@@ -71,8 +71,15 @@ exports.insertWarehouseProduct = async(req)=>{
   const col2= ['product_id','quantity']
   const val2= [req.body.product_id,req.body.quantity]
 
-  const result = await callTransactionInsertTwo('product', col1, val1, 'warehouse_stock', col2, val2);
+  query1 = `INSERT INTO product(${col1}) VALUES ($1,$2,$3,$4) RETURNING *`
+  query2 = `INSERT INTO warehouse_stock(${col2}) VALUES ($1,$2)`
+
+
+  const result = await connection.queryTransactionsTwo(query1, val1, query2, val2);
   return result;
+
+  // const result = await callTransactionInsertTwo('product', col1, val1, 'warehouse_stock', col2, val2);
+  // return result;
 }
 
 exports.incrementQuantity = async (req,) => {
