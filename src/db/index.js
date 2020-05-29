@@ -147,7 +147,7 @@ async function upsert(table_name, column_names, values, target, action) {
 
   var pr = ''
   values.forEach((item, i) => {
-    num = i + 1
+    let num = i + 1
     pr += "$" + num + ","
   });
 
@@ -175,7 +175,7 @@ async function callTransactionInsertInsert(table_name1, column_names1, values1, 
 
   var pr1 = ''
   values1.forEach((item, i) => {
-    num = i + 1
+    let num = i + 1
     pr1 += "$" + num + ","
   });
 
@@ -183,15 +183,15 @@ async function callTransactionInsertInsert(table_name1, column_names1, values1, 
 
   var pr2 = ''
   values2.forEach((item, i) => {
-    num = i + 1
+    let num = i + 1
     pr2 += "$" + num + ","
   });
 
   pr2 = pr2.slice(0, -1);
 
-  query1 = `INSERT INTO ${table_name1}(${column_names1}) VALUES (${pr1}) RETURNING *`
-  query2 = `INSERT INTO ${table_name2}(${column_names2}) VALUES (${pr2})`
-  query3 = `Delete from ${table_name3} where ${column_names3}=$1`
+  let query1 = `INSERT INTO ${table_name1}(${column_names1}) VALUES (${pr1}) RETURNING *`
+  let query2 = `INSERT INTO ${table_name2}(${column_names2}) VALUES (${pr2})`
+  let query3 = `Delete from ${table_name3} where ${column_names3}=$1`
 
 
   const result = await connection.queryTransaction(query1, values1, query2, values2, query3, values3);
@@ -203,7 +203,7 @@ async function callTransactionInsertTwo(table_name1, column_names1, values1, tab
 
   var pr1 = ''
   values1.forEach((item, i) => {
-    num = i + 1
+    let num = i + 1
     pr1 += "$" + num + ","
   });
 
@@ -211,14 +211,14 @@ async function callTransactionInsertTwo(table_name1, column_names1, values1, tab
 
   var pr2 = ''
   values2.forEach((item, i) => {
-    num = i + 1
+    let num = i + 1
     pr2 += "$" + num + ","
   });
 
   pr2 = pr2.slice(0, -1);
 
-  query1 = `INSERT INTO ${table_name1}(${column_names1}) VALUES (${pr1}) RETURNING *`
-  query2 = `INSERT INTO ${table_name2}(${column_names2}) VALUES (${pr2})`
+  let query1 = `INSERT INTO ${table_name1}(${column_names1}) VALUES (${pr1}) RETURNING *`
+  let query2 = `INSERT INTO ${table_name2}(${column_names2}) VALUES (${pr2})`
 
 
   const result = await connection.queryTransactionsTwo(query1, values1, query2, values2);
@@ -231,7 +231,7 @@ async function callTransactionInsertTwoForiegn(table_name1, column_names1, value
 
   var pr1 = ''
   values1.forEach((item, i) => {
-    num = i + 1
+    let num = i + 1
     pr1 += "$" + num + ","
   });
 
@@ -239,14 +239,14 @@ async function callTransactionInsertTwoForiegn(table_name1, column_names1, value
 
   var pr2 = ''
   values2.forEach((item, i) => {
-    num = i + 1
+    let num = i + 1
     pr2 += "$" + num + ","
   });
 
   pr2 = pr2.slice(0, -1);
 
-  query1 = `INSERT INTO ${table_name1}(${column_names1}) VALUES (${pr1}) RETURNING *`
-  query2 = `INSERT INTO ${table_name2}(${column_names2}) VALUES (${pr2})`
+  let query1 = `INSERT INTO ${table_name1}(${column_names1}) VALUES (${pr1}) RETURNING *`
+  let query2 = `INSERT INTO ${table_name2}(${column_names2}) VALUES (${pr2})`
 
 
   const result = await connection.queryTransactionsTwoForiegnKey(query1, values1, query2, values2);
@@ -258,15 +258,15 @@ async function callTransactionInsertDecrement(table1, columns, values, table2, c
 
   var pr1 = ''
   values.forEach((item, i) => {
-    num = i + 1
+    let num = i + 1
     pr1 += "$" + num + ","
   });
 
   pr1 = pr1.slice(0, -1);
 
 
-  query1 = `INSERT INTO ${table1}(${columns}) VALUES (${pr1}) RETURNING *`
-  query2 = `update ${table2} set ${col1} =${col1}-${col1update} where ${col2}=$1 `
+  let query1 = `INSERT INTO ${table1}(${columns}) VALUES (${pr1}) RETURNING *`
+  let query2 = `update ${table2} set ${col1} =${col1}-${col1update} where ${col2}=$1 `
 
   return connection.transactionTwo(query1, values, query2, [value]).then(res=>{
     return res
@@ -289,15 +289,15 @@ async function callTransactionInsertDecrementTwo(table1, columns, values, table2
 
   var pr1 = ''
   values.forEach((item, i) => {
-    num = i + 1
+    let num = i + 1
     pr1 += "$" + num + ","
   });
 
   pr1 = pr1.slice(0, -1);
 
 
-  query1 = `INSERT INTO ${table1}(${columns}) VALUES (${pr1}) RETURNING *`
-  query2 = `update ${table2} set ${col} =${col}-${colupdate} where ${col1}=$1 and ${col2}=$2`
+  let query1 = `INSERT INTO ${table1}(${columns}) VALUES (${pr1}) RETURNING *`
+  let query2 = `update ${table2} set ${col} =${col}-${colupdate} where ${col1}=$1 and ${col2}=$2`
 
   const result = await connection.queryTransactionsTwo(query1, values, query2, [val1, val2]);
   return result;
