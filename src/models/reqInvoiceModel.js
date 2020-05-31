@@ -25,7 +25,7 @@ exports.acceptRequest = async (req) => {
 
 exports.getAcceptedList = async (req) => {
 
-    const result = await getData_twoConditions('requesting_invoice_items', ['employee_id','state_accepted'], [req.query.employee_id,'true']);
+    const result = await getData_twoConditions('requesting_invoice_items natural join product', ['employee_id','state_accepted'], [req.query.employee_id,'true']);
     return result;
 }
 
