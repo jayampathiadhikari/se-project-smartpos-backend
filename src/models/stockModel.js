@@ -51,8 +51,8 @@ exports.insertSalespersonStock = async (req) => {
     const col2 ='product_id'
     const val2 = req.body.product_id
 
-    query1 = `INSERT INTO salesperson_stock(${columns}) VALUES ($1,$2,$3,$4) RETURNING *`
-    query2 = `update agent_stock set quantity = quantity-${colupdate} where ${col1}=$1 and ${col2}=$2`
+    const query1 = `INSERT INTO salesperson_stock(${columns}) VALUES ($1,$2,$3,$4) RETURNING *`
+    const query2 = `update agent_stock set quantity = quantity-${colupdate} where ${col1}=$1 and ${col2}=$2`
 
     const result = await connection.queryTransactionsTwo(query1, values, query2, [val1, val2]);
     return result;

@@ -2,8 +2,8 @@
  * import Router from express-promise-router
  */
 
-//const Router = require('express-promise-router');
-const Router = require('express');
+const Router = require('express-promise-router');
+// const Router = require('express');
 
 
 const employeeController = require('../controllers/employeeController.js');

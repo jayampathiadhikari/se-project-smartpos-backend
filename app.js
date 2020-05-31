@@ -22,6 +22,7 @@ app.use(function (req, res, next) {
     next();
 });
 
+
 //router is middleware. to use it follows
 app.get('/', function(req, res) {
     res.send({'name':'jayamoathi'});
