@@ -3,7 +3,26 @@ const { insertData } = require('../db/index');
 const { updateData } = require('../db/index');
 const { editData } = require('../db/index');
 const { callTransactionInsertTwoForiegn , addUser} = require('../db/index');
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
 
+exports.verifyToken = (req,res,next) => {
+  // Gather the jwt access token from the request header
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (token == null) return res.sendStatus(401) // if there isn't any token
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user_id) => {
+    console.log(err)
+    console.log(user_id);
+    next() // pass the execution off to whatever request the client intended
+  })
+};
+
+exports.generateAuthToken = (userid) => {
+  dotenv.config();
+  return jwt.sign({employee_id : userid}, process.env.TOKEN_SECRET, { expiresIn: '365d' });
+};
 
 exports.getUserData = async (req) => {
   console.log('de')
@@ -34,6 +53,7 @@ exports.addNewEmployee = async (req) => {
   }else{
     role_id = 3
   }
+  generateAuthToken(req.body.employee_id);
   const result =await insertData('employee', ['employee_id','role_id'], [req.body.employee_id,role_id]);
   return result;
 };
@@ -79,3 +99,5 @@ exports.addUserSalesperson = async (req) => {
   const res = await addUser([req.body.employee_id,2,req.body.district_id],'agent_salesperson',['agent_id','salesperson_id'],[req.body.agent_id])
   return res
 }
+
+

@@ -4,6 +4,10 @@ const employeeModel = require('../models/employeeModel.js');
 
 class Employee {
 
+  testToken(req,res){
+    return res.status(200).send(employeeModel.generateAuthToken('abcdef'))
+  };
+
   async getUserData(req, res) {
 
     const result = await employeeModel.getUserData(req);

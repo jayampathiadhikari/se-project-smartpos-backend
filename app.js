@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const todoRouter = require('./src/routes/toDoRoutes.js');
+const dotenv = require("dotenv");
 //Access-Control-Allow-Origin: http://localhost:3000;
 
 /**
@@ -23,9 +24,11 @@ app.use(function (req, res, next) {
 });
 
 
+
 //router is middleware. to use it follows
 app.get('/', function(req, res) {
-    res.send({'name':'jayamoathi'});
+  const secret = require('crypto').randomBytes(64).toString('base64')
+    res.send({'name':secret});
 });
 app.use(todoRouter);
 

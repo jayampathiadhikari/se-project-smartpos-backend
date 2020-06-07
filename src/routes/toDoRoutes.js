@@ -30,6 +30,8 @@ router.post('/api/v1/employee/insert', employeeController.insertData);
 router.post('/api/v1/employee/edit', employeeController.editUserData);
 router.post('/api/v1/employee/registeragent', employeeController.addAgent);
 router.post('/api/v1/employee/registersalesperson', employeeController.addSalesperson);
+router.get('/api/v1/employee/profile', employeeController.getUserData);
+router.get('/api/v1/employee/test', employeeController.testToken);
 
 //salesperson routes
 router.get('/salesperson/getdailytarget', salespersonController.getDailyTarget);
