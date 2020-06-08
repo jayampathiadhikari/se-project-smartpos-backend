@@ -10,12 +10,24 @@ exports.verifyToken = (req,res,next) => {
   // Gather the jwt access token from the request header
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
-  if (token == null) return res.sendStatus(401) // if there isn't any token
-
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user_id) => {
-    console.log(err)
-    console.log(user_id);
-    next() // pass the execution off to whatever request the client intended
+  if (token == null){
+    console.log('no token found');
+    return res.status(200).send({
+      success: false,
+      error: 'No token found'
+    })
+  }
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, employee_id) => {
+    if (error) {
+      console.log("Token corrupted");
+      return res.status(200).send({
+        success: false,
+        error: 'Token Corrupted'
+      });
+    }else{
+      req.employee_id = employee_id
+    }
+    next()
   })
 };
 
@@ -26,7 +38,7 @@ exports.generateAuthToken = (userid) => {
 
 exports.getUserData = async (req) => {
   console.log('de')
-    const result = await getData('employee', ['employee_id'], req.body.employee_id);
+    const result = await getData('employee', ['employee_id'], req.query.employee_id);
     return result;
 };
 
@@ -89,14 +101,14 @@ exports.editUserData = async (req) => {
 }
 
 exports.addUserAgent = async (req) => {
-
-  const res = await addUser([req.body.employee_id,1,req.body.district_id],'owner_agent',['owner_id','agent_id'],[req.body.owner_id])
+  const token = generateAuthToken(req.body.employee_id);
+  const res = await addUser([req.body.employee_id,1,req.body.district_id, token],'owner_agent',['owner_id','agent_id'],[req.body.owner_id])
   return res
 }
 
 exports.addUserSalesperson = async (req) => {
-
-  const res = await addUser([req.body.employee_id,2,req.body.district_id],'agent_salesperson',['agent_id','salesperson_id'],[req.body.agent_id])
+  const token = generateAuthToken(req.body.employee_id);
+  const res = await addUser([req.body.employee_id,2,req.body.district_id, token],'agent_salesperson',['agent_id','salesperson_id'],[req.body.agent_id])
   return res
 }
 
