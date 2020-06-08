@@ -1,7 +1,6 @@
 const { getData } = require('../db/index');
 const { insertData } = require('../db/index');
-const { updateData } = require('../db/index');
-const { editData } = require('../db/index');
+const { updateData, updateSingleData } = require('../db/index');
 const { callTransactionInsertTwoForiegn , addUser} = require('../db/index');
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
@@ -17,7 +16,7 @@ exports.verifyToken = (req,res,next) => {
       error: 'No token found'
     })
   }
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, employee_id) => {
+  jwt.verify(token, process.env.TOKEN_SECRET, (err, employee_id) => {
     if (error) {
       console.log("Token corrupted");
       return res.status(200).send({
@@ -34,6 +33,16 @@ exports.verifyToken = (req,res,next) => {
 exports.generateAuthToken = (userid) => {
   dotenv.config();
   return jwt.sign({employee_id : userid}, process.env.TOKEN_SECRET, { expiresIn: '365d' });
+};
+
+exports.generateNewToken = async (req) => {
+  dotenv.config();
+  const token = jwt.sign({employee_id : req.query.employee_id}, process.env.TOKEN_SECRET, { expiresIn: '365d' });
+  console.log(req.query.employee_id)
+  console.log(token.toString());
+  const result = await updateSingleData('employee','token',token.toString(),'employee_id',req.query.employee_id);
+  return result;
+  console.log(result);
 };
 
 exports.getUserData = async (req) => {
