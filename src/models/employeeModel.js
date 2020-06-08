@@ -1,6 +1,6 @@
 const { getData } = require('../db/index');
 const { insertData } = require('../db/index');
-const { updateData, updateSingleData } = require('../db/index');
+const { updateData, updateSingleStringData } = require('../db/index');
 const { callTransactionInsertTwoForiegn , addUser} = require('../db/index');
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
@@ -38,11 +38,11 @@ exports.generateAuthToken = (userid) => {
 exports.generateNewToken = async (req) => {
   dotenv.config();
   const token = jwt.sign({employee_id : req.query.employee_id}, process.env.TOKEN_SECRET, { expiresIn: '365d' });
-  console.log(req.query.employee_id)
-  console.log(token.toString());
-  const result = await updateSingleData('employee','token',token.toString(),'employee_id',req.query.employee_id);
+
+  const result = await updateSingleStringData('employee','token',token.toString(),'employee_id',req.query.employee_id);
+
   return result;
-  console.log(result);
+
 };
 
 exports.getUserData = async (req) => {
@@ -120,5 +120,3 @@ exports.addUserSalesperson = async (req) => {
   const res = await addUser([req.body.employee_id,2,req.body.district_id, token],'agent_salesperson',['agent_id','salesperson_id'],[req.body.agent_id])
   return res
 }
-
-

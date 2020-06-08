@@ -110,7 +110,14 @@ async function updateData(table_name, column_names, values, constraint, constrai
 async function updateSingleData(table_name, column_name, value, constraint, constraintvalue) {
 
   const text = `update ${table_name} set ${column_name} =${value} where ${constraint}=$1 `
+  const result = await connection.queryParameterized(text, [`${constraintvalue}`]);
+  return result;
 
+}
+
+async function updateSingleStringData(table_name, column_name, value, constraint, constraintvalue) {
+
+  const text = `update ${table_name} set ${column_name} ='${value}' where ${constraint}=$1 `
   const result = await connection.queryParameterized(text, [`${constraintvalue}`]);
   return result;
 
@@ -327,6 +334,7 @@ module.exports = {
   deleteData,
   getData_twoConditions,
   updateSingleData,
+  updateSingleStringData,
   decrementIntegers,
   upsert,
   incrementIntegers,
