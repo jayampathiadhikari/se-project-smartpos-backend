@@ -28,9 +28,10 @@ router.get('/api/v1/employee/auth', employeeController.getAuthData);
 router.post('/api/v1/employee/register', employeeController.addEmployee);
 router.post('/api/v1/employee/insert', employeeController.insertData);
 router.post('/api/v1/employee/edit', employeeController.editUserData);
-router.post('/api/v1/employee/registeragent', employeeController.addAgent);
-router.post('/api/v1/employee/registersalesperson', employeeController.addSalesperson);
-router.get('/api/v1/employee/profile', employeeController.getUserData);
+
+router.post('/api/v1/auth/employee/registeragent', employeeController.addAgent);
+router.post('/api/v1/auth/employee/registersalesperson', employeeController.addSalesperson);
+router.get('/api/v1/auth/employee/getToken', employeeController.getUserData);
 router.get('/api/v1/employee/test', employeeController.testToken);
 
 //salesperson routes
