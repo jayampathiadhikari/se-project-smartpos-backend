@@ -32,12 +32,12 @@ exports.verifyToken = (req,res,next) => {
 
 exports.generateAuthToken = (userid) => {
   dotenv.config();
-  return jwt.sign({employee_id : userid}, process.env.TOKEN_SECRET, { expiresIn: '365d' });
+  return jwt.sign({employee_id : userid}, process.env.TOKEN_SECRET);
 };
 
 exports.generateNewToken = async (req) => {
   dotenv.config();
-  const token = jwt.sign({employee_id : req.query.employee_id}, process.env.TOKEN_SECRET, { expiresIn: '365d' });
+  const token = jwt.sign({employee_id : req.query.employee_id}, process.env.TOKEN_SECRET);
 
   const result = await updateSingleStringData('employee','token',token.toString(),'employee_id',req.query.employee_id);
 

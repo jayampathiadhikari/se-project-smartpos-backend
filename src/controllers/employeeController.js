@@ -13,6 +13,7 @@ class Employee {
     return res.status(200).send(result);
   }
 
+
   async getUserData(req, res) {
 
     const result = await employeeModel.getUserData(req);
