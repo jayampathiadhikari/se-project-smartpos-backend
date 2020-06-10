@@ -117,7 +117,7 @@ async function updateSingleData(table_name, column_name, value, constraint, cons
 
 async function updateSingleStringData(table_name, column_name, value, constraint, constraintvalue) {
 
-  const text = `update ${table_name} set ${column_name} ='${value}' where ${constraint}=$1 `
+  const text = `update ${table_name} set ${column_name} ='${value}' where ${constraint}=$1 returning ${column_name}`
   const result = await connection.queryParameterized(text, [`${constraintvalue}`]);
   return result;
 
