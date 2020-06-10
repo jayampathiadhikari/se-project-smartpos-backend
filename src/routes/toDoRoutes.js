@@ -21,7 +21,6 @@ const graphController = require('../controllers/graphController.js');
 
 const router = new Router();
 
-
 //employee routes
 router.get('/api/v1/employee/profile', employeeController.getUserData);
 router.get('/api/v1/employee/auth', employeeController.getAuthData);
