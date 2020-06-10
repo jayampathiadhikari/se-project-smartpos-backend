@@ -9,7 +9,7 @@ class Employee {
   };
 
   async generateToken(req,res){
-    const result  = employeeModel.generateNewToken(req);
+    const result  = await employeeModel.generateNewToken(req);
     return res.status(200).send(result);
   }
 

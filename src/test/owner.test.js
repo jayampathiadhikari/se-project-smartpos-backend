@@ -72,45 +72,46 @@ describe('Owner',()=>{
       shop_suggestion_id:1
     }
 
-    describe('test positive case',function(){
-
-      var result;
-
-
-      before(async function() {
-      // runs once before the first test in this block
-      this.result = await connection.queryParameterized(`SELECT * from shop_suggestions where shop_suggestion_id=$1`, [request.shop_suggestion_id]);
-      //console.log(this.result);
-
-    });
-
-
-      it('it should delete a record', (done)=> {
-
-
-        chai.request(app)
-          .post('/api/v1/owner/declinesuggestion')
-          .send(request)
-          .end((err,res)=>{
-            res.should.have.status(200);
-            res.body.should.be.a('object');
-            res.body.should.have.all.keys('success','data');
-            res.body.should.have.property('data').with.lengthOf(0);
-
-            done();
-          })
-      })
-
-      after(function() {
-        // runs once after the last test in this block
-        connection.queryParameterized(`INSERT INTO shop_suggestions(shop_suggestion_id,route_id,name,latitude,longitude,shop_contact_num,name_with_initial,contact_num_cell,contact_num_land,residence_lattitude,residence_longitude,email) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) `, [this.result.data[0].shop_suggestion_id,this.result.data[0].route_id,this.result.data[0].name,this.result.data[0].latitude,this.result.data[0].longitude,this.result.data[0].shop_contact_num,this.result.data[0].name_with_initial,this.result.data[0].contact_num_cell,this.result.data[0].contact_num_land,this.result.data[0].residence_lattitude,this.result.data[0].residence_longitude,this.result.data[0].email])
-
-      });
-
-
-
-
-    })
+    // describe('test positive case',function(){
+    //
+    //   var result;
+    //
+    //
+    //   before(async function() {
+    //   // runs once before the first test in this block
+    //   this.result = await connection.queryParameterized(`SELECT * from shop_suggestions where shop_suggestion_id=$1`, [request.shop_suggestion_id]);
+    //   console.log(this.result);
+    //
+    // });
+    //
+    //
+    //   it('it should delete a record', (done)=> {
+    //
+    //
+    //     chai.request(app)
+    //       .post('/api/v1/owner/declinesuggestion')
+    //       .send(request)
+    //       .end((err,res)=>{
+    //         res.should.have.status(200);
+    //         res.body.should.be.a('object');
+    //         res.body.should.have.all.keys('success','data');
+    //         res.body.should.have.property('data').with.lengthOf(0);
+    //
+    //         done();
+    //       })
+    //   })
+    //
+    //   after(function() {
+    //     // runs once after the last test in this block
+    //     console.log(this.result);
+    //     connection.queryParameterized(`INSERT INTO shop_suggestions(shop_suggestion_id,route_id,name,latitude,longitude,shop_contact_num,name_with_initial,contact_num_cell,contact_num_land,residence_lattitude,residence_longitude,email,district_id) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) `, [this.result.data[0].shop_suggestion_id,this.result.data[0].route_id,this.result.data[0].name,this.result.data[0].latitude,this.result.data[0].longitude,this.result.data[0].shop_contact_num,this.result.data[0].name_with_initial,this.result.data[0].contact_num_cell,this.result.data[0].contact_num_land,this.result.data[0].residence_lattitude,this.result.data[0].residence_longitude,this.result.data[0].email,this.result.data[0].district_id])
+    //
+    //   });
+    //
+    //
+    //
+    //
+    // })
 
 
 
@@ -124,7 +125,11 @@ describe('Owner',()=>{
         .post('/api/v1/owner/declinesuggestion')
         .send(request)
         .end((err,res)=>{
-          res.should.have.status(404);
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.all.keys('success','errorType','error');
+          res.body.success.should.equal(false);
+          res.body.errorType.should.equal('query error')
           done();
         })
     })
@@ -198,7 +203,11 @@ describe('Owner',()=>{
         .post('/api/v1/owner/sendtarget')
         .send(request)
         .end((err,res)=>{
-          res.should.have.status(404);
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.all.keys('success','errorType','error');
+          res.body.success.should.equal(false);
+          res.body.errorType.should.equal('query error')
           done();
         })
     })

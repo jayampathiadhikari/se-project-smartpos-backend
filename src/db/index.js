@@ -92,13 +92,13 @@ async function updateData(table_name, column_names, values, constraint, constrai
   //   WHERE city = 'San Francisco' AND date = '2003-07-03';
   var valuesfinal = ''
   values.forEach((value) => {
-    console.log(value);
+    //console.log(value);
     valuesfinal += "'" + value + "'" + ","
 
   });
 
   valuesfinal = valuesfinal.slice(0, -1);
-  console.log(valuesfinal);
+  //console.log(valuesfinal);
   const text = `update ${table_name} set (${column_names}) =(${valuesfinal}) where ${constraint}=$1 `
   //const text = `update ${table_name} set (first_name,last_name) =('Sam','Perera') where ${constraint}=$1`
 
@@ -110,7 +110,14 @@ async function updateData(table_name, column_names, values, constraint, constrai
 async function updateSingleData(table_name, column_name, value, constraint, constraintvalue) {
 
   const text = `update ${table_name} set ${column_name} =${value} where ${constraint}=$1 `
+  const result = await connection.queryParameterized(text, [`${constraintvalue}`]);
+  return result;
 
+}
+
+async function updateSingleStringData(table_name, column_name, value, constraint, constraintvalue) {
+
+  const text = `update ${table_name} set ${column_name} ='${value}' where ${constraint}=$1 `
   const result = await connection.queryParameterized(text, [`${constraintvalue}`]);
   return result;
 
@@ -327,6 +334,7 @@ module.exports = {
   deleteData,
   getData_twoConditions,
   updateSingleData,
+  updateSingleStringData,
   decrementIntegers,
   upsert,
   incrementIntegers,
