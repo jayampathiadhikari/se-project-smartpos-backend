@@ -75,7 +75,7 @@ router.get('/api/v1/shop/viewagentshops', shopController.viewShops);
 router.post('/invoice/viewallinvoices', invoiceController.getAllInvoices);
 router.post('/invoice/viewinvoicedetails', invoiceController.getInvoiceDetails);
 router.put('/invoice/updateinvoicepaidamount',invoiceController.updateInvoicePaidAmount);
-router.post('/invoice/generateInvoice', invoiceController.generateInvoice);
+router.post('/api/v1/auth/invoice/generateInvoice', invoiceController.generateInvoice);
 
 
 //requesting invoice routes
