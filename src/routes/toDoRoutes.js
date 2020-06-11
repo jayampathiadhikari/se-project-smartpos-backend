@@ -53,7 +53,7 @@ router.post('/api/v1/owner/sendtarget', ownerController.sendTarget);
 router.get('/api/v1/owner/viewmonthlytarget', ownerController.viewMonthlyTarget);
 
 //salespersonRoutes routes
-router.post('/route/get-all-routes', routeController.getAllRoutes);
+router.post('/api/v1/route/get-all-routes', routeController.getAllRoutes);
 
 
 //Routes routes
@@ -64,18 +64,18 @@ router.post('/route/create-route', routeController.createNewRoute);
 
 //shop routes
 router.post('/shop/viewshops', shopController.getAllShops);
-router.post('/shop/viewshopdetails', shopController.getShopDetails);
+router.post('/api/v1/shop/viewshopdetails', shopController.getShopDetails);
 router.post('/shop/viewshopsbydistrict',shopController.getShopsByDistrict);
 router.post('/shop/viewshops-withroutebydistrict',shopController.getShopsInRouteByDistrict);
 router.post('/shop/viewshops-withnoroutebydistrict',shopController.getShopsNotInRouteByDistrict);
-router.post('/shop/get-shops-selected-route',shopController.getShopsInSelectedRoute);
+router.post('/api/v1/shop/get-shops-selected-route',shopController.getShopsInSelectedRoute);
 router.get('/api/v1/shop/viewagentshops', shopController.viewShops);
 
 //invoice routes
-router.post('/invoice/viewallinvoices', invoiceController.getAllInvoices);
-router.post('/invoice/viewinvoicedetails', invoiceController.getInvoiceDetails);
-router.put('/invoice/updateinvoicepaidamount',invoiceController.updateInvoicePaidAmount);
-router.post('/api/v1/auth/invoice/generateInvoice', invoiceController.generateInvoice);
+router.post('/api/v1/invoice/viewallinvoices', invoiceController.getAllInvoices);
+router.post('/api/v1/invoice/viewallinvoices', invoiceController.getInvoiceDetails);
+router.put('/api/v1/invoice/updateinvoicepaidamount',invoiceController.updateInvoicePaidAmount);
+router.post('/api/v1/invoice/generateInvoice', invoiceController.generateInvoice);
 
 
 //requesting invoice routes
@@ -106,7 +106,7 @@ router.get('/api/v1/report/top-dis-year', reportController.viewTopDistrictsYear)
 //stock routes
 router.get('/api/v1/stock/viewagentstock',stockController.viewAgentStock);
 router.get('/api/v1/stock/viewwarehouse',stockController.viewWarehouseStock);
-router.post('/stock/viewsalespersonstock',stockController.viewSalespersonStock);
+router.post('/api/v1/stock/viewsalespersonstock',stockController.viewSalespersonStock);
 router.post('/api/v1/stock/addtoagentstock',stockController.addToAgentStock);
 router.post('/api/v1/stock/addtosalespersonstock',stockController.addToSalespersonStock);
 
