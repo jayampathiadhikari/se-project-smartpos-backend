@@ -1,5 +1,4 @@
 
-const {database} = require('../db/postgres');
 const salespersonModel = require('../models/salespersonModel.js');
 
 class Salesperson {
@@ -22,6 +21,26 @@ class Salesperson {
         });
     }
   };
+
+
+    async getTargetAchieved(req,res){
+        const result = await salespersonModel.getTargetAchieved(req);
+        if(result.success){
+            let data= {'target_achieved':0};
+            if (result.data.length>0 && result.data[0].target_achieved!=null){
+                data.target_achieved=result.data[0].target_achieved;
+            }
+            return res.status(200).send({
+                success: result.success,
+                data:data});
+        }else{
+            return res.status(200).send({
+                success : result.success,
+                errorType: result.errorType,
+                error: result.error
+            });
+        }
+    };
 
   async getUnassignedDays(req,res){
     //we need user ID
@@ -50,7 +69,7 @@ class Salesperson {
       })
     });
   }
-};
+}
 
 const salesperson = new Salesperson();
 module.exports = salesperson;

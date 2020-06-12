@@ -37,6 +37,7 @@ router.get('/api/v1/auth/employee/test', employeeController.testToken);
 
 //salesperson routes
 router.get('/api/v1/salesperson/getdailytarget', salespersonController.getDailyTarget);
+router.post('/api/v1/auth/salesperson/gettargetachieved', salespersonController.getTargetAchieved);
 router.post('/salesperson/getunassigneddates', salespersonController.getUnassignedDays);
 
 
