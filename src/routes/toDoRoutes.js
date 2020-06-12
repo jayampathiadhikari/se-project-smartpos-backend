@@ -28,8 +28,8 @@ router.post('/api/v1/employee/register', employeeController.addEmployee);
 router.post('/api/v1/employee/insert', employeeController.insertData);
 router.post('/api/v1/employee/edit', employeeController.editUserData);
 
-router.post('/api/v1/auth/employee/registeragent', employeeController.addAgent);
-router.post('/api/v1/auth/employee/registersalesperson', employeeController.addSalesperson);
+router.post('/api/v1/employee/registeragent', employeeController.addAgent);
+router.post('/api/v1/employee/registersalesperson', employeeController.addSalesperson);
 router.get('/api/v1/auth/employee/gettoken', employeeController.getToken);
 router.get('/api/v1/auth/employee/generatetoken', employeeController.generateToken);
 router.get('/api/v1/employee/test', employeeController.testToken);
@@ -38,7 +38,7 @@ router.get('/api/v1/auth/employee/test', employeeController.testToken);
 //salesperson routes
 router.get('/api/v1/salesperson/getdailytarget', salespersonController.getDailyTarget);
 router.post('/api/v1/salesperson/gettargetachieved', salespersonController.getTargetAchieved);
-router.post('/salesperson/getunassigneddates', salespersonController.getUnassignedDays);
+router.post('/api/v1/salesperson/getunassigneddates', salespersonController.getUnassignedDays);
 
 
 //agent routes
@@ -59,7 +59,7 @@ router.post('/api/v1/route/get-all-routes', routeController.getAllRoutes);
 
 //Routes routes
 router.get('/route/getlatest-routeid', routeController.getLatestRouteId);
-router.post('/route/create-route', routeController.createNewRoute);
+router.post('/api/v1/route/create-route', routeController.createNewRoute);
 
 
 
@@ -67,8 +67,8 @@ router.post('/route/create-route', routeController.createNewRoute);
 router.post('/shop/viewshops', shopController.getAllShops);
 router.post('/api/v1/shop/viewshopdetails', shopController.getShopDetails);
 router.post('/shop/viewshopsbydistrict',shopController.getShopsByDistrict);
-router.post('/shop/viewshops-withroutebydistrict',shopController.getShopsInRouteByDistrict);
-router.post('/shop/viewshops-withnoroutebydistrict',shopController.getShopsNotInRouteByDistrict);
+router.post('/api/v1/shop/viewshops-withroutebydistrict',shopController.getShopsInRouteByDistrict);
+router.post('/api/v1/shop/viewshops-withnoroutebydistrict',shopController.getShopsNotInRouteByDistrict);
 router.post('/api/v1/shop/get-shops-selected-route',shopController.getShopsInSelectedRoute);
 router.get('/api/v1/shop/viewagentshops', shopController.viewShops);
 
