@@ -28,8 +28,8 @@ router.post('/api/v1/employee/register', employeeController.addEmployee);
 router.post('/api/v1/employee/insert', employeeController.insertData);
 router.post('/api/v1/employee/edit', employeeController.editUserData);
 
-router.post('/api/v1/auth/employee/registeragent', employeeController.addAgent);
-router.post('/api/v1/auth/employee/registersalesperson', employeeController.addSalesperson);
+router.post('/api/v1/employee/registeragent', employeeController.addAgent);
+router.post('/api/v1/employee/registersalesperson', employeeController.addSalesperson);
 router.get('/api/v1/auth/employee/gettoken', employeeController.getToken);
 router.get('/api/v1/auth/employee/generatetoken', employeeController.generateToken);
 router.get('/api/v1/employee/test', employeeController.testToken);
