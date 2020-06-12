@@ -91,7 +91,7 @@ class Invoice {
 
         const result = await invoiceModel.generateInvoice(req);
         if (result.success) {
-          return res.send({success:result.success});
+          return res.send({success:result.success , data:result.data});
         } else {
           return res.status(200).send({
             success: result.success,

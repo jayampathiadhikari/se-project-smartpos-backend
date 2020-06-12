@@ -177,6 +177,7 @@ class Database {
         client.release();
         return {
           success: true,
+          data: {invoice_id:res.rows[0].invoice_id}
         };
 
       } catch (err) {
