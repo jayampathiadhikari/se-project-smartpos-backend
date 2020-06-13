@@ -94,6 +94,7 @@ router.post('/api/v1/product/send-agent-requested', productController.sendAgentR
 router.post('/api/v1/product/addnewproduct', productController.addNewProduct);
 router.post('/api/v1/product/additems', productController.addProductItems);
 router.get('/api/v1/product/allids', productController.allProductIds);
+router.get('/api/v1/product/availability', productController.checkAvailability);
 
 //report routes
 router.get('/api/v1/report/viewreport', reportController.viewReport);

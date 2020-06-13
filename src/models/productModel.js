@@ -4,6 +4,7 @@ const {decrementIntegers} = require('../db/index');
 const {callTransactionInsertDecrement} = require('../db/index');
 const {callTransactionInsertTwo} = require('../db/index');
 const {getUniqueAllData} = require('../db/index');
+const {getExistance} = require('../db/index');
 const connection = require('../db/postgres');
 
 
@@ -85,6 +86,12 @@ exports.insertWarehouseProduct = async(req)=>{
 exports.incrementQuantity = async (req,) => {
 
     const result = await incrementIntegers('warehouse_stock', 'quantity', req.body.quantity ,'product_id', req.body.product_id);
+    return result;
+}
+
+exports.isAvailable = async (req,) => {
+
+    const result = await getExistance('product', 'product_id', req.query.product_id);
     return result;
 }
 

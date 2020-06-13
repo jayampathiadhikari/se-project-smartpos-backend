@@ -66,6 +66,13 @@ async function getData_twoConditions(table_name, constraints, values) {
 
 }
 
+
+async function getExistance(table_name,column,value) {
+
+  const result = await connection.queryParameterized(`SELECT exists (SELECT 1 FROM ${table_name} WHERE ${column} = $1 LIMIT 1) `, [value]);
+  return result;
+
+}
 async function insertData(table_name, column_names, values) {
   // console.log(column_names);
   // console.log(values);
@@ -329,6 +336,7 @@ module.exports = {
   getUniqueAllData,
   getDataNull,
   getDataNotNull,
+  getExistance,
   insertData,
   updateData,
   deleteData,

@@ -71,6 +71,21 @@ class Product{
     }
   }
 
+  async checkAvailability(req,res) {
+
+    const result = await productModel.isAvailable(req);
+    if (result.success) {
+      return res.status(200).send(result)
+      //console.log(result.data);
+    } else {
+      return res.status(200).send({
+        success: result.success,
+        errorType: result.errorType,
+        error: result.error
+      });
+    }
+  }
+
   async allProductIds(req,res) {
 
     const result = await productModel.getAllProductIds(req);
