@@ -74,7 +74,7 @@ exports.addNewEmployee = async (req) => {
   }else{
     role_id = 3
   }
-  generateAuthToken(req.body.employee_id);
+  module.generateAuthToken(req.body.employee_id);
   const result =await insertData('employee', ['employee_id','role_id'], [req.body.employee_id,role_id]);
   return result;
 };
@@ -110,13 +110,13 @@ exports.editUserData = async (req) => {
 }
 
 exports.addUserAgent = async (req) => {
-  const token = generateAuthToken(req.body.employee_id);
+  const token = module.generateAuthToken(req.body.employee_id);
   const res = await addUser([req.body.employee_id,1,req.body.district_id, token],'owner_agent',['owner_id','agent_id'],[req.body.owner_id])
   return res
 }
 
 exports.addUserSalesperson = async (req) => {
-  const token = generateAuthToken(req.body.employee_id);
+  const token = module.generateAuthToken(req.body.employee_id);
   const res = await addUser([req.body.employee_id,2,req.body.district_id, token],'agent_salesperson',['agent_id','salesperson_id'],[req.body.agent_id])
   return res
 }
