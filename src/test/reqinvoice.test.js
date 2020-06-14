@@ -11,7 +11,7 @@ describe('Reqesting Invoice',()=>{
 
   describe('view suggested list',function (){
 
-    this.timeout(5000);
+    this.timeout(50000);
 
 
     it('it should return all suggestions that agent', (done)=> {
@@ -120,7 +120,7 @@ describe('Reqesting Invoice',()=>{
 
 
   describe('view accepted suggestions',function (){
-    this.timeout(5000);
+    this.timeout(50000);
 
     it('it should return accepted suggestions', (done)=> {
 

@@ -104,49 +104,7 @@ describe('Agent',()=>{
 })
 
 
-// describe('view sales data',function(){
-//   this.timeout(5000);
-//
-//   it('it should return sales dates',(done)=>{
-//
-//     let request =   {
-//         agent_id:"vsotjU8PuSUm5HxEmDbJ5zWvbgy2"
-//                  }
-//
-//     chai.request(app)
-//       .get('/api/v1/agent/viewsalesdates')
-//       .set('content-type', 'application/json')
-//       .query(request)
-//       .end((err,res)=>{
-//         res.should.have.status(200);
-//         res.body.should.be.a('object');
-//         res.body.should.have.all.keys('success','data');
-//         for (obj in res.body.data){
-//           res.body.data[obj].should.have.property('sold_date');
-//         }
-//         done();
-//   })
-// })
-//
-//
-// // it('should be not return salesdates when id is not found',(done)=>{
-// //
-// //   let request =    {
-// //        agent_id:1234
-// //                }
-// //
-// //   chai.request(app)
-// //     .get('/api/v1/agent/viewsalesdates')
-// //     .set('content-type', 'application/json')
-// //     .query(request)
-// //     .end((err,res)=>{
-// //       res.should.have.status(404);
-// //       done();
-// // })
-// // })
-//
-//
-// })
+
 
 
 
