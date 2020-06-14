@@ -8,8 +8,30 @@ class Stock{
 
     const result = await stockModel.getAgentStock(req);
     if (result.success) {
-      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-      return res.status(200).send(result)
+
+      var array=[];
+      array=result.data
+
+      array.sort(function compare(a, b) {
+
+          const revA = a.name;
+          const revB = b.name;
+
+          let comparison = 0;
+          if (revA > revB) {
+            comparison = 1;
+          } else if (revA < revB) {
+            comparison = -1;
+          }
+          return comparison;
+      });
+
+      return res.status(200).send({
+        success:result.success,
+        data:array
+      })
+
+      //return res.status(200).send(result)
 
     } else {
       return res.status(200).send({
@@ -83,8 +105,28 @@ class Stock{
     const result = await stockModel.getWarehouse(req);
 
     if (result.success) {
-      //res.setHeader('Access-Control-Allow-Origin','http://localhost:3000')
-      return res.status(200).send(result)
+
+      var array=[];
+      array=result.data
+
+      array.sort(function compare(a, b) {
+
+          const revA = a.name;
+          const revB = b.name;
+
+          let comparison = 0;
+          if (revA > revB) {
+            comparison = 1;
+          } else if (revA < revB) {
+            comparison = -1;
+          }
+          return comparison;
+      });
+
+      return res.status(200).send({
+        success:result.success,
+        data:array
+      })
 
     } else {
       return res.status(200).send({

@@ -38,7 +38,7 @@ class ReqInvoice{
   async viewAcceptedList(req, res) {
 
     const result = await reqInvoiceModel.getAcceptedList(req);
-  
+
     if (result.success) {
 
       var i;
@@ -47,7 +47,8 @@ class ReqInvoice{
 
       for (obj of result.data) {
         id = obj.product_id;
-        const result2 = await stockModel.getWarehouseQuantity({product_id:id});
+        let req2={product_id:id}
+        const result2 = await stockModel.getWarehouseQuantity(req2);
         obj.available_qantity=result2.data[0].quantity;
       }
 
